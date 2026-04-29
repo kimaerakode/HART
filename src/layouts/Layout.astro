@@ -1,0 +1,84 @@
+---
+import { ClientRouter } from "astro:transitions";
+import "../css/globals.css";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+
+const { color = "cream" } = Astro.props;
+const foregroundColor =
+  color === "charcoal" ? "var(--color-charcoal)" : "var(--color-cream)";
+const backgroundColor =
+  color === "charcoal" ? "var(--color-cream)" : "var(--color-charcoal)";
+const headerBackground =
+  color === "charcoal"
+    ? "var(--color-cream)"
+    : "linear-gradient(180deg, rgba(44, 44, 46, 0.4) 0%, rgba(44, 44, 46, 0) 100%)";
+const footerBackground =
+  color === "charcoal"
+    ? "var(--color-charcoal)"
+    : "linear-gradient(0deg, rgba(44, 44, 46, 0.4) 0%, rgba(44, 44, 46, 0) 100%)";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link
+      rel="preload"
+      href="/fonts/basel-grotesk-mono-medium.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/graphik-regular.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/favicon/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/favicon/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/favicon/favicon-16x16.png"
+    />
+    <link rel="shortcut icon" href="/favicon/favicon.ico" />
+    <link rel="icon" href="/favicon/favicon.ico" />
+    <meta name="theme-color" content="#2C2C2E" />
+    <meta name="generator" content={Astro.generator} />
+    <ClientRouter />
+    <title>HART</title>
+  </head>
+  <body
+    style={`--foreground: ${foregroundColor}; --background: ${backgroundColor}; --header-bg: ${headerBackground}; --footer-bg: ${footerBackground};`}
+  >
+    <Header color={color} />
+    <slot />
+    <Footer color={color} />
+  </body>
+</html>
+
+<style>
+  html,
+  body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--background);
+    color: var(--foreground);
+    font-family: "Basel Grotesk Mono", "Graphik", monospace, sans-serif;
+  }
+</style>
