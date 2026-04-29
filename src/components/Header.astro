@@ -1,5 +1,8 @@
 ---
-const { color = "cream" } = Astro.props;
+import NavMenu from "./NavMenu.astro";
+const { color = "cream", variant = "primary" } = Astro.props;
+const isSecondary = variant === "secondary";
+const navMenuDirection = isSecondary ? "column" : "row";
 
 const logoSrc =
   color === "charcoal"
@@ -19,27 +22,46 @@ const logoSrc =
           alt="HART logo"
         /></a
       >
-      <a class="cart-icon-wrapper" href="">
-        <p class="cart-count text-xsmall">10</p>
-        <picture>
-          <source
-            media="(max-width: 600px)"
-            srcset="/assets/icons/cart-small-cream.svg"
-          />
-          <img
-            class="cart-icon"
-            src="/assets/icons/cart-md-cream.svg"
-            alt="Cart icon"
-          />
-        </picture>
-      </a>
+      {
+        isSecondary ? (
+          <a class="cart-icon-wrapper" href="">
+            <p class="cart-count text-xsmall">10</p>
+            <picture>
+              <source
+                media="(max-width: 1024px)"
+                srcset="/assets/icons/cart-small-cream.svg"
+              />
+              <img
+                class="cart-icon"
+                src="/assets/icons/cart-md-cream.svg"
+                alt="Cart icon"
+              />
+            </picture>
+          </a>
+        ) : (
+          <div class="header-actions">
+            <div class="header-menu-wrapper">
+              <NavMenu direction={navMenuDirection} />
+            </div>
+            <a class="cart-icon-wrapper" href="">
+              <p class="cart-count text-xsmall">10</p>
+              <picture>
+                <source
+                  media="(max-width: 1024px)"
+                  srcset="/assets/icons/cart-small-cream.svg"
+                />
+                <img
+                  class="cart-icon"
+                  src="/assets/icons/cart-md-cream.svg"
+                  alt="Cart icon"
+                />
+              </picture>
+            </a>
+          </div>
+        )
+      }
     </div>
-    <ul class="menu">
-      <li><a href="/shops">shops</a></li>
-      <li><a href="">about</a></li>
-      <li><a href="">contact</a></li>
-      <li><a href="">pre-order</a></li>
-    </ul>
+    {isSecondary && <NavMenu direction={navMenuDirection} />}
   </nav>
 </header>
 
@@ -60,6 +82,17 @@ const logoSrc =
   .logo {
     width: 79px;
     transition: width 0.3s ease;
+  }
+
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-l);
+  }
+
+  .header-menu-wrapper {
+    opacity: 0;
+    display: none;
   }
 
   .cart-icon-wrapper {
@@ -97,25 +130,31 @@ const logoSrc =
       transform var(--easy);
   }
 
-  .menu {
-    display: flex;
-    flex-direction: column;
-    margin-top: var(--space-s);
-    gap: var(--space-xs);
-  }
-
-  .menu a {
-    transition: color var(--easy);
-  }
-
-  .menu a:hover {
-    color: var(--color-grey);
-  }
-
-  @media screen and (width > 600px) {
+  @media screen and (width > 1024px) {
     header {
       padding-inline: var(--space-m);
     }
+
+    .header-actions {
+      gap: var(--space-l);
+    }
+
+    .header-menu-wrapper {
+      display: flex;
+      align-items: center;
+      opacity: 1;
+      transition:
+        opacity var(--easy),
+        display 0s allow-discrete;
+      transition-behavior: allow-discrete;
+    }
+
+    @starting-style {
+      .header-menu-wrapper {
+        opacity: 0;
+      }
+    }
+
     .logo {
       width: 100%;
     }
