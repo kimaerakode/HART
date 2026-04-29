@@ -2,7 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 ---
 
-<Layout color="cream">
+<Layout color="cream" headerVariant="secondary" footerVariant="secondary">
   <section class="hero">
     <video class="video-bg" autoplay loop muted playsinline aria-hidden="true">
       <source
@@ -34,11 +34,12 @@ import Layout from "../layouts/Layout.astro";
       height: 100%;
       object-fit: cover;
       z-index: -1;
+      transition: object-position 4.5s ease;
     }
 
-    @media screen and (width > 1024px) {
+    @media screen and (width > 800px) {
       .video-bg {
-        object-position: center 35%;
+        object-position: center 34%;
       }
     }
   </style>
