@@ -1,0 +1,137 @@
+---
+const { color = "cream" } = Astro.props;
+
+const logoSrc =
+  color === "charcoal"
+    ? "/assets/brand/hart-logo-primary-charcoal.svg"
+    : "/assets/brand/hart-logo-primary-cream.svg";
+---
+
+<header>
+  <nav>
+    <div class="header">
+      <a href="/">
+        <img
+          class="logo"
+          width="100"
+          height="39"
+          src={logoSrc}
+          alt="HART logo"
+        /></a
+      >
+      <a class="cart-icon-wrapper" href="">
+        <p class="cart-count text-xsmall">10</p>
+        <picture>
+          <source
+            media="(max-width: 600px)"
+            srcset="/assets/icons/cart-small-cream.svg"
+          />
+          <img
+            class="cart-icon"
+            src="/assets/icons/cart-md-cream.svg"
+            alt="Cart icon"
+          />
+        </picture>
+      </a>
+    </div>
+    <ul class="menu">
+      <li><a href="/shops">shops</a></li>
+      <li><a href="">about</a></li>
+      <li><a href="">contact</a></li>
+      <li><a href="">pre-order</a></li>
+    </ul>
+  </nav>
+</header>
+
+<style>
+  header {
+    padding-inline: var(--space-s);
+    width: 100svw;
+    transition: padding-inline var(--easy);
+    background: var(--header-bg);
+  }
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-block: var(--space-s);
+  }
+
+  .logo {
+    width: 79px;
+    transition: width 0.3s ease;
+  }
+
+  .cart-icon-wrapper {
+    position: relative;
+    background: var(--color-charcoal);
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 100%;
+    padding: var(--space-xs);
+    transition:
+      width var(--easy),
+      height var(--easy);
+  }
+
+  .cart-icon-wrapper:hover .cart-icon {
+    transform: scale(1.05);
+  }
+
+  .cart-icon {
+    place-self: start center;
+    transition: var(--easy);
+    width: 1.125rem;
+  }
+
+  .cart-count {
+    opacity: 0%;
+    position: absolute;
+    place-self: center;
+    top: 35%;
+    z-index: +1;
+    color: var(--color-cream);
+    transform: scale(0.5);
+    transition:
+      opacity var(--easy),
+      transform var(--easy);
+  }
+
+  .menu {
+    display: flex;
+    flex-direction: column;
+    margin-top: var(--space-s);
+    gap: var(--space-xs);
+  }
+
+  .menu a {
+    transition: color var(--easy);
+  }
+
+  .menu a:hover {
+    color: var(--color-grey);
+  }
+
+  @media screen and (width > 600px) {
+    header {
+      padding-inline: var(--space-m);
+    }
+    .logo {
+      width: 100%;
+    }
+
+    .cart-icon-wrapper {
+      width: 2.635rem;
+      height: 2.625rem;
+    }
+
+    .cart-icon {
+      width: auto;
+    }
+
+    .cart-count {
+      opacity: 100%;
+      transform: scale(1);
+    }
+  }
+</style>
