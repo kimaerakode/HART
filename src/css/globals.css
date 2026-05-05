@@ -54,10 +54,14 @@
 
     /* Border styles */
     --border-thin: 0.5px solid;
-    --border: 0.8px solid;
+    --border: 1px solid;
 
     /* Transition */
     --easy: 0.2s ease;
+
+    /* Element sizes */
+    --header-height: 3.1875rem;
+    --footer-height: 2.125rem;
   }
 }
 
@@ -102,9 +106,20 @@
   select {
     font: inherit;
   }
+
+  button {
+    background-color: transparent;
+    border: 0;
+  }
 }
 
 @layer base {
+  main {
+    margin-top: 51px;
+    margin-bottom: var(--space-l);
+    max-width: 100svw;
+    position: relative;
+  }
   /* Typography */
   p,
   h1,
@@ -145,7 +160,7 @@
 
   h2 {
     font-size: var(--text-m);
-    text-transform: initial;
+    text-transform: capitalize;
     letter-spacing: normal;
   }
 
@@ -162,11 +177,13 @@
     font-family: "Graphik";
   }
 
-  .text-small, .text-small > * {
+  .text-s,
+  .text-s > * {
     font-size: var(--text-s);
   }
 
-  .text-xsmall, .text-xsmall > * {
+  .text-xs,
+  .text-xs > * {
     font-size: var(--text-xs);
   }
 
@@ -183,63 +200,114 @@
   ul {
     list-style: none;
   }
+
+  .title-wrapper {
+    display: flex;
+    align-items: center;
+    border-bottom: var(--border) var(--color-charcoal);
+  }
+
+  .menu .title-wrapper {
+    border-bottom: var(--border-thin) var(--color-charcoal);
+  }
+
+  .caption .title-wrapper {
+    margin-bottom: 6px;
+  }
+
+  .title-wrapper h1,
+  .title-wrapper h3,
+  .title-wrapper h4 {
+    margin-bottom: 6px;
+    line-height: 100%;
+  }
+
+  /* Header */
+
   body > header {
     position: absolute;
     inset: 0 0 auto 0;
     z-index: 10;
   }
 
+  header.header--primary {
+    border-bottom: var(--border) var(--color-charcoal);
+  }
+
   /* Desktop styles */
   @media screen and (min-width: 1024px) {
+    :root {
+      --header-height: 4.625rem;
+      --footer-height: 2.125rem;
+    }
+    main {
+      margin-top: 74px;
+      padding-top: var(--space-m);
+      margin-bottom: 0;
+      padding-bottom: var(--space-m);
+    }
+
+    section {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      margin-inline: var(--space-m);
+      column-gap: var(--space-l);
+      grid-column: 2 / -1;
+      height: 100%;
+      overflow: hidden;
+    }
+
     h1,
-    h2,
-    header a {
+    h2 {
       font-size: var(--text-l);
     }
 
     h3,
+    header a {
+      font-size: var(--text-m);
+    }
+
     h4 {
       font-size: var(--text-m);
     }
 
     p {
+      font-size: var(--text-m);
+    }
+    /* 
+    p.text-xs {
       font-size: var(--text-s);
+    } */
+
+    .menu p.text-xs {
+      font-size: var(--text-xs);
     }
   }
 
-  /* Page view transition animation */
-
-  ::view-transition-old(root),
-  ::view-transition-new(root) {
-    animation-duration: 260ms;
-    animation-timing-function: ease;
-  }
-
-  ::view-transition-old(root) {
-    animation-name: fade-out;
-  }
-
-  ::view-transition-new(root) {
-    animation-name: fade-in;
+  .fade-in {
+    animation: fade-in 1s ease forwards;
   }
 
   @keyframes fade-in {
     from {
       opacity: 0;
     }
-
     to {
       opacity: 1;
     }
   }
 
-  @keyframes fade-out {
-    from {
-      opacity: 1;
-    }
+  .move-in {
+    animation: move-in 1s ease forwards;
+  }
 
+  @keyframes move-in {
+    from {
+      transform: translateX(40px);
+    }
     to {
-      opacity: 0;
+      transform: translateX(0);
     }
   }
 }

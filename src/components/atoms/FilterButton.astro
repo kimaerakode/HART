@@ -1,0 +1,38 @@
+---
+const { location, state } = Astro.props;
+---
+
+<button class=`filter-btn ${state}` href="">
+  {location}
+</button>
+
+<style>
+  .filter-btn {
+    line-height: 1;
+    padding-inline: var(--space-xs-s);
+    padding-block: 4px;
+    font-family: "Basel Grotesk Mono";
+    text-transform: capitalize;
+    background-color: var(--color-cream);
+    color: var(--color-charcoal);
+    border: var(--border) var(--color-charcoal);
+    border-radius: 4px;
+    font-size: var(--text-m);
+    white-space: nowrap;
+    text-align: center;
+  }
+
+  .filter-btn:hover {
+    cursor: pointer;
+  }
+
+  .filter-btn:focus {
+    background-color: var(--color-charcoal);
+    color: var(--color-cream);
+  }
+
+  .selected {
+    background-color: var(--color-charcoal);
+    color: var(--color-cream);
+  }
+</style>

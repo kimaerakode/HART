@@ -1,0 +1,30 @@
+---
+const { direction } = Astro.props;
+
+const imgPath =
+  direction === "left"
+    ? "/assets/icons/arrow-back-charcoal.svg"
+    : "/assets/icons/arrow-forward-charcoal.svg";
+---
+
+<button class="arrow-btn">
+  <img src={imgPath} class={direction} alt="" />
+</button>
+
+<style>
+  .arrow-btn {
+    width: var(--space-m);
+    height: fit-content;
+    transition: transform var(--easy);
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+  }
+
+  .arrow-btn:hover {
+    cursor: pointer;
+    transform: scale(1.2);
+  }
+</style>

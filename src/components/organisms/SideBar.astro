@@ -1,0 +1,60 @@
+---
+import ShopsMenu from "../molecules/ShopsMenu.astro";
+import ContactMenu from "../molecules/ContactMenu.astro";
+const { title } = Astro.props;
+---
+
+<div class="sidebar">
+  <div class="title-wrapper">
+    <h1>{title}</h1>
+  </div>
+
+  <div class="content">
+    {
+      title === "Shops" ? (
+        <ShopsMenu />
+      ) : title === "Contact" ? (
+        <ContactMenu />
+      ) : null
+    }
+    <!-- <div class="caption">
+      <p class="text-s">
+        Find us in your neighbourhood every day of the week.
+      </p>
+    </div> -->
+  </div>
+</div>
+
+<style>
+  .sidebar {
+    display: none;
+  }
+  @media screen and (min-width: 1024px) {
+    .sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-s);
+      width: 14.25rem;
+      height: calc(
+        100vh - (var(--header-height) + var(--footer-height)) -
+          (var(--space-m) * 2)
+      );
+      background-color: var(--color-cream);
+      padding-inline: var(--space-m);
+      grid-column: 1;
+      border-right: var(--border) var(--color-charcoal);
+    }
+
+    .title-wrapper {
+      gap: 6px;
+      border-bottom: var(--border) var(--color-charcoal);
+    }
+
+    .content {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100%;
+    }
+  }
+</style>

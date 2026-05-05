@@ -1,0 +1,43 @@
+---
+import Layout from "./Layout.astro";
+import SideBar from "../components/organisms/SideBar.astro";
+import ShopsMenu from "../components/molecules/ShopsMenu.astro";
+
+const {
+  color = "cream",
+  headerVariant = "primary",
+  footerVariant = "primary",
+  title = "Shops",
+} = Astro.props;
+---
+
+<Layout
+  color={color}
+  headerVariant={headerVariant}
+  footerVariant={footerVariant}
+>
+  <main>
+    <SideBar title={title} />
+    <slot />
+  </main>
+</Layout>
+
+<style>
+  main {
+    flex: 1 0 auto;
+    margin-top: 51px;
+    margin-bottom: var(--space-l);
+    max-width: 100svw;
+  }
+
+  @media screen and (min-width: 1024px) {
+    main {
+      position: fixed;
+      display: grid;
+      grid-template-columns: repeat(8, 1fr);
+      margin-top: var(--header-height);
+      padding-top: var(--space-m);
+      height: calc(100vh - (var(--header-height) + var(--footer-height)));
+    }
+  }
+</style>

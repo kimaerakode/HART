@@ -1,0 +1,76 @@
+---
+import ButtonSmall from "../atoms/ButtonSmall.astro";
+const { title, imgSrc, location, adress, openHours } = Astro.props;
+const cardTitle = title ?? location ?? "Shop location";
+const cardImgSrc = imgSrc ?? `/assets/img/shops/${location}.png`;
+---
+
+<div class="card">
+  <img class="shop-img" src={cardImgSrc} alt={cardTitle} />
+  <div class="card-content">
+    <div class="title-wrapper"><h2>{cardTitle}</h2><ButtonSmall /></div>
+    <div class="description">
+      <p class="text-s">{adress}</p>
+      <p class="text-s">{openHours}</p>
+    </div>
+  </div>
+</div>
+
+<style>
+  .shop-img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+
+  .title-wrapper {
+    justify-content: space-between;
+    padding-block: var(--space-xs-s);
+    border-bottom: var(--border) var(--color-charcoal);
+  }
+
+  .description {
+    display: flex;
+    justify-content: space-between;
+    padding-block: var(--space-xs);
+  }
+
+  .description p:nth-child(2) {
+    text-align: right;
+  }
+
+  .description p {
+    white-space: pre-line;
+  }
+
+  @media screen and (min-width: 1024px) {
+    .card {
+      position: relative;
+      grid-row: 1;
+      width: 73vw;
+      max-width: 53rem;
+      scroll-snap-align: start;
+      padding-inline-start: var(--space-m);
+    }
+
+    .card:last-child {
+      margin-inline-end: var(--space-m);
+    }
+
+    .shop-img {
+      width: 100%;
+      aspect-ratio: 16/9;
+      max-height: none;
+    }
+  }
+
+  @media screen and (min-width: 1200px) {
+    .card {
+      min-width: 53rem;
+      max-width: 59vw;
+    }
+  }
+</style>
