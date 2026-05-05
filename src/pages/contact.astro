@@ -1,0 +1,26 @@
+---
+import SideBarLayout from "../layouts/SideBarLayout.astro";
+import FaqBox from "../components/atoms/FaqBox.astro";
+---
+
+<SideBarLayout title="Contact" color="charcoal">
+  <section id="contact">
+    <div class="title-wrapper"><h2>FAQ</h2></div>
+    <div class="box-wrapper">
+      <FaqBox type="orders" />
+      <FaqBox type="products" />
+    </div>
+  </section>
+</SideBarLayout>
+
+<style>
+  .title-wrapper {
+    height: fit-content;
+    width: 100%;
+    margin-bottom: var(--space-m);
+  }
+  .box-wrapper {
+    display: flex;
+    gap: var(--space-l);
+  }
+</style>
