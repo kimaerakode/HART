@@ -1,0 +1,55 @@
+---
+import { faqConfig } from "../../data/faqData";
+
+const { type = "orders" } = Astro.props;
+const selectedFaq = faqConfig[type];
+---
+
+<div class="box">
+  <div class="heading">
+    <h3>{selectedFaq.title}</h3>
+  </div>
+  {
+    selectedFaq.items.map((i) => (
+      <div class="item">
+        <h4>{i.question}</h4>
+        <p>{i.answer}</p>
+      </div>
+    ))
+  }
+</div>
+
+<style>
+  .box {
+    border-radius: 10px;
+    border: var(--border) var(--color-charcoal);
+    overflow: hidden;
+  }
+  .heading {
+    width: 100%;
+    height: var(--space-l);
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+    padding-inline-start: var(--space-m);
+    color: var(--color-cream);
+    background-color: var(--color-charcoal);
+  }
+
+  .heading h4 {
+    font-size: var(--text-m);
+  }
+
+  .item {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    padding-block: var(--space-s);
+    padding-inline: var(--space-m);
+  }
+
+  .item:not(:last-child) {
+    border-bottom: var(--border) var(--color-charcoal);
+  }
+</style>
