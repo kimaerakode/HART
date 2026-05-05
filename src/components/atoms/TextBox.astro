@@ -1,0 +1,41 @@
+---
+const { title, description } = Astro.props;
+---
+
+<div class="box">
+  <div class="title-wrapper">
+    <h2>{title}</h2>
+  </div>
+  <p>{description}</p>
+</div>
+
+<style>
+  .box {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 1;
+    width: 100%;
+    max-width: 28rem;
+    min-height: 11rem;
+    border-radius: 10px;
+    padding-block-start: var(--space-s);
+    padding-block-end: var(--space-m);
+    padding-inline: var(--space-m);
+    gap: var(--space-s);
+    background-color: var(--color-cream);
+    color: var(--color-charcoal);
+    z-index: +1;
+  }
+
+  .box h1,
+  .box p {
+    animation: fade-in 2s ease;
+  }
+
+  @media screen and (min-width: 1024px) {
+    .box {
+      min-height: 15rem;
+      gap: var(--space-m);
+    }
+  }
+</style>
