@@ -1,0 +1,205 @@
+---
+import NavMenu from "../molecules/NavMenu.astro";
+const { variant = "primary", color = "cream" } = Astro.props;
+const isSecondary = variant === "secondary";
+const footerBackground =
+  color === "charcoal"
+    ? "var(--color-charcoal)"
+    : "linear-gradient(0deg, rgba(44, 44, 46, 0.4) 0%, rgba(44, 44, 46, 0) 100%)";
+---
+
+<footer class="text-xs-s" style={`background: ${footerBackground};`}>
+  {
+    isSecondary ? (
+      <div class="footer-content mobile landingpage">
+        <p>Open every day</p>
+        <p>@hartbageri</p>
+      </div>
+    ) : (
+      <>
+        <div class="footer-content mobile">
+          <nav>
+            <NavMenu direction="col" parent="footer" />
+          </nav>
+          <div class="footer-bottom text-xs-s">
+            <div class="links">
+              <ul class="top">
+                <li>
+                  <a href="">Privacy Policy</a>
+                </li>
+                <li>
+                  <a href="">Terms & Conditions</a>
+                </li>
+              </ul>
+
+              <ul class="bottom">
+                <li>
+                  <a href="">Site Credits</a>
+                </li>
+                <li>
+                  <a href="">Smiley Report</a>
+                </li>
+                <li>
+                  <a href="">Cookies</a>
+                </li>
+              </ul>
+              <span class="text-xs">Copyright 2026©. All rights reserved.</span>
+            </div>
+            <img
+              src="/assets/brand/hart-bakers-mark-secondary-cream.svg"
+              alt="HART logo 'Bakers Mark'"
+            />
+          </div>
+        </div>
+      </>
+    )
+  }
+  <div class="footer-content desktop">
+    <div>
+      <span>Copyright 2026©. All rights reserved.</span>
+    </div>
+    <div class="footer-right">
+      <ul class="links">
+        <li>
+          <a href="">Privacy policy</a>
+        </li>
+        <li>
+          <a href="">Terms & conditions</a>
+        </li>
+
+        <li>
+          <a href="">Site credits</a>
+        </li>
+        <li>
+          <a href="">Smiley report</a>
+        </li>
+        <li>
+          <a href=""> Cookies </a>
+        </li>
+      </ul>
+      <img
+        class="bakers-mark"
+        src="/assets/brand/hart-bakers-mark-primary-cream.svg"
+        alt="HART 'Bakers Mark' logo"
+      />
+    </div>
+  </div>
+</footer>
+
+<style>
+  p {
+    font-family: "Basel Grotesk Mono";
+  }
+  footer {
+    width: 100svw;
+    height: fit-content;
+    color: var(--color-cream);
+    font-size: var(--text-xs-s);
+    transition: padding var(--easy);
+    position: relative;
+    z-index: 10;
+  }
+
+  footer:has(.mobile.landingpage) {
+    position: absolute;
+    bottom: 0;
+  }
+
+  .footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+
+  .landingpage {
+    padding-inline: var(--space-s);
+    padding-block: var(--space-s);
+  }
+
+  .footer-content.mobile.landingpage {
+    flex-direction: row;
+  }
+  .footer-content.mobile {
+    opacity: 1;
+    visibility: visible;
+    flex-direction: column;
+  }
+
+  .footer-content.desktop {
+    display: none;
+    opacity: 0;
+  }
+
+  .bakers-mark {
+    height: 22px;
+  }
+
+  .links {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .mobile .links {
+    flex-direction: column;
+  }
+
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding-block: var(--space-m);
+    padding-inline: var(--space-s);
+  }
+  .footer-bottom * {
+    font-family: "Graphik";
+    text-transform: initial;
+    line-height: 160%;
+  }
+
+  .mobile .links .top,
+  .mobile .links .bottom {
+    display: flex;
+    flex-direction: row;
+    gap: var(--space-xs-s);
+  }
+
+  .mobile .links .top {
+    margin-bottom: var(--space-m);
+  }
+  .desktop .links {
+    gap: var(--space-l);
+  }
+
+  .footer-right {
+    display: flex;
+    gap: var(--space-s);
+    align-items: center;
+  }
+
+  @media screen and (width > 1024px) {
+    footer {
+      padding-inline: var(--space-m);
+      padding-block: var(--space-xs);
+      position: fixed;
+      bottom: 0;
+    }
+    .footer-content.mobile {
+      display: none;
+    }
+    .footer-content.desktop {
+      display: flex;
+      opacity: 1;
+      transition:
+        opacity var(--easy),
+        display 0s allow-discrete;
+      transition-behavior: allow-discrete;
+    }
+
+    @starting-style {
+      .footer-content.desktop {
+        opacity: 0;
+      }
+    }
+  }
+</style>

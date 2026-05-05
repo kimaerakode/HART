@@ -1,5 +1,64 @@
 ---
-import Layout from "../layouts/Layout.astro";
+import SideBarLayout from "../layouts/SideBarLayout.astro";
+import FilterBar from "../components/molecules/FilterBar.astro";
+import LocationCard from "../components/organisms/LocationCard.astro";
+import ArrowBar from "../components/molecules/ArrowBar.astro";
+import { shops } from "../data/shopsData";
 ---
 
-<Layout color="charcoal" />
+<SideBarLayout title="Shops" color="charcoal">
+  <section id="shops">
+    <FilterBar />
+    <div class="card-wrapper move-in">
+      {
+        shops.map((shop) => (
+          <LocationCard
+            title={shop.title}
+            adress={`${shop.street}\n${shop.town}`}
+            openHours={`${shop.openHours1}\n${shop.openHours2}`}
+            imgSrc={shop.imgSrc}
+          />
+        ))
+      }
+    </div>
+    <ArrowBar />
+  </section>
+</SideBarLayout>
+
+<style>
+  .card-wrapper {
+    display: grid;
+    margin-inline: var(--space-s);
+    gap: var(--space-l);
+    height: fit-content;
+  }
+
+  @media screen and (min-width: 620px) {
+    .card-wrapper {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media screen and (min-width: 1024px) {
+    section#shops {
+      margin-inline-start: 0;
+      margin-inline-end: var(--space-m);
+      border-right: var(--border) var(--color-charcoal);
+    }
+    .card-wrapper {
+      margin-inline: 0;
+      grid-template-columns: repeat(2, 1fr);
+      overflow-x: scroll;
+      scrollbar-width: none;
+      scroll-snap-type: x mandaotory;
+      scroll-padding-inline-end: var(--space-m);
+      gap: calc(var(--space-l) - var(--space-m));
+      overflow-y: hidden;
+      white-space: nowrap;
+      scroll-snap-type: x mandatory;
+    }
+    .card-wrapper::-webkit-scrollbar {
+      display: none;
+    }
+  }
+</style>

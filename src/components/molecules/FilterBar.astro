@@ -1,0 +1,37 @@
+---
+import FilterButton from "../atoms/FilterButton.astro";
+const areas = [
+  "reffen",
+  "city",
+  "østerbro",
+  "nørrebro",
+  "vesterbro",
+  "frederiksberg",
+  "islands brygge",
+];
+---
+
+<div class="wrapper">
+  <div class="filter-bar">
+    {areas.map((area) => <FilterButton location={area} />)}
+  </div>
+</div>
+
+<style>
+  .wrapper {
+    overflow-x: scroll;
+    scrollbar-width: thin;
+    padding-block: var(--space-m);
+    padding-inline: var(--space-s);
+  }
+  .filter-bar {
+    display: flex;
+    gap: var(--space-s);
+  }
+
+  @media screen and (min-width: 1024px) {
+    .wrapper {
+      display: none;
+    }
+  }
+</style>
