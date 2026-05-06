@@ -1,13 +1,14 @@
 ---
 import Layout from "./Layout.astro";
 import SideBar from "../components/organisms/SideBar.astro";
-import ShopsMenu from "../components/molecules/ShopsMenu.astro";
 
 const {
   color = "cream",
   headerVariant = "primary",
   footerVariant = "primary",
   title = "Shops",
+  mainClass = "",
+  sidebarClass = "",
 } = Astro.props;
 ---
 
@@ -16,8 +17,8 @@ const {
   headerVariant={headerVariant}
   footerVariant={footerVariant}
 >
-  <main>
-    <SideBar title={title} />
+  <main class={mainClass}>
+    <SideBar title={title} sidebarClass={sidebarClass} />
     <slot />
   </main>
 </Layout>
@@ -38,6 +39,11 @@ const {
       margin-top: var(--header-height);
       padding-top: var(--space-m);
       height: calc(100vh - (var(--header-height) + var(--footer-height)));
+    }
+
+    main.overflow-x {
+      padding: 0;
+      margin-bottom: var(--footer-height);
     }
   }
 </style>

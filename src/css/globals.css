@@ -40,6 +40,7 @@
     --space-xs: 0.375rem;
     --space-xs-s: 0.5rem;
     --space-s: 1rem;
+    --space-s-m: 1.25rem;
     --space-m: 1.5rem;
     --space-m-l: 2rem;
     --space-l: 2.5rem;
@@ -58,6 +59,7 @@
 
     /* Transition */
     --easy: 0.2s ease;
+    --slowly: 0.3s ease;
 
     /* Element sizes */
     --header-height: 3.1875rem;
@@ -91,6 +93,11 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
+  body *::-webkit-scrollbar {
+    display: none;
+    scrollbar-width: none;
+  }
+
   img,
   picture,
   video,
@@ -119,6 +126,11 @@
     margin-bottom: var(--space-l);
     max-width: 100svw;
     position: relative;
+  }
+
+  section {
+    margin-inline: var(--space-s);
+    max-width: 100%;
   }
   /* Typography */
   p,
@@ -207,7 +219,8 @@
     border-bottom: var(--border) var(--color-charcoal);
   }
 
-  .menu .title-wrapper {
+  .menu .title-wrapper,
+  .accordion .title-wrapper {
     border-bottom: var(--border-thin) var(--color-charcoal);
   }
 
@@ -215,11 +228,28 @@
     margin-bottom: 6px;
   }
 
+  .caption {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .menu-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+  }
+
   .title-wrapper h1,
+  .title-wrapper h2,
   .title-wrapper h3,
   .title-wrapper h4 {
     margin-bottom: 6px;
     line-height: 100%;
+  }
+
+  .accordion .title-wrapper {
+    padding-bottom: 4px;
   }
 
   /* Header */
@@ -256,6 +286,7 @@
       grid-column: 2 / -1;
       height: 100%;
       overflow: hidden;
+      max-width: 100%;
     }
 
     h1,
@@ -275,10 +306,6 @@
     p {
       font-size: var(--text-m);
     }
-    /* 
-    p.text-xs {
-      font-size: var(--text-s);
-    } */
 
     .menu p.text-xs {
       font-size: var(--text-xs);
@@ -299,7 +326,7 @@
   }
 
   .move-in {
-    animation: move-in 1s ease forwards;
+    animation: move-in 0.5s ease forwards;
   }
 
   @keyframes move-in {
@@ -308,6 +335,19 @@
     }
     to {
       transform: translateX(0);
+    }
+  }
+
+  .move-up {
+    animation: move-up 0.5s ease forwards;
+  }
+
+  @keyframes move-up {
+    from {
+      transform: translateY(40px);
+    }
+    to {
+      transform: translateY(0);
     }
   }
 }

@@ -8,7 +8,9 @@ import { shops } from "../data/shopsData";
 
 <SideBarLayout title="Shops" color="charcoal">
   <section id="shops">
-    <FilterBar />
+    <div class="filter-wrapper">
+      <FilterBar variant="shops" />
+    </div>
     <div class="card-wrapper move-in">
       {
         shops.map((shop) => (
@@ -28,12 +30,14 @@ import { shops } from "../data/shopsData";
 <style>
   .card-wrapper {
     display: grid;
-    margin-inline: var(--space-s);
     gap: var(--space-l);
     height: fit-content;
   }
 
   @media screen and (min-width: 620px) {
+    .filter-wrapper {
+      display: none;
+    }
     .card-wrapper {
       grid-template-columns: repeat(2, 1fr);
     }
@@ -45,20 +49,17 @@ import { shops } from "../data/shopsData";
       margin-inline-end: var(--space-m);
       border-right: var(--border) var(--color-charcoal);
     }
+
     .card-wrapper {
       margin-inline: 0;
       grid-template-columns: repeat(2, 1fr);
       overflow-x: scroll;
-      scrollbar-width: none;
       scroll-snap-type: x mandaotory;
       scroll-padding-inline-end: var(--space-m);
       gap: calc(var(--space-l) - var(--space-m));
       overflow-y: hidden;
       white-space: nowrap;
       scroll-snap-type: x mandatory;
-    }
-    .card-wrapper::-webkit-scrollbar {
-      display: none;
     }
   }
 </style>

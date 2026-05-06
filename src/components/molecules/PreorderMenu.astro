@@ -1,0 +1,35 @@
+---
+import PickupSelect from "./PickupSelect.astro";
+---
+
+<div class="menu-wrapper">
+  <div class="menu">
+    <PickupSelect />
+  </div>
+  <div class="caption">
+    <div class="title-wrapper">
+      <h3>
+        <a href="/checkout">Go to checkout</a>
+      </h3>
+    </div>
+    <p class="text-s">
+      For next day pick ups, PASTRY orders must be placed before 14:00 and
+      Bread orders before 24:00
+    </p>
+  </div>
+</div>
+
+<style>
+  .menu {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-m);
+    padding-top: var(--space-xs);
+  }
+
+  .title-wrapper {
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-s);
+  }
+</style>
