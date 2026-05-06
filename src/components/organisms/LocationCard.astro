@@ -8,7 +8,9 @@ const cardImgSrc = imgSrc ?? `/assets/img/shops/${location}.png`;
 <div class="card">
   <img class="shop-img" src={cardImgSrc} alt={cardTitle} />
   <div class="card-content">
-    <div class="title-wrapper"><h2>{cardTitle}</h2><ButtonSmall /></div>
+    <div class="title-wrapper">
+      <h2>{cardTitle}</h2><ButtonSmall title="pre-order" color="charcoal" />
+    </div>
     <div class="description">
       <p class="text-s">{adress}</p>
       <p class="text-s">{openHours}</p>
@@ -29,7 +31,10 @@ const cardImgSrc = imgSrc ?? `/assets/img/shops/${location}.png`;
   .title-wrapper {
     justify-content: space-between;
     padding-block: var(--space-xs-s);
-    border-bottom: var(--border) var(--color-charcoal);
+  }
+
+  .title-wrapper h2 {
+    margin-bottom: 0;
   }
 
   .description {

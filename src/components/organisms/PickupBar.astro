@@ -1,0 +1,29 @@
+---
+import PickupSelect from "../molecules/PickupSelect.astro";
+---
+
+<div class="pickup-bar">
+  <h4 class="text-xs">Pick-up info:</h4>
+  <PickupSelect />
+</div>
+
+<style>
+  .pickup-bar {
+    display: flex;
+    align-items: center;
+    gap: var(--space-m);
+    padding-inline: var(--space-s);
+    padding-block: var(--space-s);
+    border-bottom: var(--border) var(--color-charcoal);
+  }
+
+  h4 {
+    margin-bottom: 3px;
+  }
+
+  @media screen and (min-width: 1024px) {
+    .pickup-bar {
+      display: none;
+    }
+  }
+</style>

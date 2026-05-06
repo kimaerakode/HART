@@ -1,5 +1,7 @@
 ---
 import FilterButton from "../atoms/FilterButton.astro";
+const { variant } = Astro.props;
+
 const areas = [
   "reffen",
   "city",
@@ -9,20 +11,35 @@ const areas = [
   "frederiksberg",
   "islands brygge",
 ];
+
+const productCategories = [
+  "favorites",
+  "bread & buns",
+  "pastry & cake",
+  "savory",
+  "groceries",
+];
+
+const filterItems = {
+  shops: areas,
+  products: productCategories,
+};
+
+const itemsToDisplay = filterItems[variant] || [];
 ---
 
 <div class="wrapper">
-  <div class="filter-bar">
-    {areas.map((area) => <FilterButton location={area} />)}
+  <div class={`filter-bar ${variant}`}>
+    {itemsToDisplay.map((item) => <FilterButton title={item} />)}
   </div>
 </div>
 
 <style>
-  .wrapper {
-    overflow-x: scroll;
-    scrollbar-width: thin;
-    padding-block: var(--space-m);
-    padding-inline: var(--space-s);
+  @media screen and (max-width: 1024px) {
+    .wrapper {
+      overflow-x: scroll;
+      padding-block: var(--space-m);
+    }
   }
   .filter-bar {
     display: flex;
@@ -31,7 +48,14 @@ const areas = [
 
   @media screen and (min-width: 1024px) {
     .wrapper {
-      display: none;
+      padding-block: 0;
+      padding-inline: 0;
+    }
+
+    .filter-bar {
+      gap: var(--space-l);
+      height: fit-content;
+      align-items: center;
     }
   }
 </style>

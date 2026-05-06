@@ -28,24 +28,25 @@ const aboutHart = [
   headerVariant="primary"
   headerBorderless={true}
   footerVariant="primary"
->
-  <video
-    src="/assets/video/hero_mobile_comp.mp4"
-    class="video-bg"
-    autoplay
-    loop
-    muted
-    playsinline
-    aria-hidden="true"></video>
-  <section id="about">
-    <div class="wrapper move-in">
-      {
-        aboutHart.map((content) => (
-          <TextBox title={content.title} description={content.description} />
-        ))
-      }
-    </div>
-  </section>
+  ><main>
+    <video
+      src="/assets/video/hero_mobile_comp.mp4"
+      class="video-bg"
+      autoplay
+      loop
+      muted
+      playsinline
+      aria-hidden="true"></video>
+    <section id="about">
+      <div class="wrapper move-in">
+        {
+          aboutHart.map((content) => (
+            <TextBox title={content.title} description={content.description} />
+          ))
+        }
+      </div>
+    </section>
+  </main>
 
   <style>
     section#about {
@@ -57,6 +58,9 @@ const aboutHart = [
       align-items: center;
       margin-block-start: var(--header-height);
       padding-block: var(--space-l);
+      padding-inline: var(--space-s);
+
+      margin-inline: 0;
     }
     .video-bg {
       width: 100%;
@@ -78,9 +82,15 @@ const aboutHart = [
     }
 
     @media screen and (min-width: 1024px) {
+      main {
+        margin: 0;
+        padding: 0;
+      }
       section#about {
         height: calc(100svh - (var(--header-height) + var(--footer-height)));
         padding-block: 0;
+        margin-inline: 0;
+        padding-inline: var(--space-m);
         justify-content: start;
       }
       .wrapper {

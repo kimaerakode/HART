@@ -1,0 +1,44 @@
+---
+const { title } = Astro.props;
+---
+
+<div class="accordion">
+  <div class="title-wrapper">
+    <p class="text-trim">{title}</p><img
+      src="/assets/icons/accordion-arrow.svg"
+      alt=""
+    />
+  </div>
+</div>
+
+<style>
+  .title-wrapper {
+    font-family: "Graphik";
+    gap: var(--space-xs);
+    align-items: end;
+  }
+
+  p {
+    font-size: var(--text-xs);
+  }
+
+  img {
+    width: 7px;
+  }
+
+  @media screen and (min-width: 1024px) {
+    .title-wrapper {
+      padding-block: 8px;
+      justify-content: space-between;
+      padding-inline-end: 3px;
+    }
+
+    p {
+      font-size: var(--text-m);
+    }
+
+    img {
+      width: 9px;
+    }
+  }
+</style>

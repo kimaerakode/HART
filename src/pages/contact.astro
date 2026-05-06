@@ -5,7 +5,7 @@ import FaqBox from "../components/atoms/FaqBox.astro";
 
 <SideBarLayout title="Contact" color="charcoal">
   <section id="contact">
-    <div class="title-wrapper"><h2>FAQ</h2></div>
+
     <div class="box-wrapper">
       <FaqBox type="orders" />
       <FaqBox type="products" />
@@ -20,7 +20,10 @@ import FaqBox from "../components/atoms/FaqBox.astro";
     margin-bottom: var(--space-m);
   }
   .box-wrapper {
-    display: flex;
+    min-height: 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
     gap: var(--space-l);
+    height: 100%;
   }
 </style>

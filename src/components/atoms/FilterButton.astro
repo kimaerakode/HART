@@ -1,9 +1,9 @@
 ---
-const { location, state } = Astro.props;
+const { title, state } = Astro.props;
 ---
 
 <button class=`filter-btn ${state}` href="">
-  {location}
+  {title}
 </button>
 
 <style>
@@ -34,5 +34,26 @@ const { location, state } = Astro.props;
   .selected {
     background-color: var(--color-charcoal);
     color: var(--color-cream);
+  }
+
+  @media screen and (min-width: 1024px) {
+    .filter-btn {
+      padding-inline: 0;
+      padding-block: 0;
+      font-family: "Graphik";
+      background-color: transparent;
+      border: 0;
+      border-radius: 0;
+      text-align: start;
+    }
+
+    .filter-btn:focus,
+    .filter-btn:hover,
+    .selected {
+      background-color: transparent;
+      color: var(--color-charcoal);
+      text-decoration: 1px underline solid var(--color-charcoal);
+      text-underline-offset: 3px;
+    }
   }
 </style>

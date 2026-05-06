@@ -1,8 +1,8 @@
 ---
-
+const { title, color } = Astro.props;
 ---
 
-<a class="btn-small" href="">pre-order</a>
+<a class=`btn-small ${color}` href="">{title}</a>
 
 <style>
   .btn-small {
@@ -18,13 +18,24 @@
     text-align: center;
   }
 
+  .charcoal {
+    background-color: var(--color-charcoal);
+    color: var(--color-cream);
+  }
+
+  .cream {
+    background-color: var(--color-cream);
+    color: var(--color-charcoal);
+    font-family: "Graphik";
+    padding: 6px;
+  }
   .btn-small:hover {
     opacity: 100%;
     cursor: pointer;
   }
 
   @media screen and (min-width: 726px) {
-    .btn-small {
+    .charcoal {
       font-size: var(--text-s);
     }
   }

@@ -9,6 +9,7 @@ const selectedFaq = faqConfig[type];
   <div class="heading">
     <h3>{selectedFaq.title}</h3>
   </div>
+
   {
     selectedFaq.items.map((i) => (
       <div class="item">
@@ -24,6 +25,7 @@ const selectedFaq = faqConfig[type];
     border-radius: 10px;
     border: var(--border) var(--color-charcoal);
     overflow: hidden;
+    height: 100%;
   }
   .heading {
     width: 100%;

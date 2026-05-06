@@ -1,10 +1,11 @@
 ---
 import ShopsMenu from "../molecules/ShopsMenu.astro";
 import ContactMenu from "../molecules/ContactMenu.astro";
-const { title } = Astro.props;
+import PreorderMenu from "../molecules/PreorderMenu.astro";
+const { title, sidebarClass = "" } = Astro.props;
 ---
 
-<div class="sidebar">
+<div class={`sidebar ${sidebarClass}`}>
   <div class="title-wrapper">
     <h1>{title}</h1>
   </div>
@@ -15,13 +16,10 @@ const { title } = Astro.props;
         <ShopsMenu />
       ) : title === "Contact" ? (
         <ContactMenu />
+      ) : title === "Pre-Order" ? (
+        <PreorderMenu />
       ) : null
     }
-    <!-- <div class="caption">
-      <p class="text-s">
-        Find us in your neighbourhood every day of the week.
-      </p>
-    </div> -->
   </div>
 </div>
 
@@ -55,6 +53,10 @@ const { title } = Astro.props;
       flex-direction: column;
       justify-content: space-between;
       height: 100%;
+    }
+
+    .add-margin {
+      margin-block: var(--space-m);
     }
   }
 </style>
