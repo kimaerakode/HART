@@ -150,7 +150,7 @@ const products = [
     <div class="title-wrapper">
       <h2>Select items</h2>
     </div>
-    <div class="scroller">
+    <div class="scroller move-in">
       <!-- <div class="wrapper move-in"> -->
       {
         products.map((product) => (
@@ -180,21 +180,20 @@ const products = [
     display: none;
   }
 
-
   @media screen and (max-width: 1023px) {
-  .scroller {
-    container: products / inline-size;
-    display: grid;
-    grid-auto-flow: row;
-    grid-auto-rows: 1fr;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    position: relative;
-    column-gap: var(--space-m);
-    row-gap: var(--space-s);
-    width: 100%;
-    padding-block-start: var(--space-s);
+    .scroller {
+      container: products / inline-size;
+      display: grid;
+      grid-auto-flow: row;
+      grid-auto-rows: 1fr;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      position: relative;
+      column-gap: var(--space-m);
+      row-gap: var(--space-s);
+      width: 100%;
+      padding-block-start: var(--space-s);
+    }
   }
-}
 
   /* @media screen and (max-width: 1024px) {
   .scroller {
