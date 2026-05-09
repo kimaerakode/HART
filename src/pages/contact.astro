@@ -47,33 +47,19 @@ import FaqBox from "../components/atoms/FaqBox.astro";
 </SideBarLayout>
 
 <style>
-  section#contact {
-    display: grid;
-    grid-template-columns: 1fr 1.1fr;
-    column-gap: var(--space-xl);
+  @media (max-width: 1023px) {
+    section#contact {
+      display: flex;
+      flex-direction: column;
+      padding-block-start: var(--space-m);
+    }
+    .contact {
+      display: none;
+    }
   }
+
   .title-wrapper {
     margin-bottom: var(--space-s);
-  }
-  .contact {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-l);
-    transition: gap var(--easy);
-  }
-  .contact p {
-    text-wrap: wrap;
-  }
-
-  .contact a {
-    display: block;
-    text-decoration: underline solid 0.5px var(--color-charcoal);
-    text-underline-offset: 3px;
-    transition: text-underline-offset var(--easy);
-  }
-
-  .contact a:hover {
-    text-underline-offset: 4px;
   }
 
   .faq {
@@ -88,6 +74,41 @@ import FaqBox from "../components/atoms/FaqBox.astro";
     gap: var(--space-m);
     flex: 1;
     transition: gap var(--easy);
+  }
+
+  @media screen and (min-width: 840px) and (max-width: 1023px) {
+    .box-wrapper {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media screen and (min-width: 1024px) {
+    section#contact {
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      column-gap: var(--space-xl);
+    }
+    .contact {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-l);
+      transition: gap var(--easy);
+    }
+    .contact p {
+      text-wrap: wrap;
+    }
+
+    .contact a {
+      display: block;
+      text-decoration: underline solid 0.5px var(--color-charcoal);
+      text-underline-offset: 3px;
+      transition: text-underline-offset var(--easy);
+    }
+
+    .contact a:hover {
+      text-underline-offset: 4px;
+    }
   }
 
   @media screen and (min-height: 845px) {
