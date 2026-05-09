@@ -29,12 +29,17 @@ const {
     margin-top: 51px;
     margin-bottom: var(--space-l);
     max-width: 100svw;
+    grid-template:
+      "header" var(--header-height)
+      "aside" auto
+      "main" 1fr / 1fr;
   }
 
   @media screen and (min-width: 1024px) {
     main {
       position: fixed;
       display: grid;
+      width: 100%;
       /* grid-template-columns: repeat(8, 1fr); */
       margin-top: var(--header-height);
       padding-top: var(--space-m);
