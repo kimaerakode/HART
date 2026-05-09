@@ -95,7 +95,7 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
-  body *::-webkit-scrollbar {
+  .no-scrollbar *::-webkit-scrollbar {
     display: none;
     scrollbar-width: none;
   }
@@ -350,6 +350,19 @@
   @keyframes move-up {
     from {
       transform: translateY(40px);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+
+  .move-down {
+    animation: move-down 0.5s ease forwards;
+  }
+
+  @keyframes move-down {
+    from {
+      transform: translateY(-40px);
     }
     to {
       transform: translateY(0);
