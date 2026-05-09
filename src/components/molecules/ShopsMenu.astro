@@ -7,7 +7,7 @@ import { areas } from "../../data/shopsData";
     {
       areas.map((area) => (
         <li>
-          <a href="">{area}</a>
+          <button>{area}</button>
         </li>
       ))
     }
@@ -18,21 +18,25 @@ import { areas } from "../../data/shopsData";
 </div>
 
 <style>
-
-
   .menu {
     display: flex;
     flex-direction: column;
     gap: var(--space-xs);
   }
-  .menu a {
+  .menu button {
+    text-decoration: underline 0.8px solid transparent;
+    text-underline-offset: 3.5px;
+    transition: text-decoration-color var(--easy);
+  }
+  .menu button {
     font-family: "Graphik";
     font-size: var(--text-m);
     text-transform: capitalize;
   }
 
-  .menu a:hover {
-    text-decoration: underline 1px solid var(--color-charcoal);
-    text-underline-offset: 4px;
+  .menu button:hover,
+  .menu button:focus {
+    text-decoration-color: var(--color-charcoal);
+    cursor: pointer;
   }
 </style>

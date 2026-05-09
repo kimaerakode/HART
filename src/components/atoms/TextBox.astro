@@ -1,8 +1,8 @@
 ---
-const { title, description } = Astro.props;
+const { title, description, variant } = Astro.props;
 ---
 
-<div class="box">
+<div class={`box ${variant}`}>
   <div class="title-wrapper">
     <h2>{title}</h2>
   </div>
@@ -31,10 +31,27 @@ const { title, description } = Astro.props;
     animation: fade-in 2s ease;
   }
 
+  .faq h2 {
+    font-size: var(--text-m);
+    text-transform: none;
+  }
+
   @media screen and (min-width: 1024px) {
     .box {
       min-height: 15rem;
       gap: var(--space-m);
+    }
+
+    .faq {
+      width: 100%;
+      max-width: 100%;
+      min-height: 100%;
+      border: var(--border-thin) var(--color-charcoal);
+      gap: var(--space-s);
+    }
+
+    .faq .title-wrapper {
+      border-bottom: var(--border-thin) var(--color-charcoal);
     }
   }
 </style>

@@ -1,0 +1,51 @@
+<div class="menu-wrapper">
+  <ul class="menu">
+    <li><a href="#orderinfo">Online orders & pick-up</a></li>
+    <li><a href="#productinfo">Product info</a></li>
+  </ul>
+  <div class="caption">
+    <div class="title-wrapper"><h3>Contact Us</h3></div>
+    <p class="text-s">
+      <span><a href="">info@hartbageri.com </a></span><span
+        ><a href="">wholesale@hartbageri.com</a></span
+      >
+    </p>
+  </div>
+</div>
+
+<style>
+  .menu {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+
+  .menu a {
+    font-family: "Graphik";
+    font-size: var(--text-m);
+    text-transform: capitalize;
+    text-decoration-line: underline;
+    text-decoration-thickness: 1px;
+    text-decoration-color: transparent;
+    text-underline-offset: 4px;
+    transition: text-decoration-color var(--easy);
+  }
+
+  .menu a:focus-visible {
+    cursor: pointer;
+    text-decoration-color: var(--color-charcoal);
+  }
+
+  .menu a:hover {
+    cursor: pointer;
+    text-decoration-color: var(--color-charcoal);
+  }
+
+  .menu a.active {
+    text-decoration-color: var(--color-charcoal);
+  }
+  body:has(#orderinfo:target) .menu a[href="#orderinfo"],
+  body:has(#productinfo:target) .menu a[href="#productinfo"] {
+    text-decoration-color: var(--color-charcoal);
+  }
+</style>

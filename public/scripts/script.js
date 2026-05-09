@@ -1,5 +1,8 @@
 const applyAboutFooterTheme = () => {
-  if (!window.matchMedia("(width < 1024px)").matches) {
+  if (!document.body) return; // guard if script runs before <body> exists
+
+  // Use a valid media query; check for small screens
+  if (!window.matchMedia("(max-width: 1024px)").matches) {
     document.body.style.removeProperty("--footer-bg");
     return;
   }

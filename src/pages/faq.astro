@@ -1,0 +1,61 @@
+---
+import SideBarLayout from "../layouts/SideBarLayout.astro";
+import { faqConfig } from "../data/faqData";
+import TextBox from "../components/atoms/TextBox.astro";
+---
+
+<SideBarLayout
+  title="FAQ"
+  color="charcoal"
+  mainClass="scroll"
+  sidebarClass="add-margin"
+>
+  <section id="faq">
+    <div class="wrapper move-in" id="orderinfo">
+      {
+        faqConfig.orders.items.map((i) => (
+          <TextBox
+            variant="faq"
+            type="orders"
+            title={i.question}
+            description={i.answer}
+          />
+        ))
+      }
+    </div>
+
+    <div class="wrapper move-in" id="productinfo">
+      {
+        faqConfig.products.items.map((i) => (
+          <TextBox
+            variant="faq"
+            type="products"
+            title={i.question}
+            description={i.answer}
+          />
+        ))
+      }
+    </div>
+  </section>
+</SideBarLayout>
+
+<style>
+  section#faq {
+    overflow-y: auto;
+    scroll-behavior: smooth;
+    scroll-snap-type: y mandatory;
+  }
+  .wrapper {
+    grid-column: 2 / -1;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    /* grid-auto-rows: 1fr; */
+    grid-template-rows: repeat(4, 1fr);
+    align-items: stretch;
+    width: 100%;
+    min-height: 100%;
+    gap: var(--space-l);
+    padding-block: var(--space-m);
+    scroll-snap-align: start;
+  }
+</style>

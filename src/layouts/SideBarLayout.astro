@@ -39,11 +39,14 @@ const {
       margin-top: var(--header-height);
       padding-top: var(--space-m);
       height: calc(100vh - (var(--header-height) + var(--footer-height)));
+      width: 100%;
     }
 
-    main.overflow-x {
+    main.scroll {
       padding: 0;
       margin-bottom: var(--footer-height);
+      overflow-y: auto;
+      overflow-x: hidden;
     }
   }
 </style>

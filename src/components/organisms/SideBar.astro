@@ -2,6 +2,7 @@
 import ShopsMenu from "../molecules/ShopsMenu.astro";
 import ContactMenu from "../molecules/ContactMenu.astro";
 import PreorderMenu from "../molecules/PreorderMenu.astro";
+import FAQMenu from "../molecules/FAQMenu.astro";
 const { title, sidebarClass = "" } = Astro.props;
 ---
 
@@ -18,6 +19,8 @@ const { title, sidebarClass = "" } = Astro.props;
         <ContactMenu />
       ) : title === "Pre-Order" ? (
         <PreorderMenu />
+      ) : title === "FAQ" ? (
+        <FAQMenu />
       ) : null
     }
   </div>
