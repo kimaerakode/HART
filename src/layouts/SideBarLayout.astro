@@ -35,10 +35,11 @@ const {
     main {
       position: fixed;
       display: grid;
-      grid-template-columns: repeat(8, 1fr);
+      /* grid-template-columns: repeat(8, 1fr); */
       margin-top: var(--header-height);
       padding-top: var(--space-m);
       height: calc(100vh - (var(--header-height) + var(--footer-height)));
+      grid-template: "aside main" 1fr / var(--sidebar-width) 1fr;
     }
 
     main.scroll {

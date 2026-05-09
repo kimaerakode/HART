@@ -64,7 +64,7 @@
     /* Element sizes */
     --header-height: 3.1875rem;
     --footer-height: 2.125rem;
-    --sidebar-width: calc(179px + (2 * var(--space-m)));
+    --sidebar-width: calc(12.5rem + 2vw);
     --main-width: calc(100svw - var(--sidebar-width));
   }
 }
@@ -280,12 +280,15 @@
     }
 
     section {
-      display: flex;
+      /* display: flex;
       flex-direction: column;
-      justify-content: space-between;
+      justify-content: space-between; */
+      display: grid;
+      grid-template-rows: auto 1fr;
       margin-inline: var(--space-m);
       column-gap: var(--space-l);
-      grid-column: 2 / -1;
+      /* grid-column: 2 / -1; */
+      grid-area: main;
       height: 100%;
       overflow: hidden;
       max-width: 100%;
