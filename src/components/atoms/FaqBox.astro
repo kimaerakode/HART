@@ -1,4 +1,6 @@
 ---
+// @ts-nocheck
+
 import { faqConfig } from "../../data/faqData";
 
 const { type = "orders" } = Astro.props;
@@ -7,25 +9,69 @@ const selectedFaq = faqConfig[type];
 
 <div class="box">
   <div class="heading">
-    <h3>{selectedFaq.title}</h3>
+    <h2>{selectedFaq.title}</h2>
   </div>
-
-  {
-    selectedFaq.items.map((i) => (
-      <div class="item">
-        <h4>{i.question}</h4>
-        <p>{i.answer}</p>
-      </div>
-    ))
-  }
+  <div class="content">
+    {
+      selectedFaq.items.map((i, index) => (
+        <details name={`faq-${type}`} class="item">
+          <summary class="q">
+            <h3>{i.question}</h3>
+            <svg
+              class="icon"
+              viewBox="0 0 10 10"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path class="line line-horizontal" d="M1 5H9" />
+              <path class="line line-vertical" d="M5 1V9" />
+            </svg>
+          </summary>
+          <div class="answer">
+            <p>{i.answer}</p>
+          </div>
+        </details>
+      ))
+    }
+  </div>
 </div>
 
 <style>
   .box {
+    position: relative;
     border-radius: 10px;
-    border: var(--border) var(--color-charcoal);
+    border: var(--border-thin) var(--color-charcoal);
     overflow: hidden;
-    height: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+    max-height: 100%;
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-charcoal);
+  }
+
+  .box::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: var(--space-s);
+    background: linear-gradient(
+      180deg,
+      rgba(252, 250, 241, 0) 0%,
+      var(--color-cream) 100%
+    );
+    z-index: +1;
+ 
+  }
+
+  .content {
+    overflow-y: auto;
+    position: relative;
+    flex: 1;
+    min-height: 0;
   }
   .heading {
     width: 100%;
@@ -34,24 +80,109 @@ const selectedFaq = faqConfig[type];
     flex-direction: column;
     align-items: start;
     justify-content: center;
-    padding-inline-start: var(--space-m);
+    padding-inline: var(--space-s);
     color: var(--color-cream);
     background-color: var(--color-charcoal);
-  }
-
-  .heading h4 {
-    font-size: var(--text-m);
+    position: sticky;
+    top: 0;
+    flex-shrink: 0;
   }
 
   .item {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-xs);
-    padding-block: var(--space-s);
-    padding-inline: var(--space-m);
+    padding-inline: var(--space-s);
   }
 
   .item:not(:last-child) {
-    border-bottom: var(--border) var(--color-charcoal);
+    border-bottom: var(--border-thin) var(--color-charcoal);
+  }
+
+  summary:hover {
+    cursor: pointer;
+  }
+
+  summary {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-block: var(--space-s);
+    list-style: none;
+    cursor: pointer;
+  }
+
+  summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .answer {
+    display: block;
+  }
+
+  .answer > p {
+    margin: 0;
+    opacity: 0;
+    transition: opacity var(--slowly);
+  }
+
+  details[open] .answer > p {
+    opacity: 1;
+  }
+
+  details[open] .answer {
+    padding-bottom: var(--space-m);
+  }
+
+  @supports selector(details::details-content) {
+    details::details-content {
+      block-size: 0;
+      overflow: clip;
+      transition:
+        block-size var(--slowly),
+        content-visibility var(--slowly);
+      transition-behavior: allow-discrete;
+    }
+
+    details[open]::details-content {
+      block-size: auto;
+    }
+  }
+
+  .q h3 {
+    text-align: left;
+  }
+
+  .q svg {
+    transition: transform var(--easy);
+  }
+
+  .icon {
+    width: 10px;
+    height: 10px;
+    flex: 0 0 auto;
+  }
+
+  .line {
+    color: var(--color-charcoal);
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1;
+    stroke-linecap: round;
+    transition:
+      opacity var(--easy),
+      transform var(--easy);
+    transform-origin: center;
+  }
+
+  details[open] .line-vertical {
+    opacity: 0;
+    transform: scaleY(0);
+  }
+
+  details[open] .q {
+    padding-bottom: var(--space-s);
+  }
+
+  p {
+    font-size: 0.8125rem;
   }
 </style>

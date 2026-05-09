@@ -35,7 +35,7 @@ export const faqConfig = {
     ],
   },
   products: {
-    title: "Ingredients & Bread Care",
+    title: "Product Info",
     items: [
       {
         question: "Are there vegan, gluten-free or allergen-friendly options?",

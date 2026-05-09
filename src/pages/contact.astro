@@ -5,25 +5,97 @@ import FaqBox from "../components/atoms/FaqBox.astro";
 
 <SideBarLayout title="Contact" color="charcoal">
   <section id="contact">
+    <div class="contact">
+      <div>
+        <div class="title-wrapper">
+          <h2>Genereal enquiries</h2>
+        </div>
 
-    <div class="box-wrapper">
-      <FaqBox type="orders" />
-      <FaqBox type="products" />
+        <p>
+          For any general enquiries, special orders or other requests, please
+          contact us at: <a href="">info@hartbageri.com</a>
+        </p>
+      </div>
+      <div>
+        <div class="title-wrapper">
+          <h2>Work with us</h2>
+        </div>
+        <p>
+          Are you passionate and interested in learning more about baking,
+          hospitality and speciality coffee? <a href="">Apply here </a>
+        </p>
+      </div>
+      <div>
+        <div class="title-wrapper">
+          <h2>Wholesale</h2>
+        </div>
+        <p>
+          For any wholesale related requests, please contact us at: <a href="">
+            wholesale@hartbageri.com</a
+          >
+        </p>
+      </div>
+    </div>
+    <div class="faq">
+      <div class="title-wrapper"><h2>FAQ</h2></div>
+      <div class="box-wrapper">
+        <FaqBox type="orders" />
+        <FaqBox type="products" />
+      </div>
     </div>
   </section>
 </SideBarLayout>
 
 <style>
+  section#contact {
+    display: grid;
+    grid-template-columns: 1fr 1.1fr;
+    column-gap: var(--space-xl);
+  }
   .title-wrapper {
-    height: fit-content;
-    width: 100%;
-    margin-bottom: var(--space-m);
+    margin-bottom: var(--space-s);
+  }
+  .contact {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-l);
+    transition: gap var(--easy);
+  }
+  .contact p {
+    text-wrap: wrap;
+  }
+
+  .contact a {
+    display: block;
+    text-decoration: underline solid 0.5px var(--color-charcoal);
+    text-underline-offset: 3px;
+    transition: text-underline-offset var(--easy);
+  }
+
+  .contact a:hover {
+    text-underline-offset: 4px;
+  }
+
+  .faq {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
   }
   .box-wrapper {
     min-height: 0;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--space-l);
-    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-m);
+    flex: 1;
+    transition: gap var(--easy);
+  }
+
+  @media screen and (min-height: 845px) {
+    .contact {
+      gap: var(--space-xl);
+    }
+    .box-wrapper {
+      gap: var(--space-l);
+    }
   }
 </style>
