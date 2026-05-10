@@ -219,12 +219,13 @@ const products = [
     }
 
     .scroller {
+      container-name: products;
+      container-type: inline-size;
       container: products / inline-size;
       display: grid;
       grid-auto-flow: column;
       grid-auto-columns: 1fr;
-      grid-template-rows: minmax(0, 1fr) minmax(0, 1fr);
-      position: relative;
+      grid-template-rows: repeat(2, minmax(0, 1fr));
       overflow-x: auto;
       overflow-y: hidden;
       column-gap: var(--space-l);
@@ -242,27 +243,25 @@ const products = [
     .filter-wrapper {
       margin-inline: var(--space-m);
     }
-    .wrapper {
-      /* grid-auto-columns: minmax(14.1vw, 1fr); */
-
-      /* grid-template-columns: none; */
-      /* grid-template-rows: repeat(2, 1fr); */
-
-      column-gap: var(--space-l);
-      row-gap: var(--space-xs);
-      width: fit-content;
-      height: 100%;
-      align-self: start;
-      padding-top: var(--space-s);
-      padding-inline: var(--space-m);
-    }
   }
 
-  @media screen and (min-width: 1480px) and (min-height: 900px) {
+  /* @container products (min-height: 1000px) {
     .scroller {
-      grid-template-rows: repeat(3, minmax(0, 1fr));
+      grid-template-rows: repeat(2, 1fr);
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      grid-auto-columns: revert;
+      grid-auto-flow: revert;
     }
   }
+
+  @media screen and (min-width: 1300px) and (min-height: 900px) {
+    .scroller {
+      grid-template-rows: repeat(2, 1fr);
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      grid-auto-columns: revert;
+      grid-auto-flow: revert;
+    }
+  } */
 </style>
 
 <script>
