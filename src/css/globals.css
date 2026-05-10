@@ -131,7 +131,7 @@
   }
 
   section {
-    margin-inline: var(--space-s);
+    padding-inline: var(--space-s);
     max-width: 100%;
   }
   /* Typography */
@@ -279,16 +279,12 @@
     }
 
     section {
-      /* display: flex;
-      flex-direction: column;
-      justify-content: space-between; */
       grid-area: main;
       display: grid;
       grid-template-rows: auto 1fr;
       min-block-size: 0;
-      margin-inline: var(--space-m);
+      padding-inline: var(--space-m);
       column-gap: var(--space-l);
-      /* grid-column: 2 / -1; */
       height: 100%;
       width: 100%;
       overflow: hidden;
