@@ -47,6 +47,7 @@
     --space-xl: 3.75rem;
 
     /* Text sizes */
+    --text-xxs: 0.5625rem;
     --text-xs: 0.625rem;
     --text-xs-s: 0.6875rem;
     --text-s: 0.75rem;
@@ -119,6 +120,14 @@
   button {
     background-color: transparent;
     border: 0;
+  }
+
+  summary {
+    list-style: none;
+    cursor: pointer;
+  }
+  summary::-webkit-details-marker {
+    display: none;
   }
 }
 
@@ -301,7 +310,7 @@
     }
 
     h4 {
-      font-size: var(--text-m);
+      font-size: var(--text-s);
     }
 
     p {

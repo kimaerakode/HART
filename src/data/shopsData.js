@@ -10,7 +10,7 @@ export const areas = [
 
 export const shops = [
   {
-    title: "carlsbergbyen",
+    title: "carlsberg byen",
     imgSrc: "/assets/img/shops/carlsbergbyen.png",
     street: "Franciska Clausens Plads 29",
     town: "Copenhagen V, DK-1799",
