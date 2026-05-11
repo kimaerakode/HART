@@ -275,6 +275,35 @@
     border-bottom: var(--border) var(--color-charcoal);
   }
 
+  .date-picker-title,
+  .location-title,
+  .pickup-time-title {
+    font-size: var(--text-m);
+    white-space: nowrap;
+    text-box-trim: trim-both;
+    text-box-edge: cap alphabetic;
+    text-transform: capitalize;
+  }
+
+  .list {
+    padding-block: var(--space-xs-s);
+    transition:
+      background var(--easy),
+      color var(--easy);
+    scroll-snap-align: start;
+    text-transform: capitalize;
+  }
+
+  .list:not(:last-child) {
+    border-bottom: var(--border-thin) var(--color-charcoal);
+  }
+
+  .list:hover {
+    cursor: pointer;
+    background: var(--color-charcoal);
+    color: var(--color-cream);
+  }
+
   /* Desktop styles */
   @media screen and (min-width: 1024px) {
     :root {

@@ -1,15 +1,58 @@
 ---
-const { title } = Astro.props;
+//@ts-nocheck
+const { title, iconSrc, iconName } = Astro.props;
 ---
 
-<div class="accordion">
-  <div class="title-wrapper">
-    <p class="text-trim">{title}</p><img
-      src="/assets/icons/accordion-arrow.svg"
-      alt=""
-    />
+<details name="anyname" class="accordion">
+  <summary>
+    <div class="title-wrapper">
+      {
+        Astro.slots.has("title-content") ? (
+          <slot name="title-content" />
+        ) : (
+          <p class="text-trim">{title}</p>
+        )
+      }
+      {
+        Astro.slots.has("trailing") ? (
+          <slot name="trailing" />
+        ) : (
+          <img class={`icon ${iconName}`} src={iconSrc} alt={`${title} icon`} />
+        )
+      }
+    </div></summary
+  >
+  <div class="content">
+    <slot />
   </div>
-</div>
+</details>
+
+<script>
+  // Attach event listeners to document to catch accordion control events
+  document.addEventListener("openAccordion", (event) => {
+    // Walk up the DOM to find the details element
+    let target = event.target;
+    while (target && target !== document) {
+      if (target.tagName === "DETAILS") {
+        target.open = true;
+        break;
+      }
+      target = target.parentElement;
+    }
+  });
+
+  document.addEventListener("closeAccordion", (event) => {
+    // Walk up the DOM to find the details element
+    let target = event.target;
+    while (target && target !== document) {
+      if (target.tagName === "DETAILS") {
+        target.open = false;
+        break;
+      }
+      target = target.parentElement;
+    }
+  });
+</script>
 
 <style>
   .title-wrapper {
@@ -20,11 +63,65 @@ const { title } = Astro.props;
 
   p {
     font-size: var(--text-xs);
+    white-space: nowrap;
   }
 
   img {
     width: 7px;
   }
+
+  /*  */
+
+  summary {
+    list-style: none;
+    cursor: pointer;
+  }
+  summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .content {
+    display: block;
+  }
+
+  .content {
+    margin: 0;
+    opacity: 0;
+    transition: opacity var(--slowly);
+  }
+
+  details[open] .content {
+    opacity: 1;
+  }
+
+  details[open] .content {
+    padding-bottom: var(--space-m);
+  }
+
+  .arrow {
+    transition: transform var(--easy);
+  }
+
+  details[open] .arrow {
+    transform: rotate(180deg);
+  }
+
+  @supports selector(details::details-content) {
+    details::details-content {
+      block-size: 0;
+      overflow: clip;
+      transition:
+        block-size var(--slowly),
+        content-visibility var(--slowly);
+      transition-behavior: allow-discrete;
+    }
+
+    details[open]::details-content {
+      block-size: auto;
+    }
+  }
+
+  /*  */
 
   @media screen and (min-width: 1024px) {
     .title-wrapper {

@@ -101,10 +101,16 @@
   color: var(--color-cream);
 }
 
-.date-picker .rdp-day_selected:not([disabled]) {
+.date-picker .rdp-day_selected:not([disabled]),
+.date-picker .rdp-selected:not([disabled]) {
   background-color: var(--color-charcoal);
   color: var(--color-cream);
   font-weight: 600;
+}
+
+.date-picker .rdp-day_selected:not([disabled]) .rdp-day_button,
+.date-picker .rdp-selected:not([disabled]) .rdp-day_button {
+  color: var(--color-cream);
 }
 
 .date-picker .rdp-day_today:not(.rdp-day_selected) {
@@ -144,10 +150,7 @@
 }
 
 .date-picker-display {
-  margin-top: var(--space-m);
-  font-size: var(--text-s);
-  color: var(--color-charcoal);
-  text-align: center;
+  display: none;
 }
 
 .date-picker-display strong {
