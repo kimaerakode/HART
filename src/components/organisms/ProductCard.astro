@@ -1,10 +1,10 @@
 ---
 import ButtonSmall from "../atoms/ButtonSmall.astro";
-const { title, price, imgSrc } = Astro.props;
-const CardImgSrc = imgSrc ?? `/assets/img/products/${imgSrc}`;
+const { title, price, imgSrc, category, favorite } = Astro.props;
+const CardImgSrc = imgSrc;
 ---
 
-<article class="card">
+<article class="card" data-category={category} data-favorite={favorite}>
   <div class="button-wrapper">
     <ButtonSmall title="add to cart" color="cream" />
   </div>
@@ -76,8 +76,6 @@ const CardImgSrc = imgSrc ?? `/assets/img/products/${imgSrc}`;
   }
 
   @media screen and (min-width: 1024px) {
-   
-
     .price {
       font-size: var(--text-s);
     }

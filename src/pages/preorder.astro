@@ -3,136 +3,7 @@ import SideBarLayout from "../layouts/SideBarLayout.astro";
 import PickupBar from "../components/organisms/PickupBar.astro";
 import FilterBar from "../components/molecules/FilterBar.astro";
 import ProductCard from "../components/organisms/ProductCard.astro";
-
-const products = [
-  {
-    category: "Pastry & Cake",
-    favorite: true,
-    title: "Cardamom Croissant",
-    price: "42 DKK",
-    img: "cardamom-croissant.jpg",
-  },
-  {
-    category: "Bread & Buns",
-    favorite: false,
-    title: "City Loaf",
-    price: "59 DKK",
-    img: "city-loaf.jpg",
-  },
-  {
-    category: "Bread & Buns",
-    favorite: true,
-    title: "Sesame City Loaf",
-    price: "59 DKK",
-    img: "sesame-city-loaf.png",
-  },
-  {
-    category: "Bread & Buns",
-    favorite: false,
-    title: "Morning Bun",
-    price: "16 DKK",
-    img: "morning-bun.jpg",
-  },
-  {
-    category: "Bread & Buns",
-    favorite: false,
-    title: "Chocolate Bun",
-    price: "28 DKK",
-    img: "chocolate-bun.png",
-  },
-  {
-    category: "Pastry & Cake",
-    favorite: true,
-    title: "Pain Au Chocolat",
-    price: "38 DKK",
-    img: "pain-au-chocolat.jpg",
-  },
-  {
-    category: "Pastry & Cake",
-    favorite: false,
-    title: "Lemon Cake",
-    price: "45 DKK",
-    img: "lemon-cake.png",
-  },
-  {
-    category: "Pastry & Cake",
-    favorite: true,
-    title: "Strawberry Choux",
-    price: "48 DKK",
-    img: "strawberry-choux.png",
-  },
-  {
-    category: "Pastry & Cake",
-    favorite: false,
-    title: "Strawberry Tart",
-    price: "48 DKK",
-    img: "strawberry-tart.png",
-  },
-  {
-    category: "Bread & Buns",
-    favorite: true,
-    title: "Superseed",
-    price: "55 DKK",
-    img: "superseed.png",
-  },
-
-  {
-    category: "Groceries",
-    favorite: false,
-    title: "Butter from Øllingegaard",
-    price: "36 DKK",
-    img: "butter.png",
-  },
-  {
-    category: "Groceries",
-    favorite: false,
-    title: "Spring Water",
-    price: "26 DKK",
-    img: "spring-water.png",
-  },
-  {
-    category: "Groceries",
-    favorite: false,
-    title: "Bornholm Water",
-    price: "30 DKK",
-    img: "bornholm-water.png",
-  },
-  {
-    category: "Groceries",
-    favorite: false,
-    title: "Fritz Cola",
-    price: "30 DKK",
-    img: "fritz-cola.png",
-  },
-  {
-    category: "Groceries",
-    favorite: false,
-    title: "Ebeltoft Soda Rhubarb",
-    price: "39 DKK",
-    img: "ebeltoft-soda-rhubarb.png",
-  },
-  {
-    category: "Groceries",
-    favorite: false,
-    title: "Ebeltoft Soda Raspberry",
-    price: "39 DKK",
-    img: "ebeltoft-soda-raspberry.png",
-  },
-  {
-    category: "Groceries",
-    favorite: false,
-    title: "Ebeltoft Soda Lemon & Ginger",
-    price: "39 DKK",
-    img: "ebeltoft-soda-gingerlemon.png",
-  },
-  {
-    category: "Groceries",
-    favorite: false,
-    title: "Prolog Coffee Bag",
-    price: "155 DKK",
-    img: "prolog-coffee.png",
-  },
-];
+import products from "../data/products.js";
 ---
 
 <SideBarLayout
@@ -151,7 +22,6 @@ const products = [
       <h2>Select items</h2>
     </div>
     <div class="card-wrapper move-up">
-  
       {
         products.map((product) => (
           <ProductCard
@@ -163,7 +33,6 @@ const products = [
           />
         ))
       }
-
     </div>
   </section>
 </SideBarLayout>
@@ -211,8 +80,84 @@ const products = [
   }
   @media screen and (min-width: 1900px) {
     .card-wrapper {
-       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     }
   }
-
 </style>
+
+<script>
+  // @ts-nocheck
+  const setupPreorderFilters = () => {
+    const section = document.querySelector("#preorder");
+
+    if (!(section instanceof HTMLElement)) return;
+
+    const buttons = Array.from(
+      section.querySelectorAll(".filter-btn[data-filter]"),
+    );
+    const wrapper = section.querySelector(".card-wrapper");
+
+    if (!(wrapper instanceof HTMLElement) || !buttons.length) return;
+
+    const originalCards = Array.from(wrapper.children).map((card) =>
+      card.cloneNode(true),
+    );
+
+    // use CSS `move-up` animation by toggling the class on swap
+
+    const normalize = (value) => value.trim().toLowerCase();
+
+    const setActiveButton = (activeButton) => {
+      buttons.forEach((button) => {
+        button.classList.toggle("selected", button === activeButton);
+      });
+    };
+
+    const renderFilteredCards = (filterValue) => {
+      const normalizedFilter = normalize(filterValue);
+
+      const matchingCards = !normalizedFilter
+        ? originalCards
+        : originalCards.filter((card) => {
+            const category = normalize(card.dataset.category || "");
+            const isFavorite = card.dataset.favorite === "true";
+
+            return normalizedFilter === "favorites"
+              ? isFavorite
+              : category === normalizedFilter;
+          });
+
+      // Replace children and trigger the CSS `move-up` animation by toggling the class
+      wrapper.classList.remove("move-up");
+      wrapper.replaceChildren(
+        ...matchingCards.map((card) => card.cloneNode(true)),
+      );
+      // Force layout then re-add class to retrigger animation
+      // eslint-disable-next-line no-unused-expressions
+      wrapper.offsetWidth;
+      wrapper.classList.add("move-up");
+    };
+
+    buttons.forEach((button) => {
+      button.addEventListener("click", () => {
+        renderFilteredCards(button.dataset.filter || button.textContent || "");
+        setActiveButton(button);
+      });
+    });
+
+    renderFilteredCards("");
+  };
+
+  const initializePreorderFilters = () => setupPreorderFilters();
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initializePreorderFilters, {
+      once: true,
+    });
+  } else {
+    initializePreorderFilters();
+  }
+
+  document.addEventListener("astro:page-load", initializePreorderFilters);
+  document.addEventListener("astro:after-swap", initializePreorderFilters);
+</script>

@@ -1,6 +1,8 @@
 ---
 import FilterButton from "../atoms/FilterButton.astro";
-const { variant } = Astro.props;
+const { variant } = Astro.props as {
+  variant: "shops" | "products";
+};
 
 const areas = [
   "reffen",
@@ -20,7 +22,7 @@ const productCategories = [
   "groceries",
 ];
 
-const filterItems = {
+const filterItems: Record<typeof variant, string[]> = {
   shops: areas,
   products: productCategories,
 };
@@ -30,7 +32,7 @@ const itemsToDisplay = filterItems[variant] || [];
 
 <div class="wrapper">
   <div class={`filter-bar ${variant}`}>
-    {itemsToDisplay.map((item) => <FilterButton title={item} />)}
+    {itemsToDisplay.map((item) => <FilterButton title={item} filter={item} />)}
   </div>
 </div>
 
