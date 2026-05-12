@@ -1,15 +1,19 @@
 ---
 import ButtonSmall from "../atoms/ButtonSmall.astro";
-const { title, price, imgSrc, category, favorite } = Astro.props;
+const { title, price, imgSrc, category, favorite, time } = Astro.props;
 const CardImgSrc = imgSrc;
 ---
 
 <article class="card" data-category={category} data-favorite={favorite}>
   <div class="button-wrapper">
-    <ButtonSmall title="add to cart" color="cream" />
+    <div class="hover-btn">
+      <ButtonSmall title="add to cart" color="cream" font="graphik caps">
+        {time ? <span class="time-label">available from {time}</span> : null}
+      </ButtonSmall>
+    </div>
   </div>
   <div class="img-wrapper">
-    <img src={CardImgSrc} alt=`${title} image` />
+    <img src={CardImgSrc} alt={`${title} image`} width="222" height="266" />
   </div>
   <div class="description">
     <p class="title">{title}</p>
@@ -71,8 +75,23 @@ const CardImgSrc = imgSrc;
   .button-wrapper {
     position: absolute;
     top: var(--space-xs);
-    right: var(--space-xs-s);
+    right: var(--space-xs);
     z-index: +1;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    gap: var(--space-xs);
+  }
+
+  .hover-btn {
+    display: flex;
+  }
+
+  .time-label {
+    display: block;
+    text-transform: none;
+    border-top: var(--border-thin) var(--color-charcoal);
+    padding-block-start: 3px;
   }
 
   @media screen and (min-width: 1024px) {
@@ -99,7 +118,7 @@ const CardImgSrc = imgSrc;
       padding-block-start: var(--space-xs);
     }
 
-    .button-wrapper {
+    .hover-btn {
       opacity: 0;
       transition: opacity var(--easy);
     }
@@ -108,7 +127,7 @@ const CardImgSrc = imgSrc;
       cursor: pointer;
     }
 
-    .card:hover .button-wrapper {
+    .card:hover .hover-btn {
       opacity: 1;
     }
 

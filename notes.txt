@@ -1,0 +1,11 @@
+To-Do List
+
+#Pre-order menu
+- Default current year century in date input
+- Other validation error messages ?
+- Capitalize words in location list
+- Selected styling (bg + color)
+
+
+#General
+- Compress media files

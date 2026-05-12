@@ -160,3 +160,7 @@
 .rdp-weekday {
   font-size: var(--text-s);
 }
+
+.date-picker-field {
+  height: fit-content;
+}

@@ -1,13 +1,11 @@
 ---
 //@ts-nocheck
 import Accordion from "../atoms/Accordion.astro";
-import DatePickerTitle from "../atoms/DatePickerTitle";
-import DatePickerField from "../atoms/DatePickerField";
-import DatePicker from "../atoms/DatePicker";
 import LocationTitle from "../atoms/LocationTitle";
 import LocationList from "../atoms/LocationList";
 import PickupTimeTitle from "../atoms/PickupTimeTitle";
 import PickupTimeList from "../atoms/PickupTimeList";
+import DateAccordion from "./DateAccordion.astro";
 import { shops } from "../../data/shopsData";
 
 const pickupTimes = [
@@ -39,25 +37,19 @@ const pickupTimes = [
   title="Select location"
   iconSrc="/assets/icons/accordion-arrow.svg"
   iconName="arrow"
+  trailingMode="icon"
 >
   <LocationTitle client:load slot="title-content" />
   <div class="list-wrapper">
     <LocationList client:load shops={shops} />
   </div>
 </Accordion>
-<Accordion
-  title="Select date"
-  iconSrc="/assets/icons/accordion-arrow.svg"
-  iconName="arrow"
->
-  <DatePickerTitle client:load slot="title-content" />
-  <DatePickerField client:load slot="trailing" />
-  <DatePicker client:load />
-</Accordion>
+<DateAccordion />
 <Accordion
   title="Select pick-up time"
   iconSrc="/assets/icons/accordion-arrow.svg"
   iconName="arrow"
+  trailingMode="icon"
 >
   <PickupTimeTitle client:load slot="title-content" /><div class="list-wrapper">
     <PickupTimeList client:load pickupTimes={pickupTimes} />

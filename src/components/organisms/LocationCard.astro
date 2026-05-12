@@ -9,7 +9,11 @@ const cardImgSrc = imgSrc ?? `/assets/img/shops/${location}.png`;
   <img class="shop-img" src={cardImgSrc} alt={cardTitle} />
   <div class="card-content">
     <div class="title-wrapper">
-      <h2>{cardTitle}</h2><ButtonSmall title="pre-order" color="charcoal" />
+      <h2>{cardTitle}</h2><ButtonSmall
+        title="pre-order"
+        color="charcoal"
+        font="basel caps"
+      />
     </div>
     <div class="description">
       <p class="text-s">{adress}</p>

@@ -8,6 +8,17 @@ import PickupSelect from "../molecules/PickupSelect.astro";
 </div>
 
 <style>
+  @media screen and (max-width: 400px) {
+    .pickup-bar {
+      gap: var(--space-s) !important;
+    }
+  }
+  @media screen and (max-width: 440px) {
+    h4 {
+      font-size: var(--text-xxs);
+    }
+  }
+
   .pickup-bar {
     display: flex;
     align-items: center;
@@ -15,10 +26,12 @@ import PickupSelect from "../molecules/PickupSelect.astro";
     padding-inline: var(--space-s);
     padding-block: var(--space-s);
     border-bottom: var(--border) var(--color-charcoal);
+    transition: gap var(--easy);
   }
 
   h4 {
     margin-bottom: 3px;
+    white-space: nowrap;
   }
 
   @media screen and (min-width: 1024px) {

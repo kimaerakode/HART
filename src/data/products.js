@@ -18,7 +18,8 @@ const products = [
     favorite: true,
     title: "Sesame City Loaf",
     price: "59 DKK",
-    img: "sesame-city-loaf.png",
+      img: "sesame-city-loaf.png",
+        time: "08:00"
   },
   {
     category: "Bread & Buns",
@@ -26,48 +27,55 @@ const products = [
     title: "Morning Bun",
     price: "16 DKK",
     img: "morning-bun.jpg",
+    time: "08:00"
   },
   {
     category: "Bread & Buns",
     favorite: false,
     title: "Chocolate Bun",
     price: "28 DKK",
-    img: "chocolate-bun.png",
+      img: "chocolate-bun.png",
+        time: "08:00"
   },
   {
     category: "Pastry & Cake",
     favorite: true,
     title: "Pain Au Chocolat",
     price: "38 DKK",
-    img: "pain-au-chocolat.jpg",
+      img: "pain-au-chocolat.jpg",
+      time: "08:00"
   },
   {
     category: "Pastry & Cake",
     favorite: false,
     title: "Lemon Cake",
     price: "45 DKK",
-    img: "lemon-cake.png",
+      img: "lemon-cake.png",
+      time: "09:30"
   },
   {
     category: "Pastry & Cake",
     favorite: true,
     title: "Strawberry Choux",
     price: "48 DKK",
-    img: "strawberry-choux.png",
+      img: "strawberry-choux.png",
+      time: "09:30"
   },
   {
     category: "Pastry & Cake",
     favorite: false,
     title: "Strawberry Tart",
     price: "48 DKK",
-    img: "strawberry-tart.png",
+      img: "strawberry-tart.png",
+        time: "09:30"
   },
   {
     category: "Bread & Buns",
     favorite: true,
     title: "Superseed",
     price: "55 DKK",
-    img: "superseed.png",
+      img: "superseed.png",
+        time: "08:00"
   },
   {
     category: "Groceries",
@@ -81,49 +89,56 @@ const products = [
     favorite: false,
     title: "Spring Water",
     price: "26 DKK",
-    img: "spring-water.png",
+      img: "spring-water.png",
+        time: "08:00"
   },
   {
     category: "Groceries",
     favorite: false,
     title: "Bornholm Water",
     price: "30 DKK",
-    img: "bornholm-water.png",
+      img: "bornholm-water.png",
+        time: "08:00"
   },
   {
     category: "Groceries",
     favorite: false,
     title: "Fritz Cola",
     price: "30 DKK",
-    img: "fritz-cola.png",
+      img: "fritz-cola.png",
+        time: "08:00"
   },
   {
     category: "Groceries",
     favorite: false,
     title: "Ebeltoft Soda Rhubarb",
     price: "39 DKK",
-    img: "ebeltoft-soda-rhubarb.png",
+      img: "ebeltoft-soda-rhubarb.png",
+        time: "08:00"
   },
   {
     category: "Groceries",
     favorite: false,
     title: "Ebeltoft Soda Raspberry",
     price: "39 DKK",
-    img: "ebeltoft-soda-raspberry.png",
+      img: "ebeltoft-soda-raspberry.png",
+        time: "08:00"
   },
   {
     category: "Groceries",
     favorite: false,
     title: "Ebeltoft Soda Lemon & Ginger",
     price: "39 DKK",
-    img: "ebeltoft-soda-gingerlemon.png",
+      img: "ebeltoft-soda-gingerlemon.png",
+        time: "08:00"
   },
   {
     category: "Groceries",
     favorite: false,
     title: "Prolog Coffee Bag",
     price: "155 DKK",
-    img: "prolog-coffee.png",
+      img: "prolog-coffee.png",
+    time: "08:00"
   },
 ];
 
