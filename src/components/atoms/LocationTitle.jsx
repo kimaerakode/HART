@@ -10,7 +10,11 @@ export default function LocationTitle() {
 
   return (
     <span className="location-title">
-      {selected ? selected.title : "Select location"}
+      {selected ? (
+        <span className="location-title-value">{selected.title}</span>
+      ) : (
+        "Select location"
+      )}
     </span>
   );
 }

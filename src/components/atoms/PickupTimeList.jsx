@@ -1,7 +1,17 @@
-import React from "react";
-import { setSelectedPickupTime } from "./pickupTimeStore";
+import React, { useSyncExternalStore } from "react";
+import {
+  getSelectedPickupTime,
+  setSelectedPickupTime,
+  subscribe,
+} from "./pickupTimeStore";
 
 export default function PickupTimeList({ pickupTimes }) {
+  const selectedPickupTime = useSyncExternalStore(
+    subscribe,
+    getSelectedPickupTime,
+    getSelectedPickupTime,
+  );
+
   const handleSelectTime = (time) => {
     setSelectedPickupTime(time);
     // Dispatch custom event to close accordion
@@ -15,7 +25,7 @@ export default function PickupTimeList({ pickupTimes }) {
       {pickupTimes.map((time) => (
         <div
           key={time}
-          className="list time"
+          className={`list time ${selectedPickupTime === time ? "list--selected" : ""}`}
           onClick={() => handleSelectTime(time)}
           style={{ cursor: "pointer" }}
         >

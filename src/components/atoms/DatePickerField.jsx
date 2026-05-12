@@ -113,24 +113,21 @@ export default function DatePickerField() {
     }
 
     const currentYear = new Date().getFullYear();
+    const unmaskedValue =
+      maskRef.current?.unmaskedValue ?? value.replace(/\D/g, "");
     let parsedDate;
 
-    // If only 5 chars (dd/mm), auto-fill current year
-    if (value.length === 5 && value.includes("/")) {
-      const [day, month] = value.split("/");
-      parsedDate = new Date(
-        currentYear,
-        parseInt(month, 10) - 1,
-        parseInt(day, 10),
-      );
-    } else if (value.length === 10) {
-      // Full dd/mm/yyyy format — parse manually to ensure dd/mm order
-      const [day, month, year] = value.split("/");
-      parsedDate = new Date(
-        parseInt(year, 10),
-        parseInt(month, 10) - 1,
-        parseInt(day, 10),
-      );
+    // If only day/month was entered, default the year to the current year.
+    if (unmaskedValue.length === 4) {
+      const day = parseInt(unmaskedValue.slice(0, 2), 10);
+      const month = parseInt(unmaskedValue.slice(2, 4), 10);
+      parsedDate = new Date(currentYear, month - 1, day);
+    } else if (unmaskedValue.length === 8) {
+      // Full dd/mm/yyyy format — parse manually to ensure dd/mm order.
+      const day = parseInt(unmaskedValue.slice(0, 2), 10);
+      const month = parseInt(unmaskedValue.slice(2, 4), 10);
+      const year = parseInt(unmaskedValue.slice(4, 8), 10);
+      parsedDate = new Date(year, month - 1, day);
     } else {
       // Invalid format - clear the field
       inputRef.current.value = "";
