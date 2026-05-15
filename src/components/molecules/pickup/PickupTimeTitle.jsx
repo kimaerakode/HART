@@ -1,5 +1,5 @@
 import React, { useSyncExternalStore } from "react";
-import { getSelectedPickupTime, subscribe } from "./pickupTimeStore";
+import { getSelectedPickupTime, subscribe } from "../../../stores/pickupTimeStore.js";
 
 export default function PickupTimeTitle() {
   const selected = useSyncExternalStore(

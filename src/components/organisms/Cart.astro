@@ -1,0 +1,20 @@
+---
+import CartItems from "../molecules/CartItems.astro";
+import CartTotal from "../atoms/CartTotal.astro";
+---
+
+<div class="cart-wrapper">
+  <div class="title-wrapper"><h2>Cart Items</h2></div>
+  <CartItems />
+  <CartTotal placement="desktop" />
+</div>
+
+<style>
+  .cart-wrapper {
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    height: 100%;
+    min-height: 0;
+    padding-block-end: var(--space-s);
+  }
+</style>

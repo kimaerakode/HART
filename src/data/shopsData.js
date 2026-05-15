@@ -10,6 +10,31 @@ export const areas = [
 
 export const shops = [
   {
+    title: "gammel mønt",
+    imgSrc: "/assets/img/shops/gammelmoent.png",
+    street: "Gammel Mønt 4",
+    town: "Copenhagen K, DK-1117",
+    openHours1: "Mon – Fri: 07:30-18:00",
+    openHours2: "Sat – Sun: 08:00-18:00",
+  },
+  {
+    title: "Holmen",
+    imgSrc: "/assets/img/shops/holmen.png",
+    street: "Galionsvej 41",
+    town: "Copenhagen K, DK-1437",
+    openHours1: "Sun – Thu: 07:30-18:00",
+    openHours2: "Fri – Sat: 07:30-19:00",
+  },
+  {
+    title: "marmorkirken",
+    imgSrc: "/assets/img/shops/marmorkirken.png",
+    street: "Store Kongensgade 75",
+    town: "Copenhagen K, DK-1264",
+    area: "City",
+    openHours1: "Open every day",
+    openHours2: "07:30-18:00",
+  },
+  {
     title: "carlsberg byen",
     imgSrc: "/assets/img/shops/carlsbergbyen.png",
     street: "Franciska Clausens Plads 29",

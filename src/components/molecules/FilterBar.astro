@@ -39,13 +39,14 @@ const itemsToDisplay = filterItems[variant] || [];
 <style>
   @media screen and (max-width: 1024px) {
     .wrapper {
-      /* overflow-x: auto; */
       padding-block: var(--space-m);
     }
   }
   .filter-bar {
     display: flex;
     gap: var(--space-s);
+    flex-wrap: nowrap;
+    width: fit-content;
   }
 
   @media screen and (min-width: 1024px) {

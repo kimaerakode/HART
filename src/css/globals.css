@@ -129,12 +129,36 @@
   summary::-webkit-details-marker {
     display: none;
   }
+  input {
+    margin: 0;
+    padding: 0;
+    border-radius: 0;
+    background-color: transparent;
+    border: 0;
+    border-bottom: var(--border-thin) var(--color-charcoal);
+    height: var(--space-m);
+    width: 100%;
+    font-family: "Graphik";
+    font-size: var(--text-m);
+    color: var(--color-charcoal);
+  }
+
+  input[type="text"]:focus {
+    outline: 0;
+  }
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px var(--color-cream) inset !important;
+    font-family: "Graphik";
+  }
 }
 
 @layer base {
   main {
     margin-top: var(--header-height);
-    margin-bottom: var(--space-l);
+    /* margin-bottom: var(--space-l); */
     /* max-width: 100svw; */
     position: relative;
   }
@@ -220,6 +244,11 @@
     color: inherit;
   }
 
+  .link {
+    text-decoration: 0.5px underline solid var(--color-charcoal);
+
+    text-underline-offset: 4px;
+  }
   ul {
     list-style: none;
   }
@@ -228,6 +257,11 @@
     display: flex;
     align-items: center;
     border-bottom: var(--border) var(--color-charcoal);
+  }
+
+  .title-wrapper.reverse {
+    border-bottom: 0;
+    border-top: var(--border) var(--color-charcoal);
   }
 
   .menu .title-wrapper,
@@ -259,6 +293,19 @@
     line-height: 100%;
   }
 
+  .title-wrapper p {
+    margin-bottom: 6px;
+  }
+
+  .title-wrapper.reverse h1,
+  .title-wrapper.reverse h2,
+  .title-wrapper.reverse h3,
+  .title-wrapper.reverse h4 {
+    margin-bottom: 0px;
+    margin-top: 6px;
+    line-height: 100%;
+  }
+
   .accordion .title-wrapper {
     padding-bottom: 4px;
   }
@@ -278,11 +325,12 @@
   .date-picker-title,
   .location-title,
   .pickup-time-title {
-    font-size: var(--text-m);
+    font-size: var(--text-xs);
     white-space: nowrap;
     text-box-trim: trim-both;
     text-box-edge: cap alphabetic;
     text-transform: none;
+    transition: font-size var(--easy);
   }
 
   .location-name,
@@ -313,6 +361,14 @@
     color: var(--color-cream);
   }
 
+  @media screen and (max-width: 440px) {
+    .date-picker-title,
+    .location-title,
+    .pickup-time-title {
+      font-size: var(--text-xxs);
+    }
+  }
+
   /* Desktop styles */
   @media screen and (min-width: 1024px) {
     :root {
@@ -331,9 +387,10 @@
       grid-template-rows: auto 1fr;
       min-block-size: 0;
       padding-inline: var(--space-m);
+      margin-bottom: 0;
       column-gap: var(--space-l);
       height: 100%;
-      width: 100%;
+      max-width: 100%;
       overflow: hidden;
     }
 
@@ -357,6 +414,12 @@
 
     .menu p.text-xs {
       font-size: var(--text-xs);
+    }
+
+    .date-picker-title,
+    .location-title,
+    .pickup-time-title {
+      font-size: var(--text-m);
     }
   }
 

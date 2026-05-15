@@ -1,0 +1,29 @@
+---
+import products from "../../data/products.js";
+import CartItem from "../atoms/CartItem.astro";
+
+const { cartTotal } = Astro.props;
+---
+
+<div class="cart">
+  {
+    products.map((product) => (
+      <CartItem
+        title={product.title}
+        price={product.price}
+        imgSrc={`/assets/img/products/${product.img}`}
+      />
+    ))
+  }
+</div>
+
+<style>
+  .cart {
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    min-height: 0;
+    row-gap: 3px;
+    padding-block: var(--space-m);
+  }
+</style>

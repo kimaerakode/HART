@@ -1,10 +1,11 @@
 To-Do List
 
 #Pre-order menu
-- Default current year century in date input
-- Other validation error messages ?
-- Capitalize words in location list
-- Selected styling (bg + color)
+- Validation msg when attempted checkout with no pickup selection
+
+
+#Header
+- Center cart icon items (browser compability)
 
 
 #General

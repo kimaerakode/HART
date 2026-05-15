@@ -3,7 +3,7 @@ import { DayPicker } from "react-day-picker";
 import { format, isBefore, startOfDay } from "date-fns";
 import "react-day-picker/dist/style.css";
 import "./DatePicker.css";
-import { getSelectedDate, setSelectedDate, subscribe } from "./datePickerStore";
+import { getSelectedDate, setSelectedDate, subscribe } from "../../../stores/datePickerStore.js";
 
 export default function DatePicker({ onDateSelect, disabled }) {
   const selected = useSyncExternalStore(
@@ -13,17 +13,14 @@ export default function DatePicker({ onDateSelect, disabled }) {
   );
 
   const handleSelect = (date) => {
-    // Validate that the date is not in the past
     const today = startOfDay(new Date());
     const selectedDay = startOfDay(date);
 
     if (isBefore(selectedDay, today)) {
-      // Don't set the date if it's in the past
       return;
     }
 
     setSelectedDate(date);
-    // Dispatch event to close accordion and reset input field
     document.dispatchEvent(
       new CustomEvent("closeAccordion", { bubbles: true }),
     );
@@ -33,7 +30,6 @@ export default function DatePicker({ onDateSelect, disabled }) {
     onDateSelect?.(date);
   };
 
-  // Disable dates in the past
   const disabledDates = (date) => {
     const today = startOfDay(new Date());
     return isBefore(startOfDay(date), today);

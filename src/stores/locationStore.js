@@ -1,4 +1,6 @@
 // External store for managing location selection state
+import { setCheckoutSelection } from "./checkoutSelectionStore.js";
+
 let selectedLocation = null;
 const subscribers = new Set();
 
@@ -13,5 +15,6 @@ export function getSelectedLocation() {
 
 export function setSelectedLocation(location) {
   selectedLocation = location;
+  setCheckoutSelection({ location: location ?? null });
   subscribers.forEach((listener) => listener());
 }

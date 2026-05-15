@@ -3,7 +3,8 @@ import {
   getSelectedLocation,
   setSelectedLocation,
   subscribe,
-} from "./locationStore";
+} from "../../../stores/locationStore.js";
+import "./PickupList.css";
 
 export default function LocationList({ shops }) {
   const selectedLocation = useSyncExternalStore(
@@ -14,7 +15,6 @@ export default function LocationList({ shops }) {
 
   const handleSelectLocation = (shop) => {
     setSelectedLocation(shop);
-    // Dispatch custom event to close accordion
     document.dispatchEvent(
       new CustomEvent("closeAccordion", { bubbles: true }),
     );
@@ -25,9 +25,8 @@ export default function LocationList({ shops }) {
       {shops.map((shop) => (
         <div
           key={shop.title}
-          className={`list ${selectedLocation?.title === shop.title ? "list--selected" : ""}`}
+          className={`list clickable-list ${selectedLocation?.title === shop.title ? "list--selected" : ""}`}
           onClick={() => handleSelectLocation(shop)}
-          style={{ cursor: "pointer" }}
         >
           <h4 className="location-name">{shop.title}</h4>
           <p className="text-xs">

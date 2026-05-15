@@ -1,6 +1,6 @@
 import React, { useSyncExternalStore } from "react";
 import { format } from "date-fns";
-import { getSelectedDate, subscribe } from "./datePickerStore";
+import { getSelectedDate, subscribe } from "../../../stores/datePickerStore.js";
 
 export default function DatePickerTitle() {
   const selected = useSyncExternalStore(

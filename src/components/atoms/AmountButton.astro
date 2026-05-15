@@ -1,0 +1,26 @@
+---
+const { count } = Astro.props;
+---
+
+<button class="count"
+  ><img
+    src="/assets/icons/arrow-decrease-charcoal.svg"
+    alt="decrease amount (<)"
+  />{count}<img
+    src="/assets/icons/arrow-increase-charcoal.svg"
+    alt="increase amount (>)"
+  /></button
+>
+
+<style>
+  button.count {
+    display: flex;
+    justify-content: space-between;
+    min-width: 4.5rem;
+    height: fit-content;
+    gap: var(--space-s);
+    border: var(--border-thin) var(--color-charcoal);
+    border-radius: 5px;
+    padding: var(--space-xs-s) var(--space-xs);
+  }
+</style>

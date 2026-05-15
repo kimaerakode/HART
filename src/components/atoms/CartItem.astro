@@ -1,0 +1,101 @@
+---
+//@ts-nocheck
+import AmountButton from "./AmountButton.astro";
+const { title, price, imgSrc, count, singleTotal } = Astro.props;
+---
+
+<div class="cart-item">
+  <img src={imgSrc} alt={`${title} image`} />
+  <div class="content">
+    <div class="description">
+      <div class="single">
+        <p class="title">{title}</p>
+        <p class="price text-xs">{price}</p>
+      </div>
+      <div class="total mobile">
+        <p>xx DKK</p>
+      </div>
+    </div>
+    <div class="amount">
+      <AmountButton />
+      <button class="remove"
+        ><img
+          src="/assets/icons/cross-charcoal.svg"
+          alt="remove item (X)"
+        /></button
+      >
+    </div>
+    <div class="total">
+      <p>xx DKK</p>
+    </div>
+  </div>
+</div>
+
+<style>
+  .cart-item {
+    display: flex;
+    justify-content: start;
+    gap: var(--space-s);
+    max-height: 5.3125rem;
+    padding-block-end: var(--space-xs);
+  }
+
+  .cart-item:not(:last-child) {
+    border-bottom: var(--border-thin) var(--color-charcoal);
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .description,
+  .amount {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .cart-item img {
+    aspect-ratio: 5 / 6;
+    object-fit: cover;
+    border-radius: 4px;
+    max-width: var(--space-xl);
+  }
+
+  .total > * {
+    font-size: var(--text-xs);
+  }
+
+  .total:not(.mobile) {
+    display: none;
+  }
+
+  @media screen and (min-width: 480px) {
+    .content {
+      flex-direction: row;
+    }
+    .cart-item {
+      gap: var(--space-xs);
+    }
+
+    .description {
+      width: 40%;
+    }
+
+    .amount {
+      justify-content: center;
+      align-items: center;
+      gap: var(--space-l);
+    }
+
+    .total {
+      align-self: center;
+    }
+
+    .total.mobile {
+      display: none;
+    }
+  }
+</style>

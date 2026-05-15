@@ -1,4 +1,6 @@
 // External store for managing pickup time selection state
+import { setCheckoutSelection } from "./checkoutSelectionStore.js";
+
 let selectedPickupTime = null;
 const subscribers = new Set();
 
@@ -13,5 +15,6 @@ export function getSelectedPickupTime() {
 
 export function setSelectedPickupTime(time) {
   selectedPickupTime = time;
+  setCheckoutSelection({ time: time ?? null });
   subscribers.forEach((listener) => listener());
 }

@@ -1,3 +1,6 @@
+import { format } from "date-fns";
+import { setCheckoutSelection } from "./checkoutSelectionStore.js";
+
 let selectedDate;
 
 const listeners = new Set();
@@ -8,6 +11,7 @@ export function getSelectedDate() {
 
 export function setSelectedDate(date) {
   selectedDate = date;
+  setCheckoutSelection({ date: date ? format(date, "dd/MM/yyyy") : null });
   listeners.forEach((listener) => listener());
 }
 

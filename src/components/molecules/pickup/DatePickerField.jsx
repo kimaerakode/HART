@@ -7,7 +7,7 @@ import React, {
 import { format, isValid } from "date-fns";
 import { InputMask, MaskedRange } from "imask";
 import "./DatePickerField.css";
-import { getSelectedDate, setSelectedDate, subscribe } from "./datePickerStore";
+import { getSelectedDate, setSelectedDate, subscribe } from "../../../stores/datePickerStore.js";
 
 export default function DatePickerField() {
   const selected = useSyncExternalStore(
@@ -26,31 +26,15 @@ export default function DatePickerField() {
       maskRef.current = new InputMask(inputRef.current, {
         mask: "dd/mm/yyyy",
         blocks: {
-          dd: {
-            mask: MaskedRange,
-            from: 1,
-            to: 31,
-            maxLength: 2,
-          },
-          mm: {
-            mask: MaskedRange,
-            from: 1,
-            to: 12,
-            maxLength: 2,
-          },
-          yyyy: {
-            mask: MaskedRange,
-            from: 1900,
-            to: 2100,
-            maxLength: 4,
-          },
+          dd: { mask: MaskedRange, from: 1, to: 31, maxLength: 2 },
+          mm: { mask: MaskedRange, from: 1, to: 12, maxLength: 2 },
+          yyyy: { mask: MaskedRange, from: 1900, to: 2100, maxLength: 4 },
         },
         lazy: false,
         overwrite: "shift",
       });
     }
 
-    // Listen for calendar date selection to reset input field
     const handleCalendarSelect = () => {
       justCommittedRef.current = true;
       setError(null);
@@ -65,10 +49,7 @@ export default function DatePickerField() {
     document.addEventListener("dateSelectedFromCalendar", handleCalendarSelect);
 
     return () => {
-      document.removeEventListener(
-        "dateSelectedFromCalendar",
-        handleCalendarSelect,
-      );
+      document.removeEventListener("dateSelectedFromCalendar", handleCalendarSelect);
       if (maskRef.current) {
         maskRef.current.destroy();
         maskRef.current = null;
@@ -78,7 +59,6 @@ export default function DatePickerField() {
 
   useEffect(() => {
     if (inputRef.current) {
-      // Skip refilling if we just committed (to allow reset)
       if (justCommittedRef.current) {
         justCommittedRef.current = false;
         return;
@@ -90,12 +70,9 @@ export default function DatePickerField() {
     }
   }, [selected]);
 
-  // Auto-clear error after 2 seconds
   useEffect(() => {
     if (error) {
-      const timer = setTimeout(() => {
-        setError(null);
-      }, 4000);
+      const timer = setTimeout(() => setError(null), 4000);
       return () => clearTimeout(timer);
     }
   }, [error]);
@@ -117,19 +94,16 @@ export default function DatePickerField() {
       maskRef.current?.unmaskedValue ?? value.replace(/\D/g, "");
     let parsedDate;
 
-    // If only day/month was entered, default the year to the current year.
     if (unmaskedValue.length === 4) {
       const day = parseInt(unmaskedValue.slice(0, 2), 10);
       const month = parseInt(unmaskedValue.slice(2, 4), 10);
       parsedDate = new Date(currentYear, month - 1, day);
     } else if (unmaskedValue.length === 8) {
-      // Full dd/mm/yyyy format — parse manually to ensure dd/mm order.
       const day = parseInt(unmaskedValue.slice(0, 2), 10);
       const month = parseInt(unmaskedValue.slice(2, 4), 10);
       const year = parseInt(unmaskedValue.slice(4, 8), 10);
       parsedDate = new Date(year, month - 1, day);
     } else {
-      // Invalid format - clear the field
       inputRef.current.value = "";
       if (maskRef.current) {
         maskRef.current.updateValue();
@@ -138,7 +112,6 @@ export default function DatePickerField() {
     }
 
     if (!isValid(parsedDate)) {
-      // Invalid date - clear the field
       inputRef.current.value = "";
       if (maskRef.current) {
         maskRef.current.updateValue();
@@ -146,14 +119,12 @@ export default function DatePickerField() {
       return;
     }
 
-    // Check if date is in the past
     const today = new Date();
     today.setHours(0, 0, 0, 0);
     parsedDate.setHours(0, 0, 0, 0);
 
     if (parsedDate < today) {
       setError("Date cannot be in the past");
-      // Clear the input field
       inputRef.current.value = "";
       if (maskRef.current) {
         maskRef.current.updateValue();
@@ -161,16 +132,12 @@ export default function DatePickerField() {
       return;
     }
 
-    // Date is valid and not in the past - commit it
-    // Mark that we just committed so useEffect doesn't refill the field
     justCommittedRef.current = true;
     setSelectedDate(parsedDate);
-    // Reset input field after successful commit
     inputRef.current.value = "";
     if (maskRef.current) {
       maskRef.current.updateValue();
     }
-    // Dispatch custom event to close accordion
     inputRef.current.dispatchEvent(
       new CustomEvent("closeAccordion", { bubbles: true }),
     );
@@ -183,17 +150,12 @@ export default function DatePickerField() {
         className="date-picker-field"
         type="text"
         onFocus={(event) => {
-          // Clear error when focused
           setError(null);
-          // Dispatch custom event to open accordion
           event.currentTarget.dispatchEvent(
             new CustomEvent("openAccordion", { bubbles: true }),
           );
         }}
-        onInput={() => {
-          // Clear error when user starts typing
-          setError(null);
-        }}
+        onInput={() => setError(null)}
         onBlur={commitValue}
         onKeyDown={(event) => {
           if (event.key === "Enter") {

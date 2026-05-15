@@ -1,0 +1,39 @@
+---
+import CheckoutSelection from "./CheckoutSelection.jsx";
+---
+
+<div class="menu-wrapper">
+  <CheckoutSelection client:load />
+  <div class="caption">
+    <div class="title-wrapper">
+      <h3><a href="/preorder">Edit Order</a></h3>
+    </div>
+    <p class="text-s">
+      Pastry orders must be placed before 14:00 and Bread orders must be placed
+      before 24:00 in case you want to pick up your baked goods the day after
+      you've placed your order.
+    </p>
+  </div>
+</div>
+
+<style>
+  .menu {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-m);
+  }
+  .menu .title-wrapper {
+    border-bottom: var(--border-thin) var(--color-charcoal);
+    height: var(--space-m);
+    align-items: end;
+  }
+
+  .item {
+    display: flex;
+    flex-direction: column;
+  }
+  .item span {
+    align-self: end;
+    font-size: var(--text-s);
+  }
+</style>

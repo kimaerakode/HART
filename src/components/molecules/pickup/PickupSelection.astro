@@ -1,12 +1,12 @@
 ---
 //@ts-nocheck
-import Accordion from "../atoms/Accordion.astro";
-import LocationTitle from "../atoms/LocationTitle";
-import LocationList from "../atoms/LocationList";
-import PickupTimeTitle from "../atoms/PickupTimeTitle";
-import PickupTimeList from "../atoms/PickupTimeList";
-import DateAccordion from "./DateAccordion.astro";
-import { shops } from "../../data/shopsData";
+import Accordion from "../../atoms/Accordion.astro";
+import LocationTitle from "./LocationTitle.jsx";
+import LocationList from "./LocationList.jsx";
+import PickupTimeTitle from "./PickupTimeTitle.jsx";
+import PickupTimeList from "./PickupTimeList.jsx";
+import DateAccordion from "./PickupDateAccordion.astro";
+import { shops } from "../../../data/shopsData";
 
 const pickupTimes = [
   "07:30 – 08:00",
@@ -62,7 +62,6 @@ const pickupTimes = [
     max-height: 16rem;
     overflow-y: auto;
     border-bottom: var(--border-thin) var(--color-charcoal);
-    scroll-snap-type: y mandatory;
   }
 
   .list {
@@ -81,10 +80,12 @@ const pickupTimes = [
     border-bottom: var(--border-thin) var(--color-charcoal);
   }
 
-  .list:hover {
-    cursor: pointer;
-    background: var(--color-charcoal);
-    color: var(--color-cream);
+  @media (hover: hover) {
+    .list:hover {
+      cursor: pointer;
+      background: var(--color-charcoal);
+      color: var(--color-cream);
+    }
   }
 
   h4 {
@@ -98,6 +99,10 @@ const pickupTimes = [
   @media screen and (min-width: 1024px) {
     .list {
       padding-inline: var(--space-xs-s);
+    }
+
+    .list-wrapper {
+      scroll-snap-type: y mandatory;
     }
   }
 </style>

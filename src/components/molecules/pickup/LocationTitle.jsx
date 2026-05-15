@@ -1,5 +1,5 @@
 import React, { useSyncExternalStore } from "react";
-import { getSelectedLocation, subscribe } from "./locationStore";
+import { getSelectedLocation, subscribe } from "../../../stores/locationStore.js";
 
 export default function LocationTitle() {
   const selected = useSyncExternalStore(

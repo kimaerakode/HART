@@ -1,10 +1,23 @@
 ---
 import ButtonSmall from "../atoms/ButtonSmall.astro";
-const { title, price, imgSrc, category, favorite, time } = Astro.props;
+const { title, price, imgSrc, category, favorite, time, description, allergens } =
+  Astro.props;
 const CardImgSrc = imgSrc;
 ---
 
-<article class="card" data-category={category} data-favorite={favorite}>
+<article
+  class="card"
+  data-category={category}
+  data-favorite={favorite}
+  data-title={title}
+  data-price={price}
+  data-img={CardImgSrc}
+  data-time={time}
+  data-description={description}
+  data-allergens={allergens}
+  role="button"
+  tabindex="0"
+>
   <div class="button-wrapper">
     <div class="hover-btn">
       <ButtonSmall title="add to cart" color="cream" font="graphik caps">

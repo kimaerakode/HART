@@ -1,8 +1,10 @@
 ---
 import SideBarLayout from "../layouts/SideBarLayout.astro";
 import PickupBar from "../components/organisms/PickupBar.astro";
+import PopoverPreorder from "../components/organisms/Popover-Preorder.astro";
 import FilterBar from "../components/molecules/FilterBar.astro";
 import ProductCard from "../components/organisms/ProductCard.astro";
+import ProductModalController from "../components/ui/ProductModalController.jsx";
 import products from "../data/products.js";
 ---
 
@@ -12,6 +14,7 @@ import products from "../data/products.js";
   mainClass="scroll"
   sidebarClass="add-margin"
 >
+  <PopoverPreorder />
   <PickupBar />
 
   <section id="preorder" class="no-scrollbar">
@@ -31,20 +34,29 @@ import products from "../data/products.js";
             time={product.time}
             favorite={product.favorite}
             category={product.category}
+            description={product.description}
+            allergens={product.allergens}
           />
         ))
       }
     </div>
+    <ProductModalController client:load />
   </section>
 </SideBarLayout>
 
 <style>
+  @media screen and (max-width: 481px) {
+    .card-wrapper {
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    }
+  }
   section#preorder {
     display: flex;
     flex-direction: column;
     justify-content: start;
     overflow-y: auto;
     height: 100%;
+    padding-bottom: var(--space-l);
   }
   .title-wrapper {
     display: none;
@@ -63,7 +75,6 @@ import products from "../data/products.js";
     column-gap: var(--space-m);
     row-gap: var(--space-s);
     width: 100%;
-    padding-block-start: var(--space-s);
   }
 
   @media screen and (min-width: 1024px) {
@@ -73,10 +84,23 @@ import products from "../data/products.js";
       padding-bottom: var(--space-xl);
     }
 
+    .filter-wrapper {
+      overflow-x: visible;
+      width: 100%;
+    }
+
+    .filter-wrapper .wrapper {
+      width: 100%;
+    }
+
+    .filter-wrapper .filter-bar {
+      flex-wrap: wrap;
+    }
+
     .card-wrapper {
       column-gap: var(--space-l);
       row-gap: var(--space-s);
-      padding-block: var(--space-s);
+      padding-block-start: var(--space-s);
     }
     .title-wrapper {
       display: block;
@@ -165,4 +189,51 @@ import products from "../data/products.js";
 
   document.addEventListener("astro:page-load", initializePreorderFilters);
   document.addEventListener("astro:after-swap", initializePreorderFilters);
+</script>
+
+<script>
+  // @ts-nocheck
+  // Simple delegated handler that opens the product modal via CustomEvent
+  (function () {
+    const root = document.querySelector("#preorder");
+    if (!root) return;
+
+    /** @param {HTMLElement} card */
+    function openProductModal(card) {
+      const ds = /** @type {any} */ (card).dataset || {};
+      window.dispatchEvent(
+        new CustomEvent("open-product", {
+          detail: {
+            title: ds.title,
+            price: ds.price,
+            imgSrc: ds.img,
+            time: ds.time,
+            description: ds.description,
+            allergens: ds.allergens,
+          },
+        }),
+      );
+    }
+
+    root.addEventListener("click", (e) => {
+      const target = e.target;
+      const maybe = target instanceof Element ? target.closest(".card") : null;
+      const card = maybe instanceof HTMLElement ? maybe : null;
+      if (!card) return;
+      openProductModal(card);
+    });
+
+    // keyboard activation for accessibility: Enter or Space opens product
+    root.addEventListener("keydown", (e) => {
+      if (!(e instanceof KeyboardEvent)) return;
+      if (e.key !== "Enter" && e.key !== " ") return;
+      const target = e.target;
+      const maybe = target instanceof Element ? target.closest(".card") : null;
+      const card = maybe instanceof HTMLElement ? maybe : null;
+      if (!card) return;
+      // prevent page scroll on Space
+      if (e.key === " ") e.preventDefault();
+      openProductModal(card);
+    });
+  })();
 </script>

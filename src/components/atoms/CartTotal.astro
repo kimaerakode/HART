@@ -1,0 +1,32 @@
+---
+const { cartTotal } = Astro.props;
+const { placement = "mobile" } = Astro.props;
+---
+
+<div class={`total--${placement}`}>
+  <div class="title-wrapper reverse">
+    <h3><span>Total</span> <span>{cartTotal}</span></h3>
+  </div>
+</div>
+
+<style>
+  @media screen and (max-width: 1023px) {
+    .total--desktop {
+      display: none;
+    }
+
+    .total--mobile {
+      display: block;
+    }
+  }
+
+  @media screen and (min-width: 1024px) {
+    .total--mobile {
+      display: none;
+    }
+
+    .total--desktop {
+      display: block;
+    }
+  }
+</style>
