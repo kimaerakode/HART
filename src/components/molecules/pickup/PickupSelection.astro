@@ -1,0 +1,108 @@
+---
+//@ts-nocheck
+import Accordion from "../../atoms/Accordion.astro";
+import LocationTitle from "./LocationTitle.jsx";
+import LocationList from "./LocationList.jsx";
+import PickupTimeTitle from "./PickupTimeTitle.jsx";
+import PickupTimeList from "./PickupTimeList.jsx";
+import DateAccordion from "./PickupDateAccordion.astro";
+import { shops } from "../../../data/shopsData";
+
+const pickupTimes = [
+  "07:30 – 08:00",
+  "08:00 – 08:30",
+  "08:30 – 09:00",
+  "09:00 – 09:30",
+  "09:30 – 10:00",
+  "10:00 – 10:30",
+  "10:30 – 11:00",
+  "11:00 – 11:30",
+  "11:30 – 12:00",
+  "12:00 – 12:30",
+  "12:30 – 13:00",
+  "13:00 – 13:30",
+  "13:30 – 14:00",
+  "14:00 – 14:30",
+  "14:30 – 15:00",
+  "15:00 – 15:30",
+  "15:30 – 16:00",
+  "16:00 – 16:30",
+  "16:30 – 17:00",
+  "17:00 – 17:30",
+  "17:30 – 18:00",
+];
+---
+
+<Accordion
+  title="Select location"
+  iconSrc="/assets/icons/accordion-arrow.svg"
+  iconName="arrow"
+  trailingMode="icon"
+>
+  <LocationTitle client:load slot="title-content" />
+  <div class="list-wrapper">
+    <LocationList client:load shops={shops} />
+  </div>
+</Accordion>
+<DateAccordion />
+<Accordion
+  title="Select pick-up time"
+  iconSrc="/assets/icons/accordion-arrow.svg"
+  iconName="arrow"
+  trailingMode="icon"
+>
+  <PickupTimeTitle client:load slot="title-content" /><div class="list-wrapper">
+    <PickupTimeList client:load pickupTimes={pickupTimes} />
+  </div></Accordion
+>
+
+<style>
+  .list-wrapper {
+    position: relative;
+    max-height: 16rem;
+    overflow-y: auto;
+    border-bottom: var(--border-thin) var(--color-charcoal);
+  }
+
+  .list {
+    padding-block: var(--space-xs-s);
+    transition:
+      background var(--easy),
+      color var(--easy);
+    scroll-snap-align: start;
+  }
+
+  .list-wrapper:has(.time) {
+    max-height: 10.5rem;
+  }
+
+  .list:not(:last-child) {
+    border-bottom: var(--border-thin) var(--color-charcoal);
+  }
+
+  @media (hover: hover) {
+    .list:hover {
+      cursor: pointer;
+      background: var(--color-charcoal);
+      color: var(--color-cream);
+    }
+  }
+
+  h4 {
+    text-transform: capitalize;
+  }
+
+  p span {
+    display: block;
+  }
+
+  @media screen and (min-width: 1024px) {
+    .list {
+      padding-inline: var(--space-xs-s);
+    }
+
+    .list-wrapper {
+      scroll-snap-type: y mandatory;
+    }
+  }
+</style>

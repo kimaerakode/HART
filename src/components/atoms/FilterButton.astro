@@ -1,13 +1,25 @@
 ---
-const { title, state } = Astro.props;
+const { title, state, filter } = Astro.props as {
+  title: string;
+  state?: string;
+  filter?: string;
+};
 ---
 
-<button class=`filter-btn ${state}` href="">
+<button
+  class={`filter-btn ${state}`}
+  type="button"
+  data-filter={filter ?? title}
+>
   {title}
 </button>
 
 <style>
   .filter-btn {
+    appearance: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     line-height: 1;
     padding-inline: var(--space-xs-s);
     padding-block: 4px;
@@ -20,6 +32,7 @@ const { title, state } = Astro.props;
     font-size: var(--text-m);
     white-space: nowrap;
     text-align: center;
+    text-decoration: none;
   }
 
   .filter-btn:hover {

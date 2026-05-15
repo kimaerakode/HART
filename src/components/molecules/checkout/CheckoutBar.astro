@@ -1,0 +1,63 @@
+---
+import CartTotal from "../../atoms/CartTotal.astro";
+import CheckoutSubmit from "./CheckoutSubmit.astro";
+---
+
+<div class="bar">
+  <CartTotal placement="mobile" />
+  <CheckoutSubmit placement="mobile" />
+</div>
+
+<style>
+  .bar {
+    position: sticky;
+    bottom: 0;
+    z-index: 11;
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(44, 44, 46, 40%);
+    backdrop-filter: blur(50px);
+    border-top: var(--border-thinx) var(--color-charcoal);
+    padding-inline: var(--space-s);
+    padding-block-start: var(--space-xs);
+    padding-block-end: var(--space-s);
+    gap: var(--space-s);
+    color: var(--color-cream);
+  }
+
+  .bar :global(.title-wrapper),
+  .bar :global(.terms) {
+    border: 0;
+  }
+
+  .bar :global(.terms) {
+    align-items: end;
+    padding-block: 0;
+  }
+
+  .bar :global(.terms label .link) {
+    text-decoration-color: var(--color-cream);
+  }
+
+  .bar :global(.terms .btn) {
+    margin-block: 0;
+    background-color: var(--color-cream);
+    color: var(--color-charcoal);
+    border: var(--border) var(--color-charcoal);
+  }
+
+  .bar :global(.terms-wrapper) {
+    margin-block-end: 3px;
+  }
+
+  .bar :global(label) {
+    font-size: var(--text-xs);
+    margin-top: 1px;
+  }
+
+  @media screen and (min-width: 1024px) {
+    .bar {
+      display: none;
+    }
+  }
+</style>

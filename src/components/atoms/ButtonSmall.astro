@@ -1,8 +1,8 @@
 ---
-const { title, color } = Astro.props;
+const { title, color, font } = Astro.props;
 ---
 
-<a class=`btn-small ${color}` href="">{title}</a>
+<a class=`btn-small ${color} ${font}` href="">{title} <slot /></a>
 
 <style>
   .btn-small {
@@ -13,11 +13,27 @@ const { title, color } = Astro.props;
     color: var(--color-cream);
     opacity: 90%;
     transition: opacity var(--easy);
-    font-size: var(--text-xs);
-    text-transform: uppercase;
     text-align: center;
   }
 
+  .btn-small:has(.time-label) {
+    text-align: end;
+    padding-block: 3px;
+  }
+
+  .graphik {
+    font-family: "Graphik";
+    font-size: var(--text-xs);
+  }
+
+  .basel {
+    font-family: "Basel Grotesk Mono";
+    font-size: var(--text-s);
+  }
+
+  .caps {
+    text-transform: uppercase;
+  }
   .charcoal {
     background-color: var(--color-charcoal);
     color: var(--color-cream);
@@ -26,8 +42,6 @@ const { title, color } = Astro.props;
   .cream {
     background-color: var(--color-cream);
     color: var(--color-charcoal);
-    font-family: "Graphik";
-    padding: 6px;
   }
   .btn-small:hover {
     opacity: 100%;
@@ -35,8 +49,8 @@ const { title, color } = Astro.props;
   }
 
   @media screen and (min-width: 726px) {
-    .charcoal {
-      font-size: var(--text-s);
+    .btn-small {
+      padding-block: 3px;
     }
   }
 </style>

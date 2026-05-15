@@ -3,7 +3,9 @@ import ShopsMenu from "../molecules/ShopsMenu.astro";
 import ContactMenu from "../molecules/ContactMenu.astro";
 import PreorderMenu from "../molecules/PreorderMenu.astro";
 import FAQMenu from "../molecules/FAQMenu.astro";
+import CheckoutMenu from "../molecules/checkout/CheckoutMenu.astro";
 const { title, sidebarClass = "" } = Astro.props;
+const { menuVariant = "" } = Astro.props;
 ---
 
 <aside class={`sidebar ${sidebarClass}`}>
@@ -13,14 +15,18 @@ const { title, sidebarClass = "" } = Astro.props;
 
   <div class="content">
     {
-      title === "Shops" ? (
+      menuVariant === "shops" || (!menuVariant && title === "Shops") ? (
         <ShopsMenu />
-      ) : title === "Contact" ? (
+      ) : menuVariant === "contact" || (!menuVariant && title === "Contact") ? (
         <ContactMenu />
-      ) : title === "Pre-Order" ? (
+      ) : menuVariant === "preorder" ||
+        (!menuVariant && title === "Pre-Order") ? (
         <PreorderMenu />
-      ) : title === "FAQ" ? (
+      ) : menuVariant === "faq" || (!menuVariant && title === "FAQ") ? (
         <FAQMenu />
+      ) : menuVariant === "checkout" ||
+        (!menuVariant && title === "Checkout") ? (
+        <CheckoutMenu />
       ) : null
     }
   </div>
@@ -40,9 +46,7 @@ const { title, sidebarClass = "" } = Astro.props;
         100vh - (var(--header-height) + var(--footer-height)) -
           (var(--space-m) * 2)
       );
-      background-color: var(--color-cream);
       padding-inline: var(--space-m);
-      /* grid-column: 1; */
       grid-area: aside;
       border-right: var(--border) var(--color-charcoal);
     }

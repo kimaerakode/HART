@@ -1,0 +1,271 @@
+---
+//@ts-nochecks
+import PickupSelection from "../molecules/pickup/PickupSelection.astro";
+
+const isPreorderPage = /\/preorder\/?$/.test(Astro.url.pathname);
+---
+
+{
+  isPreorderPage ? (
+    <>
+      <div class="overlay" data-popover-preorder>
+        <div class="backdrop" />
+        <div
+          id="preorder-popover"
+          class="box move-in"
+          aria-label="Preorder popover"
+          role="dialog"
+          aria-modal="true"
+        >
+          <div class="title-wrapper">
+            <p>
+              For next day pick ups, PASTRY orders must be placed before 14:00
+              and  Bread orders before 24:00.
+            </p>
+          </div>
+          <div class="popover-pickup-select">
+            <PickupSelection />
+          </div>
+          <button type="button" class="close-button">
+            See our menu
+          </button>
+        </div>
+      </div>
+    </>
+  ) : null
+}
+
+<script>
+  // Guard: only run in browser
+  if (typeof window !== "undefined") {
+    const overlay = document.querySelector("[data-popover-preorder]");
+
+    if (overlay instanceof HTMLElement) {
+      const mobileQuery = window.matchMedia("(max-width: 1023px)");
+
+      const syncPopoverState = () => {
+        if (!mobileQuery.matches) {
+          overlay.classList.remove("is-open");
+        }
+      };
+
+      syncPopoverState();
+
+      const handleOpen = () => {
+        if (mobileQuery.matches) {
+          overlay.classList.add("is-open");
+        }
+      };
+
+      const handleClose = () => {
+        overlay.classList.remove("is-open");
+      };
+
+      document.addEventListener("open-preorder-popover", handleOpen);
+
+      const closeButton = overlay.querySelector(".close-button");
+      closeButton?.addEventListener("click", handleClose);
+
+      const backdrop = overlay.querySelector(".backdrop");
+      backdrop?.addEventListener("click", handleClose);
+
+      if (typeof mobileQuery.addEventListener === "function") {
+        mobileQuery.addEventListener("change", syncPopoverState);
+      } else {
+        mobileQuery.addListener(syncPopoverState);
+      }
+    }
+  }
+</script>
+
+<style>
+  .overlay {
+    display: none;
+  }
+
+  .title-wrapper {
+    color: var(--color-cream);
+    border-color: var(--color-cream);
+  }
+
+  @media screen and (max-width: 1023px) {
+    .overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-s);
+      opacity: 0;
+      pointer-events: none;
+      transition:
+        opacity var(--easy),
+        transform var(--easy);
+    }
+
+    .overlay.is-open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(44, 44, 46, 0.45);
+      backdrop-filter: blur(2px);
+    }
+
+    .box {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: var(--space-m);
+      width: min(100%, 24rem);
+      max-height: calc(100% - (var(--space-s) * 2));
+      padding: var(--space-s);
+      border-radius: 10px;
+      background: var(--color-charcoal);
+      color: var(--color-cream);
+      overflow-y: auto;
+      transform: translateY(10px) scale(0.98);
+      transition: transform var(--easy);
+    }
+
+    .overlay.is-open .box {
+      transform: translateY(0) scale(1);
+    }
+
+    .title-wrapper {
+      color: var(--color-cream);
+      border-color: var(--color-cream);
+    }
+
+    .close-button {
+      width: calc(min(100%, 16rem) - (2 * var(--space-s)));
+      height: var(--space-m-l);
+      margin-top: auto;
+      padding-inline: var(--space-s);
+      padding-block: 4px;
+      border-radius: 10px;
+      background: var(--color-cream);
+      color: var(--color-charcoal);
+      font-family: "Graphik";
+      font-size: var(--text-s);
+      text-transform: capitalize;
+    }
+
+    @media (hover: hover) {
+      .close-button:hover {
+        cursor: pointer;
+      }
+    }
+
+    .popover-pickup-select {
+      padding-inline: var(--space-s);
+      width: min(100%, 16rem);
+    }
+
+    .popover-pickup-select {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs-s);
+    }
+
+    .popover-pickup-select :global(.accordion) {
+      background-color: var(--color-cream);
+      border-radius: 10px;
+      padding-bottom: 0;
+      overflow: hidden;
+      color: var(--color-charcoal);
+    }
+
+    .popover-pickup-select :global(details[open] .content) {
+      padding-bottom: 0;
+    }
+
+    .popover-pickup-select :global(.accordion .title-wrapper) {
+      padding-block: var(--space-xs-s);
+      color: var(--color-charcoal);
+      background-color: var(--color-cream);
+      padding-inline: var(--space-s);
+      height: var(--space-m-l);
+      display: flex;
+      align-items: center;
+      width: 100%;
+    }
+
+    .popover-pickup-select :global(.accordion .list),
+    .popover-pickup-select :global(.accordion .content:has(.date-picker)) {
+      padding-inline: var(--space-s);
+    }
+
+    .popover-pickup-select :global(.accordion .list--selected) {
+      background-color: var(--color-charcoal);
+    }
+
+    .popover-pickup-select :global(.accordion h4) {
+      font-size: var(--text-xs);
+      line-height: 180%;
+    }
+
+    .popover-pickup-select :global(.accordion p) {
+      line-height: 100%;
+    }
+
+    .popover-pickup-select :global(.accordion img.icon) {
+      width: 9px;
+    }
+
+    .popover-pickup-select :global(.accordion .location-title),
+    .popover-pickup-select :global(.accordion .date-picker-title),
+    .popover-pickup-select :global(.accordion .pickup-time-title) {
+      font-size: var(--text-s);
+    }
+
+    .popover-pickup-select :global(.accordion p) {
+      font-size: var(--text-s);
+    }
+
+    .popover-pickup-select :global(.accordion .list-wrapper) {
+      max-height: 10rem;
+    }
+
+    .popover-pickup-select :global(.accordion .date-picker .rdp-month),
+    .popover-pickup-select :global(.accordion .list-wrapper) {
+      border-bottom: 0;
+    }
+
+    /* Replace the arrow icon with the date input for the Date accordion only */
+    .popover-pickup-select :global(.accordion:nth-of-type(2) .icon) {
+      display: none !important;
+    }
+
+    /* Ensure the trailing field slot (date input) is visible on mobile for the Date accordion */
+    .popover-pickup-select :global(.accordion:nth-of-type(2) .trailing-slot) {
+      display: inline-flex !important;
+      align-items: center;
+      gap: var(--space-xs);
+    }
+
+    .popover-pickup-select
+      :global(.accordion:nth-of-type(2) .trailing-slot)
+      :global(*) {
+      /* tighten input sizing inside the trailing slot */
+      max-width: 7.5rem;
+    }
+  }
+
+  @media screen and (min-width: 1024px) {
+    .overlay {
+      display: none !important;
+    }
+
+    .close-button {
+      display: none;
+    }
+  }
+</style>

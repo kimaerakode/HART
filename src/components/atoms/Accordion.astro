@@ -1,30 +1,165 @@
 ---
-const { title } = Astro.props;
+//@ts-nocheck
+const { title, iconSrc, iconName, trailingMode = "icon" } = Astro.props;
+const isFieldMode = trailingMode === "field";
 ---
 
-<div class="accordion">
-  <div class="title-wrapper">
-    <p class="text-trim">{title}</p><img
-      src="/assets/icons/accordion-arrow.svg"
-      alt=""
-    />
+<details name="anyname" class="accordion">
+  <summary>
+    <div class="title-wrapper">
+      {
+        Astro.slots.has("title-content") ? (
+          <slot name="title-content" />
+        ) : (
+          <p class="text-trim">{title}</p>
+        )
+      }
+      {
+        isFieldMode ? (
+          <span class="trailing-slot">
+            <slot name="trailing" />
+          </span>
+        ) : (
+          <img
+            class={`icon ${iconName} desktop-icon`}
+            src={iconSrc}
+            alt={`${title} icon`}
+          />
+        )
+      }
+      {
+        isFieldMode ? (
+          <img
+            class={`icon ${iconName} mobile-icon`}
+            src={iconSrc}
+            alt={`${title} icon`}
+          />
+        ) : null
+      }
+    </div></summary
+  >
+  <div class="content">
+    <slot />
   </div>
-</div>
+</details>
+
+<script>
+  // Attach event listeners to document to catch accordion control events
+  document.addEventListener("openAccordion", (event) => {
+    // Walk up the DOM to find the details element
+    let node = /** @type {Element | null} */ (event.target as any);
+    while (node && node !== document) {
+      if (node instanceof HTMLElement) {
+        if (node.tagName === "DETAILS") {
+          // set the `open` attribute on the details element
+          node.setAttribute("open", "");
+          break;
+        }
+        node = node.parentElement;
+      } else {
+        break;
+      }
+    }
+  });
+
+  document.addEventListener("closeAccordion", (event) => {
+    // Walk up the DOM to find the details element
+    let node = /** @type {Element | null} */ (event.target as any);
+    while (node && node !== document) {
+      if (node instanceof HTMLElement) {
+        if (node.tagName === "DETAILS") {
+          node.removeAttribute("open");
+          break;
+        }
+        node = node.parentElement;
+      } else {
+        break;
+      }
+    }
+  });
+</script>
 
 <style>
   .title-wrapper {
+    display: flex;
+    width: 100%;
     font-family: "Graphik";
     gap: var(--space-xs);
     align-items: end;
+    justify-content: space-between;
   }
 
   p {
     font-size: var(--text-xs);
+    white-space: nowrap;
   }
 
   img {
     width: 7px;
   }
+
+  .desktop-icon,
+  .mobile-icon {
+    display: block;
+    flex: 0 0 auto;
+  }
+
+  .mobile-icon {
+    display: none;
+  }
+
+  /*  */
+
+  summary {
+    list-style: none;
+    cursor: pointer;
+  }
+  summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .content {
+    display: block;
+  }
+
+  .content {
+    margin: 0;
+    opacity: 0;
+    transition: opacity var(--slowly);
+  }
+
+  details[open] .content {
+    opacity: 1;
+  }
+
+  details[open] .content {
+    padding-bottom: var(--space-m);
+  }
+
+  .arrow {
+    transition: transform var(--easy);
+  }
+
+  details[open] .arrow {
+    transform: rotate(180deg);
+  }
+
+  @supports selector(details::details-content) {
+    details::details-content {
+      block-size: 0;
+      overflow: clip;
+      transition:
+        block-size var(--slowly),
+        content-visibility var(--slowly);
+      transition-behavior: allow-discrete;
+    }
+
+    details[open]::details-content {
+      block-size: auto;
+    }
+  }
+
+  /*  */
 
   @media screen and (min-width: 1024px) {
     .title-wrapper {
@@ -39,6 +174,29 @@ const { title } = Astro.props;
 
     img {
       width: 9px;
+    }
+    .trailing-slot {
+      display: inline-flex;
+      align-items: center;
+    }
+    .desktop-icon {
+      display: block;
+    }
+    .mobile-icon {
+      display: none;
+    }
+  }
+
+  /* Mobile: hide trailing slot content and show the mobile-only arrow */
+  @media screen and (max-width: 1023px) {
+    .trailing-slot {
+      display: none;
+    }
+    .mobile-icon {
+      display: inline-block;
+    }
+    .desktop-icon {
+      display: inline-block;
     }
   }
 </style>

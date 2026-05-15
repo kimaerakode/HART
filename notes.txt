@@ -1,0 +1,12 @@
+To-Do List
+
+#Pre-order menu
+- Validation msg when attempted checkout with no pickup selection
+
+
+#Header
+- Center cart icon items (browser compability)
+
+
+#General
+- Compress media files

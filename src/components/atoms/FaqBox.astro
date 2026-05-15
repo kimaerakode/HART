@@ -11,11 +11,11 @@ const selectedFaq = faqConfig[type];
   <div class="heading">
     <h2>{selectedFaq.title}</h2>
   </div>
-  <div class="content move-up">
+  <div class="content">
     {
       selectedFaq.items.map((i, index) => (
         <details name={`faq-${type}`} class="item">
-          <summary class="q fade-in">
+          <summary class="q ">
             <h3>{i.question}</h3>
             <svg
               class="icon"
@@ -104,13 +104,7 @@ const selectedFaq = faqConfig[type];
     align-items: center;
     justify-content: space-between;
     padding-block: var(--space-s);
-    list-style: none;
-    cursor: pointer;
     column-gap: var(--space-s);
-  }
-
-  summary::-webkit-details-marker {
-    display: none;
   }
 
   .answer {

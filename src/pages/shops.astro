@@ -28,10 +28,22 @@ import { shops } from "../data/shopsData";
 </SideBarLayout>
 
 <style>
+  section#shops {
+    overflow-x: hidden;
+    padding-block-end: var(--space-l);
+  }
+
+  .filter-wrapper {
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+  }
+
   .card-wrapper {
     display: grid;
     gap: var(--space-l);
     height: fit-content;
+    overflow-x: hidden;
   }
 
   @media screen and (min-width: 620px) {
@@ -45,21 +57,24 @@ import { shops } from "../data/shopsData";
 
   @media screen and (min-width: 1024px) {
     section#shops {
-      margin-inline-start: 0;
+      padding-inline: 0;
       margin-inline-end: var(--space-m);
-      border-right: var(--border) var(--color-charcoal);
+      padding-block-end: 0;
+      max-width: 100%;
+       border-right: var(--border) var(--color-charcoal);
     }
 
     .card-wrapper {
-      margin-inline: 0;
       grid-template-columns: repeat(2, 1fr);
-      overflow-x: scroll;
-      scroll-snap-type: x mandaotory;
-      scroll-padding-inline-end: var(--space-m);
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      /* scroll-padding-inline-end: var(--space-m); */
       gap: calc(var(--space-l) - var(--space-m));
       overflow-y: hidden;
       white-space: nowrap;
-      scroll-snap-type: x mandatory;
+      height: 100%;
+      width: 100%;
+     
     }
   }
 </style>

@@ -7,6 +7,7 @@ const {
   headerVariant = "primary",
   footerVariant = "primary",
   title = "Shops",
+  menuVariant = "",
   mainClass = "",
   sidebarClass = "",
 } = Astro.props;
@@ -18,7 +19,11 @@ const {
   footerVariant={footerVariant}
 >
   <main class={mainClass}>
-    <SideBar title={title} sidebarClass={sidebarClass} />
+    <SideBar
+      title={title}
+      menuVariant={menuVariant}
+      sidebarClass={sidebarClass}
+    />
     <slot />
   </main>
 </Layout>
@@ -27,7 +32,7 @@ const {
   main {
     flex: 1 0 auto;
     margin-top: 51px;
-    margin-bottom: var(--space-l);
+    /* margin-bottom: var(--space-l); */
     max-width: 100svw;
     grid-template:
       "header" var(--header-height)

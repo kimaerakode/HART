@@ -11,7 +11,7 @@ import TextBox from "../components/atoms/TextBox.astro";
   sidebarClass="add-margin"
 >
   <section id="faq">
-    <div class="wrapper move-in" id="orderinfo">
+    <div class="wrapper" id="orderinfo">
       {
         faqConfig.orders.items.map((i) => (
           <TextBox
@@ -24,7 +24,7 @@ import TextBox from "../components/atoms/TextBox.astro";
       }
     </div>
 
-    <div class="wrapper move-in" id="productinfo">
+    <div class="wrapper" id="productinfo">
       {
         faqConfig.products.items.map((i) => (
           <TextBox
@@ -43,7 +43,6 @@ import TextBox from "../components/atoms/TextBox.astro";
   section#faq {
     overflow-y: auto;
     scroll-behavior: smooth;
-    scroll-snap-type: y mandatory;
   }
   .wrapper {
     grid-column: 2 / -1;
@@ -57,5 +56,11 @@ import TextBox from "../components/atoms/TextBox.astro";
     gap: var(--space-l);
     padding-block: var(--space-m);
     scroll-snap-align: start;
+  }
+
+  @media screen and (min-width: 1024px) {
+    section#faq {
+      scroll-snap-type: y mandatory;
+    }
   }
 </style>

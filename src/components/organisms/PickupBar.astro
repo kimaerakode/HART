@@ -1,13 +1,46 @@
 ---
-import PickupSelect from "../molecules/PickupSelect.astro";
+// @ts-nocheck
+import LocationTitle from "../molecules/pickup/LocationTitle.jsx";
+import DatePickerTitle from "../molecules/pickup/DatePickerTitle.jsx";
+import PickupTimeTitle from "../molecules/pickup/PickupTimeTitle.jsx";
 ---
 
 <div class="pickup-bar">
   <h4 class="text-xs">Pick-up info:</h4>
-  <PickupSelect />
+  <button
+    type="button"
+    class="pickup-trigger"
+    data-open-preorder-popover
+    aria-haspopup="dialog"
+    aria-controls="preorder-popover"
+  >
+    <span class="trigger-item">
+      <LocationTitle client:load />
+      <img src="/assets/icons/accordion-arrow.svg" alt="" aria-hidden="true" />
+    </span>
+    <span class="trigger-item">
+      <DatePickerTitle client:load />
+      <img src="/assets/icons/accordion-arrow.svg" alt="" aria-hidden="true" />
+    </span>
+    <span class="trigger-item">
+      <PickupTimeTitle client:load />
+      <img src="/assets/icons/accordion-arrow.svg" alt="" aria-hidden="true" />
+    </span>
+  </button>
 </div>
 
 <style>
+  @media screen and (max-width: 400px) {
+    .pickup-bar {
+      gap: var(--space-s) !important;
+    }
+  }
+  @media screen and (max-width: 440px) {
+    h4 {
+      font-size: var(--text-xxs);
+    }
+  }
+
   .pickup-bar {
     display: flex;
     align-items: center;
@@ -15,10 +48,43 @@ import PickupSelect from "../molecules/PickupSelect.astro";
     padding-inline: var(--space-s);
     padding-block: var(--space-s);
     border-bottom: var(--border) var(--color-charcoal);
+    transition: gap var(--easy);
+  }
+
+  .pickup-trigger {
+    display: flex;
+    align-items: center;
+    gap: var(--space-s);
+    min-width: 0;
+    flex-wrap: wrap;
+    text-align: left;
+
+    padding-block: var(--space-xxs);
+    background: transparent;
+    color: inherit;
+  }
+
+  .trigger-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    white-space: nowrap;
+    font-family: "Graphik";
+  }
+
+  .trigger-item img {
+    width: 6px;
+    flex: 0 0 auto;
+  }
+
+  @media (hover: hover) {
+    .pickup-trigger:hover {
+      cursor: pointer;
+    }
   }
 
   h4 {
-    margin-bottom: 3px;
+    white-space: nowrap;
   }
 
   @media screen and (min-width: 1024px) {
@@ -27,3 +93,24 @@ import PickupSelect from "../molecules/PickupSelect.astro";
     }
   }
 </style>
+
+<script>
+  if (typeof window !== "undefined") {
+    const init = () => {
+      const trigger = document.querySelector("[data-open-preorder-popover]");
+      if (!(trigger instanceof HTMLElement)) return;
+
+      trigger.addEventListener("click", () => {
+        document.dispatchEvent(
+          new CustomEvent("open-preorder-popover", { bubbles: true }),
+        );
+      });
+    };
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", init, { once: true });
+    } else {
+      init();
+    }
+  }
+</script>

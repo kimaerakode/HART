@@ -1,0 +1,12 @@
+.date-picker-field-wrapper { position: relative; width: 100%; line-height: 1; }
+.date-picker-field { display: block; width: 100%; margin: 0; padding: 0; border: 0; background: transparent; color: var(--color-charcoal); font-family: "Graphik"; font-size: var(--text-xs); line-height: 1; text-align: right; outline: none; cursor: text; margin-bottom: -2px; }
+.date-picker-error-popover { position: absolute; right: 0; top: 50%; transform: translateY(-50%) translateX(calc(100% + 12px)); background-color: var(--color-charcoal); border-radius: 4px; padding: 8px 12px; min-width: 160px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12); z-index: 10; white-space: nowrap; animation: fadeIn 0.2s ease-in, fadeOut 0.4s ease-out 1.8s forwards; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes fadeOut { from { opacity: 1; } to { opacity: 0; } }
+.date-picker-error-popover::before { content: ""; position: absolute; right: 100%; top: 50%; transform: translateY(-50%); border: 6px solid transparent; border-right-color: var(--color-charcoal); }
+.date-picker-error-text { font-size: var(--text-xs); color: var(--color-cream); margin: 0; font-family: "Graphik"; line-height: 1.2; }
+.date-picker-field::placeholder { color: var(--color-grey); }
+.date-picker-field:-webkit-autofill,
+.date-picker-field:-webkit-autofill:hover,
+.date-picker-field:-webkit-autofill:focus { -webkit-box-shadow: 0 0 0 1000px var(--color-cream) inset; -webkit-text-fill-color: var(--color-charcoal); border: none; }
+@media screen and (min-width: 1024px) { .date-picker-field { font-size: var(--text-xs); width: 100%; } }
