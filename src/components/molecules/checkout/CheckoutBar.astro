@@ -1,10 +1,10 @@
 ---
-import CartTotal from "../../atoms/CartTotal.astro";
+import CartTotal from "../../atoms/CartTotal.jsx";
 import CheckoutSubmit from "./CheckoutSubmit.astro";
 ---
 
 <div class="bar">
-  <CartTotal placement="mobile" />
+  <CartTotal placement="mobile" client:load />
   <CheckoutSubmit placement="mobile" />
 </div>
 
@@ -22,6 +22,7 @@ import CheckoutSubmit from "./CheckoutSubmit.astro";
     padding-block-start: var(--space-xs);
     padding-block-end: var(--space-s);
     gap: var(--space-s);
+    border-top: var(--border-thin) var(--color-charcoal);
     color: var(--color-cream);
   }
 

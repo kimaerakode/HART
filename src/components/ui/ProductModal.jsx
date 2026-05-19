@@ -1,9 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import AmountButton from "../atoms/AmountButton.jsx";
+import { addToCart } from "../../stores/cartStore.js";
 
 export default function ProductModal({ product, open, onClose }) {
   const [quantity, setQuantity] = useState(1);
+
+  const handleAddToCart = () => {
+    if (product) {
+      console.log("[ProductModal] Adding product to cart:", {
+        product,
+        quantity,
+      });
+      addToCart(product, quantity);
+      setQuantity(1);
+      onClose();
+    }
+  };
 
   useEffect(() => {
     if (!open) return;
@@ -57,21 +70,27 @@ export default function ProductModal({ product, open, onClose }) {
           <div className="title-wrapper">
             <h3>{product?.title}</h3>
           </div>
-          <p className="pm-price">{product?.price}</p>
-          {product?.time && (
-            <p className="pm-time">{`Available from ${product.time}`}</p>
-          )}
+          <div className="pm-details">
+            <p className="pm-price">{product?.price}</p>
+            {product?.time && (
+              <p className="pm-time">{`Available from ${product.time}`}</p>
+            )}
+          </div>
+
           <p className="pm-description">{product?.description}</p>
 
           <div className="pm-actions">
             <AmountButton
+              color="charcoal"
               count={quantity}
               onDecrease={() =>
                 setQuantity((current) => Math.max(1, current - 1))
               }
               onIncrease={() => setQuantity((current) => current + 1)}
             />
-            <button className="pm-button">Add to cart</button>
+            <button className="pm-button" onClick={handleAddToCart}>
+              Add to cart
+            </button>
           </div>
 
           {product?.allergens ? (

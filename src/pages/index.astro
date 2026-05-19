@@ -4,7 +4,15 @@ import Layout from "../layouts/Layout.astro";
 
 <Layout color="cream" headerVariant="secondary" footerVariant="secondary">
   <section class="hero">
-    <video class="video-bg" autoplay loop muted playsinline aria-hidden="true">
+    <video
+      class="video-bg"
+      autoplay
+      loop
+      muted
+      playsinline
+      aria-hidden="true"
+      poster="/assets/img/placeholder_hero-video.png"
+    >
       <source
         src="/assets/video/skg_mobile_comp.mp4"
         media="(max-width: 1023px)"
@@ -13,7 +21,7 @@ import Layout from "../layouts/Layout.astro";
         src="/assets/video/skg_mobile_comp.mp4"
         media="(prefers-reduced-data: reduce)"
       />
-      <source src="/assets/video/skg_raw.mp4" media="(min-width: 1024px)" />
+      <source src="/assets/video/hero-video.mp4" media="(min-width: 1024px)" />
     </video>
   </section>
 

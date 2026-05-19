@@ -59,4 +59,17 @@ const menuDirection = direction === "row" ? "row" : "column";
     margin-top: var(--space-m);
     gap: var(--space-s);
   }
+
+  .menu.column.mobile {
+    gap: 0;
+    margin-top: 0;
+  }
+  .mobile li {
+    display: flex;
+    align-items: center;
+    text-transform: uppercase;
+    padding-inline: var(--space-s);
+    padding-block: var(--space-m);
+    border-bottom: var(--border-thin) var(--color-cream);
+  }
 </style>

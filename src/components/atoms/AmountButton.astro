@@ -1,8 +1,8 @@
 ---
-const { count } = Astro.props;
+const { count, color } = Astro.props;
 ---
 
-<button class="count"
+<button class={`count ${color}`}
   ><img
     src="/assets/icons/arrow-decrease-charcoal.svg"
     alt="decrease amount (<)"
@@ -22,5 +22,9 @@ const { count } = Astro.props;
     border: var(--border-thin) var(--color-charcoal);
     border-radius: 5px;
     padding: var(--space-xs-s) var(--space-xs);
+  }
+
+  .cream {
+    
   }
 </style>

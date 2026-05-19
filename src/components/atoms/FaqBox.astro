@@ -14,8 +14,8 @@ const selectedFaq = faqConfig[type];
   <div class="content">
     {
       selectedFaq.items.map((i, index) => (
-        <details name={`faq-${type}`} class="item">
-          <summary class="q ">
+        <details name={`faq-${type}`}>
+          <summary class="q">
             <h3>{i.question}</h3>
             <svg
               class="icon"
@@ -86,11 +86,11 @@ const selectedFaq = faqConfig[type];
     flex-shrink: 0;
   }
 
-  .item {
+  details {
     padding-inline: var(--space-s);
   }
 
-  .item:not(:last-child) {
+  details:not(:last-child) {
     border-bottom: var(--border-thin) var(--color-charcoal);
   }
 
@@ -108,36 +108,34 @@ const selectedFaq = faqConfig[type];
   }
 
   .answer {
-    display: block;
-  }
-
-  .answer > p {
     margin: 0;
     opacity: 0;
     transition: opacity var(--slowly);
-  }
-
-  details[open] .answer > p {
-    opacity: 1;
-  }
-
-  details[open] .answer {
     padding-bottom: var(--space-m);
   }
 
-  @supports selector(details::details-content) {
+  details {
+    overflow: hidden;
+  }
+
+  details[open] .answer {
+    opacity: 1;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
     details::details-content {
-      block-size: 0;
-      overflow: clip;
       transition:
         block-size var(--slowly),
         content-visibility var(--slowly);
       transition-behavior: allow-discrete;
     }
+  }
 
-    details[open]::details-content {
-      block-size: auto;
-    }
+  details::details-content {
+    block-size: 0;
+  }
+  details[open]::details-content {
+    block-size: auto;
   }
 
   .q h3 {
@@ -169,10 +167,6 @@ const selectedFaq = faqConfig[type];
   details[open] .line-vertical {
     opacity: 0;
     transform: scaleY(0);
-  }
-
-  details[open] .q {
-    padding-bottom: var(--space-s);
   }
 
   p {

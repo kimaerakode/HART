@@ -1,4 +1,5 @@
 ---
+import FilterButton from "../atoms/FilterButton.astro";
 import { areas } from "../../data/shopsData";
 ---
 
@@ -7,7 +8,7 @@ import { areas } from "../../data/shopsData";
     {
       areas.map((area) => (
         <li>
-          <button>{area}</button>
+          <FilterButton title={area} filter={area} />
         </li>
       ))
     }

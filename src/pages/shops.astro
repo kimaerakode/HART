@@ -16,6 +16,7 @@ import { shops } from "../data/shopsData";
         shops.map((shop) => (
           <LocationCard
             title={shop.title}
+            area={shop.area}
             adress={`${shop.street}\n${shop.town}`}
             openHours={`${shop.openHours1}\n${shop.openHours2}`}
             imgSrc={shop.imgSrc}
@@ -78,3 +79,77 @@ import { shops } from "../data/shopsData";
     }
   }
 </style>
+
+<script>
+  // @ts-nocheck
+  const setupShopFilters = () => {
+    const section = document.querySelector("#shops");
+
+    if (!(section instanceof HTMLElement)) return;
+
+    if (section.dataset.filtersInitialized === "true") return;
+    section.dataset.filtersInitialized = "true";
+
+    const buttons = Array.from(
+      document.querySelectorAll('.filter-btn[data-filter]'),
+    );
+    const cards = Array.from(section.querySelectorAll(".card[data-area]"));
+
+    if (!buttons.length || !cards.length) return;
+
+    const normalize = (value) => value.trim().toLowerCase();
+
+    const setActiveButton = (activeFilter) => {
+      buttons.forEach((button) => {
+        const buttonFilter = normalize(
+          button.dataset.filter || button.textContent || "",
+        );
+        const isSelected = Boolean(activeFilter) && buttonFilter === activeFilter;
+
+        button.classList.toggle("selected", isSelected);
+        button.setAttribute("aria-pressed", String(isSelected));
+      });
+    };
+
+    const renderCards = (filterValue) => {
+      const activeFilter = normalize(filterValue || "");
+
+      cards.forEach((card) => {
+        const cardArea = normalize(card.dataset.area || "");
+        const shouldShow = !activeFilter || cardArea === activeFilter;
+
+        card.hidden = !shouldShow;
+      });
+
+      setActiveButton(activeFilter);
+    };
+
+    buttons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const buttonFilter = normalize(
+          button.dataset.filter || button.textContent || "",
+        );
+        const nextFilter = button.classList.contains("selected")
+          ? ""
+          : buttonFilter;
+
+        renderCards(nextFilter);
+      });
+    });
+
+    renderCards("");
+  };
+
+  const initializeShopFilters = () => setupShopFilters();
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initializeShopFilters, {
+      once: true,
+    });
+  } else {
+    initializeShopFilters();
+  }
+
+  document.addEventListener("astro:page-load", initializeShopFilters);
+  document.addEventListener("astro:after-swap", initializeShopFilters);
+</script>

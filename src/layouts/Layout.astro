@@ -3,11 +3,13 @@ import { ClientRouter } from "astro:transitions";
 import "../css/globals.css";
 import Header from "../components/organisms/Header.astro";
 import Footer from "../components/organisms/Footer.astro";
+import MobileMenu from "../components/organisms/MobileMenu.astro";
 
 const {
   color = "cream",
   headerVariant = "primary",
   footerVariant = "primary",
+  menuVariant = "main",
   headerBorderless = false,
 } = Astro.props;
 const foregroundColor =
@@ -76,6 +78,7 @@ const footerBackground =
       variant={headerVariant}
       borderless={headerBorderless}
     />
+    <MobileMenu variant={menuVariant} />
 
     <slot />
 

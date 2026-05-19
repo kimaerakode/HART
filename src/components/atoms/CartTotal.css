@@ -1,0 +1,28 @@
+.title-wrapper {
+  justify-content: space-between;
+}
+
+.title-wrapper span {
+  font-size: var(--text-m);
+}
+
+@media screen and (max-width: 1023px) {
+  .total--desktop {
+    display: none;
+  }
+
+  .total--mobile {
+    display: block;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .total--mobile {
+    display: none;
+  }
+
+  .total--desktop {
+    align-self: end;
+    display: block;
+  }
+}

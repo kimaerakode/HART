@@ -1,12 +1,30 @@
-import React, { useSyncExternalStore } from "react";
-import { getCheckoutSelection, subscribe } from "../../../stores/checkoutSelectionStore.js";
+import React, { useEffect, useState } from "react";
 
 export default function CheckoutSelectionFields() {
-  const selection = useSyncExternalStore(
-    subscribe,
-    getCheckoutSelection,
-    getCheckoutSelection,
-  );
+  const [selection, setSelection] = useState({
+    location: null,
+    date: null,
+    time: null,
+  });
+
+  useEffect(() => {
+    console.log("[CheckoutSelectionFields] Hydration complete, loading store");
+    
+    // Lazy load store only after hydration
+    import("../../../stores/checkoutSelectionStore.js").then(
+      ({ getCheckoutSelection, subscribe }) => {
+        // Update selection immediately with current data
+        setSelection(getCheckoutSelection());
+        
+        // Subscribe to selection changes
+        const unsubscribe = subscribe(() => {
+          setSelection(getCheckoutSelection());
+        });
+        
+        return unsubscribe;
+      }
+    );
+  }, []);
 
   const locationValue =
     typeof selection.location === "string"

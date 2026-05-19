@@ -1,7 +1,15 @@
 ---
 import ButtonSmall from "../atoms/ButtonSmall.astro";
-const { title, price, imgSrc, category, favorite, time, description, allergens } =
-  Astro.props;
+const {
+  title,
+  price,
+  imgSrc,
+  category,
+  favorite,
+  time,
+  description,
+  allergens,
+} = Astro.props;
 const CardImgSrc = imgSrc;
 ---
 
@@ -107,6 +115,11 @@ const CardImgSrc = imgSrc;
     padding-block-start: 3px;
   }
 
+  @media (hover: hover) {
+    .card:hover {
+      cursor: pointer;
+    }
+  }
   @media screen and (min-width: 1024px) {
     .price {
       font-size: var(--text-s);
@@ -134,10 +147,6 @@ const CardImgSrc = imgSrc;
     .hover-btn {
       opacity: 0;
       transition: opacity var(--easy);
-    }
-
-    .card:hover {
-      cursor: pointer;
     }
 
     .card:hover .hover-btn {

@@ -25,6 +25,10 @@
   line-height: 120%;
 }
 
+.title-wrapper .selection-title {
+  font-size: var(--text-s);
+}
+
 .location-address {
   align-self: end;
   display: flex;

@@ -1,12 +1,12 @@
 ---
-import CartItems from "../molecules/CartItems.astro";
-import CartTotal from "../atoms/CartTotal.astro";
+import CartItems from "../molecules/CartItems.jsx";
+import CartTotal from "../atoms/CartTotal.jsx";
 ---
 
 <div class="cart-wrapper">
   <div class="title-wrapper"><h2>Cart Items</h2></div>
-  <CartItems />
-  <CartTotal placement="desktop" />
+  <CartItems client:load />
+  <CartTotal placement="desktop" client:load />
 </div>
 
 <style>

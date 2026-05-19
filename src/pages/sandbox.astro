@@ -1,0 +1,15 @@
+---
+//@ts-nocheck
+import Layout from "../layouts/Layout.astro";
+import SideBarLayout from "../layouts/SideBarLayout.astro";
+import MobileMenu from "../components/organisms/MobileMenu.astro";
+import FaqBox from "../components/atoms/FaqBox.astro";
+import { faqConfig } from "../data/faqData";
+
+const { type = "orders" } = Astro.props;
+const selectedFaq = faqConfig[type];
+---
+
+<SideBarLayout color="charcoal">
+  <section></section>
+</SideBarLayout>

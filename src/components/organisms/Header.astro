@@ -1,6 +1,7 @@
 ---
 import { fade } from "astro:transitions";
 import NavMenu from "../molecules/NavMenu.astro";
+
 const {
   color = "cream",
   variant = "primary",
@@ -22,6 +23,10 @@ const logoSrc =
       transition:name="header-row"
       transition:animate={fade({ duration: "0.2s" })}
     >
+      <button class="mobile-toggle">
+        <img src={`/assets/icons/menu-${color}.svg`} alt="" />
+      </button>
+
       <a href="/">
         <img
           class="logo"
@@ -34,7 +39,9 @@ const logoSrc =
       {
         isSecondary ? (
           <a class="cart-icon-wrapper" href="">
-            <p class="cart-count text-xs">10</p>
+            <p class="cart-count text-xs" data-cart-count>
+              0
+            </p>
             <picture>
               <source
                 media="(max-width: 1024px)"
@@ -53,7 +60,9 @@ const logoSrc =
               <NavMenu direction={navMenuDirection} />
             </div>
             <a class="cart-icon-wrapper" href="">
-              <p class="cart-count text-xs">10</p>
+              <p class="cart-count text-xs" data-cart-count>
+                0
+              </p>
               <picture>
                 <source
                   media="(max-width: 1024px)"
@@ -75,6 +84,39 @@ const logoSrc =
     </div>
   </nav>
 </header>
+
+<script>
+  const CART_STORAGE_KEY = "hart_cart";
+  const CART_CHANGE_EVENT = "hart-cart-change";
+
+  const countNodes = document.querySelectorAll("[data-cart-count]");
+
+  const readCartCount = () => {
+    try {
+      const stored = localStorage.getItem(CART_STORAGE_KEY);
+      if (!stored) return 0;
+
+      const cart = JSON.parse(stored);
+      let count = 0;
+      for (const item of cart) {
+        count += item.quantity || 0;
+      }
+      return count;
+    } catch {
+      return 0;
+    }
+  };
+
+  const renderCount = () => {
+    const count = String(readCartCount());
+    countNodes.forEach((node) => {
+      node.textContent = count;
+    });
+  };
+
+  renderCount();
+  window.addEventListener(CART_CHANGE_EVENT, renderCount);
+</script>
 
 <style>
   header {
@@ -159,6 +201,9 @@ const logoSrc =
   }
 
   @media screen and (width > 1024px) {
+    .mobile-toggle {
+      display: none;
+    }
     header {
       padding-inline: var(--space-m);
     }

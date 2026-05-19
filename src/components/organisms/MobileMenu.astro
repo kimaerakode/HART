@@ -1,0 +1,111 @@
+---
+import NavMenu from "../molecules/NavMenu.astro";
+import ShopsMenu from "../molecules/ShopsMenu.astro";
+import ContactMenu from "../molecules/ContactMenu.astro";
+import PreorderMenu from "../molecules/PreorderMenu.astro";
+import FAQMenu from "../molecules/FAQMenu.astro";
+import CheckoutMenu from "../molecules/checkout/CheckoutMenu.astro";
+const { variant = "main", state } = Astro.props;
+---
+
+<div class={`${state} mobile-menu--overlay`}>
+  <div class="top-bar">
+    <button class="close">
+      <img src="/assets/icons/cross-cream.svg" alt="Close menu (X)" /></button
+    >
+  </div>
+  {
+    variant !== "main" ? (
+      <div class="arrow-bar">
+        <button class="arrow-left">
+          <img src="/assets/icons/arrow-back-cream.svg" alt="Back" />
+        </button>
+      </div>
+    ) : null
+  }
+
+  <ul class="mobile-menu-wrapper">
+    {
+      variant === "main" ? (
+        <NavMenu direction="column" parent="mobile" />
+      ) : variant === "shops" ? (
+        <ShopsMenu />
+      ) : variant === "contact" ? (
+        <ContactMenu />
+      ) : variant === "preorder" ? (
+        <PreorderMenu />
+      ) : variant === "faq" ? (
+        <FAQMenu />
+      ) : variant === "checkout" ? (
+        <CheckoutMenu />
+      ) : null
+    }
+    <!-- <NavMenu direction="column" parent="mobile" /><slot /> -->
+  </ul>
+  <div class="bottom">
+    <a target="_blank" href="https://www.instagram.com/hartbageri/"
+      >@hartbageri</a
+    >
+    <img src="/assets/brand/scribble-logo-cream.svg" alt="Hart logo" />
+  </div>
+</div>
+
+<style>
+  .overlay {
+    background-color: var(--color-charcoal);
+    color: var(--color-cream);
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    min-height: 90svh;
+    max-width: 95svw;
+    inset: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 11;
+  }
+
+  .close,
+  .arrow-left {
+    display: flex;
+    align-items: center;
+  }
+
+  .close img {
+    width: var(--space-s);
+  }
+
+  .arrow-left img {
+    width: var(--space-m);
+  }
+
+  .top-bar,
+  .arrow-bar {
+    width: 100%;
+    height: fit-content;
+    border-bottom: var(--border) var(--color-cream);
+  }
+
+  .top-bar,
+  .arrow-bar,
+  .bottom {
+    padding: var(--space-s);
+  }
+
+  .bottom {
+    display: flex;
+    flex: 1;
+    justify-content: space-between;
+    align-items: end;
+    width: 100%;
+    font-size: var(--text-s);
+  }
+
+  @media screen and (min-width: 1024px) {
+    .mobile-menu--overlay {
+      display: none;
+    }
+  }
+</style>

@@ -2,6 +2,8 @@
 //@ts-nocheck
 import AmountButton from "./AmountButton.astro";
 const { title, price, imgSrc, count, singleTotal } = Astro.props;
+const computedTotal =
+  singleTotal ?? Math.round((parseFloat(price) || 0) * (count || 0));
 ---
 
 <div class="cart-item">
@@ -13,7 +15,7 @@ const { title, price, imgSrc, count, singleTotal } = Astro.props;
         <p class="price text-xs">{price}</p>
       </div>
       <div class="total mobile">
-        <p>xx DKK</p>
+        <p>{computedTotal} DKK</p>
       </div>
     </div>
     <div class="amount">
@@ -26,7 +28,7 @@ const { title, price, imgSrc, count, singleTotal } = Astro.props;
       >
     </div>
     <div class="total">
-      <p>xx DKK</p>
+      <p>{computedTotal} DKK</p>
     </div>
   </div>
 </div>

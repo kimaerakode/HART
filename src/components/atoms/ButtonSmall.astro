@@ -2,23 +2,32 @@
 const { title, color, font } = Astro.props;
 ---
 
-<a class=`btn-small ${color} ${font}` href="">{title} <slot /></a>
+<button type="button" class={`btn-small ${color} ${font}`}>
+  {title}
+  <slot />
+</button>
 
 <style>
   .btn-small {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
     padding-block: 4px;
     padding-inline: 6px;
     border-radius: 3.5px;
+    border: none;
     background-color: var(--color-charcoal);
     color: var(--color-cream);
     opacity: 90%;
     transition: opacity var(--easy);
     text-align: center;
+    font: inherit;
   }
 
   .btn-small:has(.time-label) {
-    text-align: end;
     padding-block: 3px;
+    gap: 3px;
   }
 
   .graphik {

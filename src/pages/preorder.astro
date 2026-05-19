@@ -45,9 +45,9 @@ import products from "../data/products.js";
 </SideBarLayout>
 
 <style>
-  @media screen and (max-width: 481px) {
+  @media screen and (max-width: 480px) {
     .card-wrapper {
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
     }
   }
   section#preorder {
@@ -70,7 +70,7 @@ import products from "../data/products.js";
     display: grid;
     grid-auto-flow: row;
     grid-auto-rows: 1fr;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
     position: relative;
     column-gap: var(--space-m);
     row-gap: var(--space-s);
@@ -79,9 +79,8 @@ import products from "../data/products.js";
 
   @media screen and (min-width: 1024px) {
     section#preorder {
-      padding-block-start: var(--space-m);
+      padding-block: var(--space-m);
       row-gap: var(--space-xs-s);
-      padding-bottom: var(--space-xl);
     }
 
     .filter-wrapper {
@@ -98,18 +97,15 @@ import products from "../data/products.js";
     }
 
     .card-wrapper {
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
       column-gap: var(--space-l);
       row-gap: var(--space-s);
       padding-block-start: var(--space-s);
+      padding-block-end: var(--space-xl);
     }
     .title-wrapper {
       display: block;
       order: -1;
-    }
-  }
-  @media screen and (min-width: 1900px) {
-    .card-wrapper {
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     }
   }
 </style>

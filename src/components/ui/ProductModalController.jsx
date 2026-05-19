@@ -6,12 +6,17 @@ export default function ProductModalController() {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
+    console.log("[ProductModalController] Mounting, adding event listener for 'open-product'");
     const handler = (e) => {
+      console.log("[ProductModalController] Received 'open-product' event with detail:", e.detail);
       setProduct(e.detail || {});
       setOpen(true);
     };
     window.addEventListener("open-product", handler);
-    return () => window.removeEventListener("open-product", handler);
+    return () => {
+      console.log("[ProductModalController] Unmounting, removing event listener");
+      window.removeEventListener("open-product", handler);
+    };
   }, []);
 
   return (
@@ -19,6 +24,7 @@ export default function ProductModalController() {
       product={product}
       open={open}
       onClose={() => {
+        console.log("[ProductModalController] Closing modal");
         setOpen(false);
         setTimeout(() => setProduct(null), 200);
       }}
