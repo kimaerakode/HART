@@ -111,31 +111,29 @@ const selectedFaq = faqConfig[type];
     margin: 0;
     opacity: 0;
     transition: opacity var(--slowly);
-    padding-bottom: var(--space-m);
-  }
-
-  details {
-    overflow: hidden;
   }
 
   details[open] .answer {
     opacity: 1;
   }
 
-  @media (prefers-reduced-motion: no-preference) {
-    details::details-content {
-      transition:
-        block-size var(--slowly),
-        content-visibility var(--slowly);
-      transition-behavior: allow-discrete;
-    }
+  details .answer {
+    padding-bottom: var(--space-m);
   }
 
-  details::details-content {
-    block-size: 0;
+  details {
+    overflow: hidden;
   }
+  details::details-content {
+   max-height: 0;
+    transition:
+      height var(--slowly),
+      content-visibility var(--slowly);
+    transition-behavior: allow-discrete;
+  }
+
   details[open]::details-content {
-    block-size: auto;
+    max-height: 100%;
   }
 
   .q h3 {
@@ -168,6 +166,8 @@ const selectedFaq = faqConfig[type];
     opacity: 0;
     transform: scaleY(0);
   }
+
+ 
 
   p {
     font-size: 0.8125rem;

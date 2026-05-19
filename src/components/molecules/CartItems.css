@@ -3,7 +3,7 @@
   flex-direction: column;
   overflow-y: auto;
   min-height: 0;
-  row-gap: 3px;
+  row-gap: 6px;
   padding-block: var(--space-m);
 }
 
@@ -20,7 +20,7 @@
 }
 
 .cart-item img.product {
-  aspect-ratio: 5 / 6;
+  aspect-ratio: 9 / 10;
   object-fit: cover;
   border-radius: 4px;
   max-width: var(--space-xl);

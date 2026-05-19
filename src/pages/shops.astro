@@ -6,7 +6,7 @@ import ArrowBar from "../components/molecules/ArrowBar.astro";
 import { shops } from "../data/shopsData";
 ---
 
-<SideBarLayout title="Shops" color="charcoal">
+<SideBarLayout title="Shops" color="charcoal" menuVariant="shops">
   <section id="shops" class="no-scrollbar">
     <div class="filter-wrapper">
       <FilterBar variant="shops" />
@@ -62,7 +62,7 @@ import { shops } from "../data/shopsData";
       margin-inline-end: var(--space-m);
       padding-block-end: 0;
       max-width: 100%;
-       border-right: var(--border) var(--color-charcoal);
+      border-right: var(--border) var(--color-charcoal);
     }
 
     .card-wrapper {
@@ -75,7 +75,6 @@ import { shops } from "../data/shopsData";
       white-space: nowrap;
       height: 100%;
       width: 100%;
-     
     }
   }
 </style>
@@ -91,7 +90,7 @@ import { shops } from "../data/shopsData";
     section.dataset.filtersInitialized = "true";
 
     const buttons = Array.from(
-      document.querySelectorAll('.filter-btn[data-filter]'),
+      document.querySelectorAll(".filter-btn[data-filter]"),
     );
     const cards = Array.from(section.querySelectorAll(".card[data-area]"));
 
@@ -104,7 +103,8 @@ import { shops } from "../data/shopsData";
         const buttonFilter = normalize(
           button.dataset.filter || button.textContent || "",
         );
-        const isSelected = Boolean(activeFilter) && buttonFilter === activeFilter;
+        const isSelected =
+          Boolean(activeFilter) && buttonFilter === activeFilter;
 
         button.classList.toggle("selected", isSelected);
         button.setAttribute("aria-pressed", String(isSelected));

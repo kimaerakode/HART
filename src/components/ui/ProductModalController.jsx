@@ -6,15 +6,38 @@ export default function ProductModalController() {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    console.log("[ProductModalController] Mounting, adding event listener for 'open-product'");
-    const handler = (e) => {
-      console.log("[ProductModalController] Received 'open-product' event with detail:", e.detail);
-      setProduct(e.detail || {});
+    console.log(
+      "[ProductModalController] Mounting, adding event listener for 'open-product'",
+    );
+
+    const openModal = (detail) => {
+      setProduct(detail || {});
       setOpen(true);
+      window.__hartPendingProductModal = null;
     };
+
+    const handler = (e) => {
+      console.log(
+        "[ProductModalController] Received 'open-product' event with detail:",
+        e.detail,
+      );
+      openModal(e.detail);
+    };
+
     window.addEventListener("open-product", handler);
+
+    if (window.__hartPendingProductModal) {
+      console.log(
+        "[ProductModalController] Consuming queued product modal payload:",
+        window.__hartPendingProductModal,
+      );
+      openModal(window.__hartPendingProductModal);
+    }
+
     return () => {
-      console.log("[ProductModalController] Unmounting, removing event listener");
+      console.log(
+        "[ProductModalController] Unmounting, removing event listener",
+      );
       window.removeEventListener("open-product", handler);
     };
   }, []);

@@ -3,7 +3,7 @@ import SideBarLayout from "../layouts/SideBarLayout.astro";
 import FaqBox from "../components/atoms/FaqBox.astro";
 ---
 
-<SideBarLayout title="Contact" color="charcoal">
+<SideBarLayout title="Contact" color="charcoal" menuVariant="contact">
   <section id="contact">
     <div class="contact">
       <div>
@@ -103,7 +103,9 @@ import FaqBox from "../components/atoms/FaqBox.astro";
 
     .contact a {
       display: block;
-      text-decoration: underline solid 0.5px var(--color-charcoal);
+      text-decoration: underline;
+      text-decoration-color: var(--color-charcoal);
+      text-decoration-thickness: 0.5px;
       text-underline-offset: 3px;
       transition: text-underline-offset var(--easy);
     }

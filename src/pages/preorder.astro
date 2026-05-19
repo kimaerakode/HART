@@ -11,6 +11,7 @@ import products from "../data/products.js";
 <SideBarLayout
   title="Pre-Order"
   color="charcoal"
+  menuVariant="preorder"
   mainClass="scroll"
   sidebarClass="add-margin"
 >
@@ -50,6 +51,12 @@ import products from "../data/products.js";
       grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
     }
   }
+  @media screen and (min-width: 480px) {
+    .card-wrapper {
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    }
+  }
+
   section#preorder {
     display: flex;
     flex-direction: column;
@@ -70,7 +77,6 @@ import products from "../data/products.js";
     display: grid;
     grid-auto-flow: row;
     grid-auto-rows: 1fr;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
     position: relative;
     column-gap: var(--space-m);
     row-gap: var(--space-s);
@@ -190,25 +196,25 @@ import products from "../data/products.js";
 <script>
   // @ts-nocheck
   // Simple delegated handler that opens the product modal via CustomEvent
-  (function () {
+  const setupModalTrigger = () => {
     const root = document.querySelector("#preorder");
     if (!root) return;
 
     /** @param {HTMLElement} card */
     function openProductModal(card) {
       const ds = /** @type {any} */ (card).dataset || {};
-      window.dispatchEvent(
-        new CustomEvent("open-product", {
-          detail: {
-            title: ds.title,
-            price: ds.price,
-            imgSrc: ds.img,
-            time: ds.time,
-            description: ds.description,
-            allergens: ds.allergens,
-          },
-        }),
-      );
+
+      const detail = {
+        title: ds.title,
+        price: ds.price,
+        imgSrc: ds.img,
+        time: ds.time,
+        description: ds.description,
+        allergens: ds.allergens,
+      };
+
+      window.__hartPendingProductModal = detail;
+      window.dispatchEvent(new CustomEvent("open-product", { detail }));
     }
 
     root.addEventListener("click", (e) => {
@@ -231,5 +237,16 @@ import products from "../data/products.js";
       if (e.key === " ") e.preventDefault();
       openProductModal(card);
     });
-  })();
+  };
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", setupModalTrigger, {
+      once: true,
+    });
+  } else {
+    setupModalTrigger();
+  }
+
+  document.addEventListener("astro:page-load", setupModalTrigger);
+  document.addEventListener("astro:after-swap", setupModalTrigger);
 </script>

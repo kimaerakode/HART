@@ -72,6 +72,10 @@ function notifyCartChange() {
 
   if (typeof window !== "undefined") {
     window.dispatchEvent(new CustomEvent(CART_CHANGE_EVENT));
+
+    if (typeof window.__hartSyncCartCount === "function") {
+      window.__hartSyncCartCount();
+    }
   }
 }
 

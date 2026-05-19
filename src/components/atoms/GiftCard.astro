@@ -14,7 +14,7 @@ const { placement = "mobile" } = Astro.props;
       <input class="btn" type="submit" value="Apply" />
     </form>
 
-    <img src="/assets/brand/flower-illustration.svg" alt="" />
+    <img class="flower" src="/assets/brand/flower-illustration.png" alt="" />
   </div>
 </div>
 
@@ -70,6 +70,12 @@ const { placement = "mobile" } = Astro.props;
     padding-inline: var(--space-xs);
     align-self: end;
     transition: opacity var(--easy);
+  }
+
+  .flower {
+    shape-rendering: geometricPrecision;
+    text-rendering: geometricPrecision;
+    transform: unset !important;
   }
 
   @media (hover: hover) {

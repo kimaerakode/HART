@@ -58,7 +58,9 @@ const { title, state, filter } = Astro.props as {
       border: 0;
       border-radius: 0;
       text-align: start;
-      text-decoration: 0.8px underline solid transparent;
+      text-decoration: underline;
+      text-decoration-color: transparent;
+      text-decoration-thickness: 0.8px;
       text-underline-offset: 3.5px;
       transition: text-decoration-color var(--easy);
     }
