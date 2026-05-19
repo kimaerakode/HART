@@ -46,7 +46,7 @@ const selectedFaq = faqConfig[type];
     display: flex;
     flex-direction: column;
     height: fit-content;
-    max-height: 100%;
+    block-size: 100%;
   }
 
   .box::before {
@@ -125,15 +125,15 @@ const selectedFaq = faqConfig[type];
     overflow: hidden;
   }
   details::details-content {
-   max-height: 0;
+    block-size: 0;
     transition:
-      height var(--slowly),
+      block-size var(--slowly),
       content-visibility var(--slowly);
     transition-behavior: allow-discrete;
   }
 
   details[open]::details-content {
-    max-height: 100%;
+    block-size: auto;
   }
 
   .q h3 {
@@ -166,8 +166,6 @@ const selectedFaq = faqConfig[type];
     opacity: 0;
     transform: scaleY(0);
   }
-
- 
 
   p {
     font-size: 0.8125rem;

@@ -1,6 +1,7 @@
 ---
 import SideBarLayout from "../layouts/SideBarLayout.astro";
 import FaqBox from "../components/atoms/FaqBox.astro";
+import MailHart from "../components/atoms/MailHart.astro";
 ---
 
 <SideBarLayout title="Contact" color="charcoal" menuVariant="contact">
@@ -13,7 +14,8 @@ import FaqBox from "../components/atoms/FaqBox.astro";
 
         <p>
           For any general enquiries, special orders or other requests, please
-          contact us at: <a href="">info@hartbageri.com</a>
+          contact us at:
+          <MailHart mailName="info" />
         </p>
       </div>
       <div>
@@ -22,7 +24,7 @@ import FaqBox from "../components/atoms/FaqBox.astro";
         </div>
         <p>
           Are you passionate and interested in learning more about baking,
-          hospitality and speciality coffee? <a href="">Apply here </a>
+          hospitality and speciality coffee? <a href="">Apply here</a>
         </p>
       </div>
       <div>
@@ -30,9 +32,9 @@ import FaqBox from "../components/atoms/FaqBox.astro";
           <h2>Wholesale</h2>
         </div>
         <p>
-          For any wholesale related requests, please contact us at: <a href="">
-            wholesale@hartbageri.com</a
-          >
+          For any wholesale related requests, please contact us at: <MailHart
+            mailName="wholesale"
+          />
         </p>
       </div>
     </div>
@@ -102,7 +104,6 @@ import FaqBox from "../components/atoms/FaqBox.astro";
     }
 
     .contact a {
-      display: block;
       text-decoration: underline;
       text-decoration-color: var(--color-charcoal);
       text-decoration-thickness: 0.5px;

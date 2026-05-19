@@ -1,3 +1,7 @@
+---
+import MailHart from "../atoms/MailHart.astro";
+---
+
 <div class="menu">
   <div class="item">
     <p class="text-s">
@@ -17,8 +21,74 @@
       >
     </p>
   </div>
+</div>
+<div class="contact--mobile-menu">
+  <div class="item">
+    <h2>General Inquiries</h2>
+    <p>
+      For any general enquiries, special orders or other requests, please
+      contact us at:
+    </p>
+    <span class="link"> <MailHart mailName="info" /></span>
+  </div>
+  <div class="item">
+    <h2>Work With Us</h2>
+    <p>
+      Are you passionate and interested in learning more about baking,
+      hospitality and speciality coffee?
+    </p>
+    <span class="link"
+      ><a href="https://hartbageri.teamtailor.com/">Apply here</a></span
+    >
+  </div>
+  <div class="item">
+    <h2>Wholesale</h2>
+    <p>For any wholesale related requests, please contact us at:</p>
+    <span class="link"> <MailHart mailName="wholesale" /></span>
+  </div>
+  <div class="item">
+    <h2>FAQ</h2>
+    <span class="link"><a href="/contact">Find answers here</a></span>
+  </div>
+</div>
 
-  <style>
+<style>
+  @media screen and (max-width: 1024px) {
+    .menu,
+    .menu > * {
+      display: none;
+    }
+
+    .contact--mobile-menu .item {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+      padding: var(--space-s);
+      border-bottom: var(--border-thin) var(--color-cream);
+    }
+
+    .link {
+      font-family: "Graphik";
+      font-size: var(--text-s);
+      align-self: start;
+      text-decoration: underline;
+      text-decoration-color: currentColor;
+      text-decoration-thickness: 0.5px;
+      text-underline-offset: 3px;
+      transition: text-underline-offset var(--easy);
+    }
+  }
+
+  @media (hover: hover) {
+    .link:hover {
+      text-underline-offset: 4px;
+    }
+  }
+  @media screen and (min-width: 1024px) {
+    .contact--mobile-menu {
+      display: none;
+    }
+
     .menu {
       display: flex;
       flex-direction: column;
@@ -40,5 +110,5 @@
       text-underline-offset: 3px;
       line-height: 16pt;
     }
-  </style>
-</div>
+  }
+</style>
