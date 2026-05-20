@@ -4,7 +4,7 @@ const products = [
     favorite: true,
     title: "Cardamom Croissant",
     price: "42 DKK",
-    img: "cardamom-croissant.jpg",
+    img: "cardamom-croissant.webp",
     description:
       "Little squares of croissant dough are tossed in our special blend cardamom sugar and baked together to form our cardamom croissant. It is heady and aromatic with an intense cardamom rush.",
     allergens: "gluten, dairy, eggs",
@@ -14,7 +14,7 @@ const products = [
     favorite: false,
     title: "City Loaf",
     price: "59 DKK",
-    img: "city-loaf.jpg",
+    img: "city-loaf.webp",
     description:
       "Our signature sourdough bread made with a mix of French and Italian wheat flours and french grey sea salt.",
   },
@@ -23,7 +23,7 @@ const products = [
     favorite: true,
     title: "Sesame City Loaf",
     price: "59 DKK",
-    img: "sesame-city-loaf.png",
+    img: "sesame-city-loaf.webp",
     time: "08:00",
     description:
       "Our signature sourdough bread topped with sesame. Made with a mix of French and Italian wheat flours and french grey sea salt.",
@@ -33,7 +33,7 @@ const products = [
     favorite: false,
     title: "Morning Bun",
     price: "16 DKK",
-    img: "morning-bun.jpg",
+    img: "morning-bun.webp",
     time: "08:00",
     description:
       "100% sourdough buns, with a bit of wholewheat flour for some extra flavour. We have three types: mixed seeds, sesame seeds or plain buns.",
@@ -43,7 +43,7 @@ const products = [
     favorite: false,
     title: "Chocolate Bun",
     price: "28 DKK",
-    img: "chocolate-bun.png",
+    img: "chocolate-bun.webp",
     time: "08:00",
   },
   {
@@ -51,7 +51,7 @@ const products = [
     favorite: true,
     title: "Pain Au Chocolat",
     price: "38 DKK",
-    img: "pain-au-chocolat.jpg",
+    img: "pain-au-chocolat.webp",
     time: "08:00",
     description:
       "Our classic pain au chocolat; croissant dough rolled with sticks of dark, bittersweet chocolate.",
@@ -61,7 +61,7 @@ const products = [
     favorite: false,
     title: "Lemon Cake",
     price: "45 DKK",
-    img: "lemon-cake.png",
+    img: "lemon-cake.webp",
     time: "09:30",
   },
   {
@@ -69,7 +69,7 @@ const products = [
     favorite: true,
     title: "Strawberry Choux",
     price: "48 DKK",
-    img: "strawberry-choux.png",
+    img: "strawberry-choux.webp",
     time: "09:30",
   },
   {
@@ -77,7 +77,7 @@ const products = [
     favorite: false,
     title: "Strawberry Tart",
     price: "48 DKK",
-    img: "strawberry-tart.png",
+    img: "strawberry-tart.webp",
     time: "09:30",
   },
   {
@@ -85,7 +85,7 @@ const products = [
     favorite: true,
     title: "Superseed",
     price: "55 DKK",
-    img: "superseed.png",
+    img: "superseed.webp",
     time: "08:00",
     description:
       "Naturally leavened 100% rye tin loaf. Made with beer, malt sirup, sesame, pumpkin, flax and sunflower seeds, it contains more seeds than flour by weight.",
@@ -95,7 +95,7 @@ const products = [
     favorite: false,
     title: "Beetroot Sandwich",
     price: "79 DKK",
-    img: "beetroot-sandwich.png",
+    img: "beetroot-sandwich.webp",
     time: "09:30",
     description:
       "Sourdough sandwich with roasted beetroot, pickled red onion, fresh horseradish and a generous smear of cream cheese.",
@@ -105,7 +105,7 @@ const products = [
     favorite: false,
     title: "Tomato Sandwich",
     price: "79 DKK",
-    img: "tomato-sandwich.png",
+    img: "tomato-sandwich.webp",
     time: "09:30",
     description:
       "Sourdough sandwich with roasted beetroot, pickled red onion, fresh horseradish and a generous smear of cream cheese.",
@@ -116,7 +116,7 @@ const products = [
     favorite: false,
     title: "Mushroom Sandwich",
     price: "79 DKK",
-    img: "mushroom-sandwich.png",
+    img: "mushroom-sandwich.webp",
     time: "09:30",
     description:
       "Sourdough sandwich with roasted beetroot, pickled red onion, fresh horseradish and a generous smear of cream cheese.",
@@ -126,7 +126,7 @@ const products = [
     favorite: false,
     title: "Butter from Øllingegaard",
     price: "36 DKK",
-    img: "butter.png",
+    img: "butter.webp",
     description:
       "Old-fashioned danish butter. Made from organic cream. The obvious choice for all food enthusiasts.",
   },
@@ -135,7 +135,7 @@ const products = [
     favorite: false,
     title: "Spring Water",
     price: "26 DKK",
-    img: "spring-water.png",
+    img: "spring-water.webp",
     time: "08:00",
     description:
       "Lovely fresh spring water from Postevand.dk who are focusing on the protection of our groundwater by donating money for tree planting in Denmark.",
@@ -145,7 +145,7 @@ const products = [
     favorite: false,
     title: "Bornholm Water",
     price: "30 DKK",
-    img: "bornholm-water.png",
+    img: "bornholm-water.webp",
     time: "08:00",
     description:
       "The many salts and minerals from the Bornholm underground gives it a unique taste and character, while at the same time enhancing the taste nuances in the food it is served with.",
@@ -155,7 +155,7 @@ const products = [
     favorite: false,
     title: "Fritz Cola",
     price: "30 DKK",
-    img: "fritz-cola.png",
+    img: "fritz-cola.webp",
     time: "08:00",
     description:
       "One of the feistiest kolas which contains real cola nut extract and natural caffeine – an unmistakable get-me-up.",
@@ -165,7 +165,7 @@ const products = [
     favorite: false,
     title: "Ebeltoft Soda Rhubarb",
     price: "39 DKK",
-    img: "ebeltoft-soda-rhubarb.png",
+    img: "ebeltoft-soda-rhubarb.webp",
     time: "08:00",
     description:
       "Amazingly fresh and flavourfull sodas from Ebeltoft Farm Brewery.",
@@ -175,7 +175,7 @@ const products = [
     favorite: false,
     title: "Ebeltoft Soda Raspberry",
     price: "39 DKK",
-    img: "ebeltoft-soda-raspberry.png",
+    img: "ebeltoft-soda-raspberry.webp",
     time: "08:00",
     description:
       "Amazingly fresh and flavourfull sodas from Ebeltoft Farm Brewery.",
@@ -185,7 +185,7 @@ const products = [
     favorite: false,
     title: "Ebeltoft Soda Lemon & Ginger",
     price: "39 DKK",
-    img: "ebeltoft-soda-gingerlemon.png",
+    img: "ebeltoft-soda-gingerlemon.webp",
     time: "08:00",
   },
   {
@@ -193,7 +193,7 @@ const products = [
     favorite: false,
     title: "Prolog Coffee Bag",
     price: "155 DKK",
-    img: "prolog-coffee.png",
+    img: "prolog-coffee.webp",
     time: "08:00",
     description:
       "We store all our coffee in protecting ventilating packing that allows the oxygen from the roasted beans to leave the bags. This helps keep the durability of the coffee. ",
