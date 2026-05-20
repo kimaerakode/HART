@@ -14,15 +14,11 @@ const { variant = "main", state } = Astro.props;
       <img src="/assets/icons/cross-cream.svg" alt="Close menu (X)" /></button
     >
   </div>
-  {
-    variant === "contact" ? (
-      <div class="arrow-bar">
-        <button class="arrow-left" type="button" data-mobile-menu-back>
-          <img src="/assets/icons/arrow-back-cream.svg" alt="Back" />
-        </button>
-      </div>
-    ) : null
-  }
+  <div class="arrow-bar">
+    <button class="arrow-left" type="button" data-mobile-menu-back>
+      <img src="/assets/icons/arrow-back-cream.svg" alt="Back" />
+    </button>
+  </div>
 
   <div
     class="mobile-menu-views"
