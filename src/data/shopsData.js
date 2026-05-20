@@ -11,7 +11,7 @@ export const areas = [
 export const shops = [
   {
     title: "reffen",
-    imgSrc: "/assets/img/shops/reffen.png",
+    imgSrc: "/assets/img/shops_webp/reffen.webp",
     area: "reffen",
     street: "Refshalevej 159A",
     town: "Copenhagen K, DK-1432",
@@ -20,7 +20,7 @@ export const shops = [
   },
   {
     title: "holmen",
-    imgSrc: "/assets/img/shops/holmen.png",
+    imgSrc: "/assets/img/shops_webp/holmen.webp",
     area: "city",
     street: "Galionsvej 41",
     town: "Copenhagen K, DK-1437",
@@ -29,7 +29,7 @@ export const shops = [
   },
   {
     title: "gammel mønt",
-    imgSrc: "/assets/img/shops/gammelmoent.png",
+    imgSrc: "/assets/img/shops_webp/gammelmoent.webp",
     area: "city",
     street: "Gammel Mønt 4",
     town: "Copenhagen K, DK-1117",
@@ -39,7 +39,7 @@ export const shops = [
 
   {
     title: "marmorkirken",
-    imgSrc: "/assets/img/shops/marmorkirken.png",
+    imgSrc: "/assets/img/shops_webp/marmorkirken.webp",
     area: "city",
     street: "Store Kongensgade 75",
     town: "Copenhagen K, DK-1264",
@@ -49,7 +49,7 @@ export const shops = [
 
   {
     title: "østerbro",
-    imgSrc: "/assets/img/shops/oesterbro.png",
+    imgSrc: "/assets/img/shops_webp/oesterbro.webp",
     area: "østerbro",
     street: "Victor Borges Plads 2",
     town: "Copenhagen Ø, DK-2100",
@@ -58,7 +58,7 @@ export const shops = [
   },
   {
     title: "Stefansgade",
-    imgSrc: "/assets/img/shops/noerrebro.png",
+    imgSrc: "/assets/img/shops_webp/noerrebro.webp",
     area: "nørrebro",
     street: "Julius Bloms Gade 32",
     town: "Copenhagen N, DK-2200",
@@ -67,7 +67,7 @@ export const shops = [
   },
   {
     title: "carlsberg byen",
-    imgSrc: "/assets/img/shops/carlsbergbyen.png",
+    imgSrc: "/assets/img/shops_webp/carlsbergbyen.webp",
     area: "vesterbro",
     street: "Franciska Clausens Plads 29",
     town: "Copenhagen V, DK-1799",
@@ -76,7 +76,7 @@ export const shops = [
   },
   {
     title: "frederiksberg",
-    imgSrc: "/assets/img/shops/frb.png",
+    imgSrc: "/assets/img/shops_webp/frb.webp",
     area: "frederiksberg",
     street: "Gammel Kongevej 109",
     town: "Frederiksberg, DK-1850",
@@ -85,7 +85,7 @@ export const shops = [
   },
   {
     title: "kødbyen",
-    imgSrc: "/assets/img/shops/koedbyen.png",
+    imgSrc: "/assets/img/shops_webp/koedbyen.webp",
     area: "vesterbro",
     street: "Høkerboderne 17",
     town: "Copenhagen V, DK-1712",
@@ -94,7 +94,7 @@ export const shops = [
   },
   {
     title: "istedgade",
-    imgSrc: "/assets/img/shops/istedgade.png",
+    imgSrc: "/assets/img/shops_webp/istedgade.webp",
     area: "vesterbro",
     street: "Istedgade 61",
     town: "Copenhagen V, DK-1716",
