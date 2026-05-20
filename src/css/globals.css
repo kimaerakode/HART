@@ -126,6 +126,11 @@
     background-color: transparent;
     border: 0;
   }
+  @media (hover: hover) {
+    button:hover {
+      cursor: pointer;
+    }
+  }
 
   summary {
     list-style: none;

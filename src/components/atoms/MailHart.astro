@@ -1,0 +1,33 @@
+---
+const { mailName } = Astro.props;
+const mailAdress =
+  mailName === "info"
+    ? "info@hartbageri.com"
+    : mailName === "wholesale"
+      ? "wholesale@hartbageri.com"
+      : "";
+---
+
+<a
+  target="_blank"
+  href={`mailto:${mailAdress || `${mailName}@hartbageri.com`}`}
+>
+  {mailAdress || `${mailName}@hartbageri.com`}
+</a>
+
+<style>
+  a {
+    display: block;
+    text-decoration: underline;
+    text-decoration-color: currentColor;
+    text-decoration-thickness: 0.5px;
+    text-underline-offset: 3px;
+    transition: text-underline-offset var(--easy);
+  }
+
+  @media (hover: hover) {
+    a:hover {
+      text-underline-offset: 4px;
+    }
+  }
+</style>

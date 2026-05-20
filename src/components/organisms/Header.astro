@@ -133,22 +133,84 @@ const logoSrc =
   document.addEventListener("astro:page-load", initializeCartCount);
   document.addEventListener("astro:after-swap", initializeCartCount);
 
-  // Mobile menu toggle
-  const mobileToggle = document.querySelector(".mobile-toggle");
-  const mobileMenu = document.querySelector(".mobile-menu--overlay");
-  const closeButton = mobileMenu?.querySelector(".close");
+  // Mobile menu toggle with handler cleanup and navigation-aware open
+  const initializeMobileMenu = (() => {
+    let clickHandler = null;
+    let closeHandler = null;
+    let linkHandler = null;
 
-  if (mobileToggle && mobileMenu) {
-    mobileToggle.addEventListener("click", () => {
-      mobileMenu.classList.toggle("active");
+    return () => {
+      const mobileToggle = document.querySelector(".mobile-toggle");
+      const mobileMenu = document.querySelector(".mobile-menu--overlay");
+      const closeButton = mobileMenu?.querySelector(".close");
+
+      // Remove old listeners to prevent accumulation
+      if (mobileToggle && clickHandler) {
+        mobileToggle.removeEventListener("click", clickHandler);
+      }
+      if (closeButton && closeHandler) {
+        closeButton.removeEventListener("click", closeHandler);
+      }
+      if (mobileMenu && linkHandler) {
+        mobileMenu.removeEventListener("click", linkHandler);
+      }
+
+      // Create new handlers
+      clickHandler = () => {
+        mobileMenu?.classList.toggle("active");
+      };
+      closeHandler = () => {
+        mobileMenu?.classList.remove("active");
+      };
+
+      linkHandler = (e) => {
+        const target =
+          e.target instanceof Element ? e.target.closest("a") : null;
+        if (!target) return;
+        const href = target.getAttribute("href");
+        const targetAttr = target.getAttribute("target");
+        // Only handle internal navigations
+        if (!href || href.startsWith("http") || targetAttr === "_blank") return;
+        try {
+          const url = new URL(href, window.location.origin);
+          const inMainMenu = Boolean(
+            target.closest('[data-menu-panel="main"]'),
+          );
+          if (url.pathname === "/contact" && inMainMenu) {
+            e.preventDefault();
+            window.__hartSetMobileMenuView?.("contact");
+            return;
+          }
+          mobileMenu?.classList.remove("active");
+        } catch (err) {
+          // ignore
+        }
+      };
+
+      // Add new listeners
+      if (mobileToggle && mobileMenu) {
+        mobileToggle.addEventListener("click", clickHandler);
+      }
+      if (closeButton && mobileMenu) {
+        closeButton.addEventListener("click", closeHandler);
+      }
+      if (mobileMenu) {
+        mobileMenu.addEventListener("click", linkHandler);
+      }
+      mobileMenu?.classList.remove("active");
+    };
+  })();
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initializeMobileMenu, {
+      once: true,
     });
+  } else {
+    initializeMobileMenu();
   }
 
-  if (closeButton && mobileMenu) {
-    closeButton.addEventListener("click", () => {
-      mobileMenu.classList.remove("active");
-    });
-  }
+  document.addEventListener("astro:page-load", initializeMobileMenu);
+  document.addEventListener("astro:after-swap", initializeMobileMenu);
 </script>
 
 <style>
@@ -198,6 +260,8 @@ const logoSrc =
   }
 
   .cart-icon-wrapper {
+    display: grid;
+    place-content: start center;
     position: relative;
     background: var(--color-charcoal);
     width: 2.25rem;
@@ -264,8 +328,6 @@ const logoSrc =
     }
 
     .cart-icon-wrapper {
-      display: grid;
-      place-content: start center;
       width: 2.635rem;
       height: 2.625rem;
     }

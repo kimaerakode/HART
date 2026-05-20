@@ -12,6 +12,7 @@ const {
   menuVariant = "main",
   headerBorderless = false,
 } = Astro.props;
+const mobileMenuVariant = menuVariant === "contact" ? "contact" : "main";
 const foregroundColor =
   color === "charcoal" ? "var(--color-charcoal)" : "var(--color-cream)";
 const backgroundColor =
@@ -78,7 +79,7 @@ const footerBackground =
       variant={headerVariant}
       borderless={headerBorderless}
     />
-    <MobileMenu variant={menuVariant} />
+    <MobileMenu variant={mobileMenuVariant} />
 
     <slot />
 
