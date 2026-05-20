@@ -30,7 +30,12 @@ export default function CartModal({ open, onClose }) {
         }
       }}
     >
-      <div className="cm-box" role="dialog" aria-modal="true" aria-label="Cart">
+      <div
+        className="cm-box move-in"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Cart"
+      >
         <div className="cm-header">
           <h2 className="cm-title">Cart</h2>
           <button
@@ -49,7 +54,7 @@ export default function CartModal({ open, onClose }) {
 
         <div className="cm-content">
           <div className="cm-scroll">
-            <CartItems buttonColor="charcoal" />
+            <CartItems buttonColor="cream" buttonTone="charcoal" />
           </div>
         </div>
 
