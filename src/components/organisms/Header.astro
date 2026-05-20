@@ -38,7 +38,11 @@ const logoSrc =
       >
       {
         isSecondary ? (
-          <a class="cart-icon-wrapper" href="">
+          <button
+            class="cart-icon-wrapper"
+            type="button"
+            aria-label="Open cart"
+          >
             <p class="cart-count text-xs" data-cart-count>
               0
             </p>
@@ -53,13 +57,17 @@ const logoSrc =
                 alt="Cart icon"
               />
             </picture>
-          </a>
+          </button>
         ) : (
           <div class="header-actions">
             <div class="header-menu-wrapper">
               <NavMenu direction={navMenuDirection} />
             </div>
-            <button class="cart-icon-wrapper">
+            <button
+              class="cart-icon-wrapper"
+              type="button"
+              aria-label="Open cart"
+            >
               <p class="cart-count text-xs" data-cart-count>
                 0
               </p>
@@ -132,6 +140,48 @@ const logoSrc =
 
   document.addEventListener("astro:page-load", initializeCartCount);
   document.addEventListener("astro:after-swap", initializeCartCount);
+
+  const initializeCartModal = (() => {
+    let clickHandler = null;
+
+    return () => {
+      const cartButtons = document.querySelectorAll(".cart-icon-wrapper");
+
+      if (clickHandler) {
+        cartButtons.forEach((button) => {
+          button.removeEventListener("click", clickHandler);
+        });
+      }
+
+      clickHandler = (event) => {
+        event.preventDefault();
+        const win = /** @type {any} */ (window);
+
+        if (typeof win.__hartOpenCartModal === "function") {
+          win.__hartOpenCartModal();
+          return;
+        }
+
+        win.__hartPendingCartModal = true;
+        window.dispatchEvent(new CustomEvent("open-cart"));
+      };
+
+      cartButtons.forEach((button) => {
+        button.addEventListener("click", clickHandler);
+      });
+    };
+  })();
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initializeCartModal, {
+      once: true,
+    });
+  } else {
+    initializeCartModal();
+  }
+
+  document.addEventListener("astro:page-load", initializeCartModal);
+  document.addEventListener("astro:after-swap", initializeCartModal);
 
   // Mobile menu toggle with handler cleanup and navigation-aware open
   const initializeMobileMenu = (() => {
@@ -264,10 +314,13 @@ const logoSrc =
     place-content: start center;
     position: relative;
     background: var(--color-charcoal);
+    border: none;
+    appearance: none;
     width: 2.25rem;
     height: 2.25rem;
     border-radius: 100%;
     padding: var(--space-xs);
+    cursor: pointer;
     transition:
       width var(--easy),
       height var(--easy);

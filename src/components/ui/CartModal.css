@@ -1,0 +1,158 @@
+.cm-backdrop {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: start;
+  justify-content: end;
+  padding: var(--space-s);
+  background: rgba(44, 44, 46, 0.5);
+  z-index: 100;
+}
+
+.cm-box {
+  position: relative;
+  width: min(42rem, 100%);
+  max-height: calc(100% - var(--footer-height) - var(--space-xs));
+  overflow: hidden;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  background: var(--color-cream);
+  color: var(--color-charcoal);
+  border-radius: 10px;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.28);
+}
+
+.cm-header {
+  color: var(--color-cream);
+  background-color: var(--color-charcoal);
+  padding-inline: var(--space-s);
+  padding-block: var(--space-xs);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cm-title {
+  font-size: var(--text-l);
+}
+
+.cm-close {
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.cm-close img {
+  width: var(--space-xs-s);
+  height: auto;
+}
+
+.cm-content {
+  min-height: 0;
+}
+
+.cm-scroll {
+  min-height: 0;
+  max-height: 100%;
+  overflow-y: auto;
+  padding: var(--space-s);
+  padding-bottom: 7rem;
+}
+
+.cm-scroll .cart {
+  padding-block: 0;
+}
+
+.cm-footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-m);
+  border-top: var(--border) var(--color-charcoal);
+  padding-inline: var(--space-s);
+  padding-block-start: var(--space-xs);
+  padding-block-end: var(--space-s);
+  background-color: rgb(44, 44, 46, 40%);
+  backdrop-filter: blur(50px);
+  color: var(--color-cream);
+}
+
+.cm-checkout-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding-block: var(--space-xs);
+  padding-inline: var(--space-s);
+  border-radius: 5px;
+  background: var(--color-cream);
+  color: var(--color-charcoal);
+  text-decoration: none;
+  text-transform: uppercase;
+  font-family: "Basel Grotesk Mono";
+  font-size: var(--text-s);
+  transition: opacity var(--easy);
+  border: var(--border-thin) var(--color-charcoal);
+}
+
+.cm-box .cart-empty,
+.cm-box .cart-item-title,
+.cm-box .cart-item-price,
+.cm-box .cart-item-total,
+.cm-box .cart-amount-count,
+.cm-box .title-wrapper h3,
+.cm-box .title-wrapper span {
+  color: var(--color-charocal);
+}
+
+.cm-box .cart-item > * {
+  color: var(--color-charcoal);
+}
+
+.cm-box .cart-item:not(:last-child) {
+  border-bottom-color: var(--color-charcoal);
+}
+
+.cm-box .cart-item-remove img {
+  filter: brightness(0) invert(1);
+}
+
+.cm-box .amount-color-cream {
+  background: var(--color-cream) !important;
+  border-color: var(--color-charcoal);
+  color: var(--color-charcoal);
+  padding-inline: var(--space-xs-s);
+  padding-block: var(--space-xs);
+}
+
+.cm-box .title-wrapper.reverse {
+  border: 0;
+}
+
+.cm-box .total--mobile,
+.cm-box .total--desktop {
+  display: block !important;
+}
+
+@media (hover: hover) {
+  .cm-checkout-link:hover,
+  .cm-close:hover {
+    opacity: 0.9;
+  }
+}
+
+@media screen and (max-width: 1023px) {
+  .cm-box {
+    width: 100%;
+    max-height: 88svh;
+  }
+
+  .cm-content {
+    padding-inline: var(--space-s);
+  }
+}

@@ -4,7 +4,7 @@ const { count, color } = Astro.props;
 
 <button class={`count ${color}`}
   ><img
-    src="/assets/icons/arrow-decrease-charcoal.svg"
+    src={`/assets/icons/arrow-decrease-${color}.svg`}
     alt="decrease amount (<)"
   />{count}<img
     src="/assets/icons/arrow-increase-charcoal.svg"
@@ -24,7 +24,15 @@ const { count, color } = Astro.props;
     padding: var(--space-xs-s) var(--space-xs);
   }
 
+  .charcoal {
+    color: var(--color-charcoal);
+    background-color: var(--color-cream);
+    border-color: var(--color-charcoal);
+  }
+
   .cream {
-    
+    color: var(--color-cream);
+    background-color: var(--color-charcoal);
+    border-color: var(--color-cream);
   }
 </style>
