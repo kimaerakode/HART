@@ -47,16 +47,31 @@ import { shops } from "../data/shopsData";
     overflow-x: hidden;
   }
 
+  .title-wrapper.mobile {
+    margin-inline: var(--space-s);
+    margin-block-start: var(--space-s);
+  }
+
   @media screen and (min-width: 620px) {
-    .filter-wrapper {
-      display: none;
-    }
     .card-wrapper {
       grid-template-columns: repeat(2, 1fr);
     }
   }
 
+  @media screen and (max-width: 1024px) {
+    section#shops {
+      padding-inline: 0;
+    }
+
+    .card-wrapper {
+      padding-inline: var(--space-s);
+    }
+  }
+
   @media screen and (min-width: 1024px) {
+    .filter-wrapper {
+      display: none;
+    }
     section#shops {
       padding-inline: 0;
       margin-inline-end: var(--space-m);

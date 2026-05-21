@@ -5,6 +5,7 @@ import Header from "../components/organisms/Header.astro";
 import Footer from "../components/organisms/Footer.astro";
 import MobileMenu from "../components/organisms/MobileMenu.astro";
 import CartModalController from "../components/ui/CartModalController.jsx";
+import SelectionWarning from "../components/ui/SelectionWarning.jsx";
 
 const {
   color = "cream",
@@ -81,6 +82,7 @@ const footerBackground =
       borderless={headerBorderless}
     />
     <CartModalController client:load />
+    <SelectionWarning client:load />
     <MobileMenu variant={mobileMenuVariant} />
 
     <slot />

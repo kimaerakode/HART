@@ -71,6 +71,13 @@ import products from "../data/products.js";
 
   .filter-wrapper {
     overflow-x: auto;
+    width: 100%;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .filter-wrapper::-webkit-scrollbar {
+    display: none;
   }
 
   .card-wrapper {
@@ -81,6 +88,16 @@ import products from "../data/products.js";
     column-gap: var(--space-m);
     row-gap: var(--space-s);
     width: 100%;
+  }
+
+  @media screen and (max-width: 1024px) {
+    section#preorder {
+      padding-inline: 0;
+    }
+
+    .card-wrapper {
+      padding-inline: var(--space-s);
+    }
   }
 
   @media screen and (min-width: 1024px) {

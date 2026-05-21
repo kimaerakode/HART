@@ -54,13 +54,51 @@ export default function CartModal({ open, onClose }) {
 
         <div className="cm-content">
           <div className="cm-scroll">
-            <CartItems buttonColor="cream" buttonTone="charcoal" />
+            <CartItems buttonColor="charcoal" buttonTone="cream" />
           </div>
         </div>
 
         <div className="cm-footer">
           <CartTotal placement="mobile" />
-          <a className="cm-checkout-link" href="/checkout">
+          <a
+            className="cm-checkout-link"
+            href="/checkout"
+            onClick={(e) => {
+              if (typeof window === "undefined") return;
+
+              let sel = null;
+              try {
+                sel = JSON.parse(
+                  window.localStorage.getItem("hart.checkoutSelection") ||
+                    "null",
+                );
+              } catch (err) {
+                sel = null;
+              }
+
+              const hasLocation = sel && sel.location;
+              const hasDate = sel && sel.date;
+              const hasTime = sel && sel.time;
+
+              if (!hasLocation || !hasDate || !hasTime) {
+                e.preventDefault();
+                // Dispatch a global custom event that the SelectionWarning component listens for
+                const event = new CustomEvent("show-selection-warning", {
+                  detail: {
+                    onGo: () => (window.location.href = "/preorder"),
+                    onClose: () => {
+                      document.dispatchEvent(
+                        new CustomEvent("open-preorder-popover", {
+                          bubbles: true,
+                        }),
+                      );
+                    },
+                  },
+                });
+                window.dispatchEvent(event);
+              }
+            }}
+          >
             Go to checkout
           </a>
         </div>

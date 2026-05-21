@@ -96,7 +96,7 @@
 }
 
 /* Cart Amount Button Styling */
-.cart-amount {
+.cart .cart-amount {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -125,11 +125,11 @@
   color: var(--color-cream);
 }
 
-.cart-amount-btn {
+.cart .cart-amount-btn {
   display: grid;
   place-items: center;
-  width: 7px;
-  height: 7px;
+  width: 6px;
+  height: 6px;
   padding: 0;
   border: none;
   background: transparent;

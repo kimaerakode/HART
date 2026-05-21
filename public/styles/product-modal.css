@@ -177,7 +177,7 @@
   background: var(--color-cream);
 }
 
-.cart-amount-count {
+.pm-box .cart-amount-count {
   width: 2ch;
   flex: 0 0 auto;
   text-align: center;
@@ -186,7 +186,7 @@
   color: var(--color-charcoal);
 }
 
-.cart-amount-btn {
+.pm-box .cart-amount-btn {
   display: grid;
   place-items: center;
   width: 8px;

@@ -51,6 +51,24 @@ const isPreorderPage = /\/preorder\/?$/.test(Astro.url.pathname);
 
       syncPopoverState();
 
+      const storageKey = "preorderPopoverDismissed_v1";
+
+      const isDismissed = () => {
+        try {
+          return localStorage.getItem(storageKey) === "1";
+        } catch (e) {
+          return false;
+        }
+      };
+
+      const markDismissed = () => {
+        try {
+          localStorage.setItem(storageKey, "1");
+        } catch (e) {
+          // ignore storage errors (e.g., private mode)
+        }
+      };
+
       const handleOpen = () => {
         if (mobileQuery.matches) {
           overlay.classList.add("is-open");
@@ -59,6 +77,7 @@ const isPreorderPage = /\/preorder\/?$/.test(Astro.url.pathname);
 
       const handleClose = () => {
         overlay.classList.remove("is-open");
+        markDismissed();
       };
 
       document.addEventListener("open-preorder-popover", handleOpen);
@@ -68,6 +87,12 @@ const isPreorderPage = /\/preorder\/?$/.test(Astro.url.pathname);
 
       const backdrop = overlay.querySelector(".backdrop");
       backdrop?.addEventListener("click", handleClose);
+
+      // Open popover automatically on initial load when on mobile,
+      // unless the user previously dismissed it
+      if (mobileQuery.matches && !isDismissed()) {
+        handleOpen();
+      }
 
       if (typeof mobileQuery.addEventListener === "function") {
         mobileQuery.addEventListener("change", syncPopoverState);
@@ -92,7 +117,7 @@ const isPreorderPage = /\/preorder\/?$/.test(Astro.url.pathname);
     .overlay {
       position: fixed;
       inset: 0;
-      z-index: 50;
+      z-index: 200;
       display: flex;
       align-items: center;
       justify-content: center;

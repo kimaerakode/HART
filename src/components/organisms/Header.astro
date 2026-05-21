@@ -95,6 +95,11 @@ const logoSrc =
 
 <script>
   // @ts-nocheck
+  import {
+    isMobileViewport,
+    openContactMenu,
+  } from "../../scripts/mobileMenu.js";
+
   const CART_STORAGE_KEY = "hart_cart";
   const CART_CHANGE_EVENT = "hart-cart-change";
 
@@ -187,12 +192,13 @@ const logoSrc =
   const initializeMobileMenu = (() => {
     let clickHandler = null;
     let closeHandler = null;
-    let linkHandler = null;
+    let secondaryNavHandler = null;
 
     return () => {
       const mobileToggle = document.querySelector(".mobile-toggle");
       const mobileMenu = document.querySelector(".mobile-menu--overlay");
       const closeButton = mobileMenu?.querySelector(".close");
+      const secondaryNav = document.querySelector(".secondary-nav");
 
       // Remove old listeners to prevent accumulation
       if (mobileToggle && clickHandler) {
@@ -201,8 +207,8 @@ const logoSrc =
       if (closeButton && closeHandler) {
         closeButton.removeEventListener("click", closeHandler);
       }
-      if (mobileMenu && linkHandler) {
-        mobileMenu.removeEventListener("click", linkHandler);
+      if (secondaryNav && secondaryNavHandler) {
+        secondaryNav.removeEventListener("click", secondaryNavHandler);
       }
 
       // Create new handlers
@@ -213,27 +219,25 @@ const logoSrc =
         mobileMenu?.classList.remove("active");
       };
 
-      linkHandler = (e) => {
+      secondaryNavHandler = (e) => {
         const target =
           e.target instanceof Element ? e.target.closest("a") : null;
         if (!target) return;
+
         const href = target.getAttribute("href");
         const targetAttr = target.getAttribute("target");
-        // Only handle internal navigations
         if (!href || href.startsWith("http") || targetAttr === "_blank") return;
+
         try {
           const url = new URL(href, window.location.origin);
-          const inMainMenu = Boolean(
-            target.closest('[data-menu-panel="main"]'),
-          );
-          if (url.pathname === "/contact" && inMainMenu) {
+          const isMobile = isMobileViewport();
+
+          if (isMobile && url.pathname === "/contact") {
             e.preventDefault();
-            window.__hartSetMobileMenuView?.("contact");
-            return;
+            openContactMenu();
           }
-          mobileMenu?.classList.remove("active");
-        } catch (err) {
-          // ignore
+        } catch {
+          // ignore invalid URLs
         }
       };
 
@@ -244,8 +248,8 @@ const logoSrc =
       if (closeButton && mobileMenu) {
         closeButton.addEventListener("click", closeHandler);
       }
-      if (mobileMenu) {
-        mobileMenu.addEventListener("click", linkHandler);
+      if (secondaryNav) {
+        secondaryNav.addEventListener("click", secondaryNavHandler);
       }
       mobileMenu?.classList.remove("active");
     };
