@@ -31,15 +31,15 @@ import Layout from "../layouts/Layout.astro";
   </section>
 
   <style>
-    body {
-      position: fixed;
-    }
     .hero {
-      position: relative;
-      min-height: 100svh;
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100dvh;
       overflow: hidden;
       margin-inline: 0;
       padding-inline: 0;
+      isolation: isolate;
     }
 
     .video-bg {
@@ -48,11 +48,12 @@ import Layout from "../layouts/Layout.astro";
       width: 100%;
       height: 100%;
       object-fit: cover;
+      object-position: center;
       z-index: -1;
       transition: object-position 4.5s ease;
     }
 
-    @media screen and (width > 800px) {
+    @media screen and (min-width: 1024px) {
       .video-bg {
         object-position: center 34%;
       }
