@@ -18,7 +18,6 @@ import CheckoutSubmit from "./CheckoutSubmit.astro";
     background-color: rgb(44, 44, 46, 40%);
     -webkit-backdrop-filter: blur(50px);
     backdrop-filter: blur(50px);
-
     border-top: var(--border-thinx) var(--color-charcoal);
     padding-inline: var(--space-s);
     padding-block-start: var(--space-xs);
@@ -39,6 +38,9 @@ import CheckoutSubmit from "./CheckoutSubmit.astro";
   }
 
   .bar :global(.terms label .link) {
+    text-decoration: underline;
+    text-decoration-thickness: 0.5px;
+    text-underline-offset: 4px;
     text-decoration-color: var(--color-cream);
   }
 

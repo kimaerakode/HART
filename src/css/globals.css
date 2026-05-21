@@ -253,6 +253,9 @@
   }
 
   .link {
+    text-decoration: underline;
+    text-decoration-thickness: 0.5px;
+    text-decoration-color: currentColor;
     text-decoration: 0.5px underline solid var(--color-charcoal);
 
     text-underline-offset: 4px;
