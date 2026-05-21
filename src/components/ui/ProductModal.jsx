@@ -81,7 +81,7 @@ export default function ProductModal({ product, open, onClose }) {
 
           <div className="pm-actions">
             <AmountButton
-              color="charcoal"
+              color="cream"
               count={quantity}
               onDecrease={() =>
                 setQuantity((current) => Math.max(1, current - 1))

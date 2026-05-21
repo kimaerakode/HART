@@ -7,6 +7,7 @@ export default function CartTotal({ placement = "mobile" }) {
 
   useEffect(() => {
     console.log("[CartTotal] Hydration complete, loading cart store");
+    let unsubscribe = () => {};
 
     // Lazy load store only after hydration
     import("../../stores/cartStore.js").then(({ getCart, subscribe }) => {
@@ -19,7 +20,7 @@ export default function CartTotal({ placement = "mobile" }) {
       setTotal(newTotal);
 
       // Subscribe to cart changes
-      const unsubscribe = subscribe(() => {
+      unsubscribe = subscribe(() => {
         const updatedCart = getCart();
         const updatedTotal = updatedCart.reduce((sum, item) => {
           const price = parseFloat(item.price) || 0;
@@ -27,9 +28,9 @@ export default function CartTotal({ placement = "mobile" }) {
         }, 0);
         setTotal(updatedTotal);
       });
-
-      return unsubscribe;
     });
+
+    return () => unsubscribe();
   }, []);
 
   return (

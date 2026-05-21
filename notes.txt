@@ -4,10 +4,7 @@ To-Do List
 - Validation msg when attempted checkout with no pickup selection
 
 
-#Header
-- Center cart icon items (browser compability)
+#Shops page
+- Transition animation when filtering
+- Layout for single shop areas
 
-
-
-#General
-- Compress media files

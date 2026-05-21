@@ -9,7 +9,7 @@ import PickupSelection from "./pickup/PickupSelection.astro";
   <div class="caption">
     <div class="title-wrapper">
       <h3>
-        <a href="/checkout">Go to checkout</a>
+        <a id="preorder-go-checkout" href="/checkout">Go to checkout</a>
       </h3>
     </div>
     <p class="text-s">
@@ -33,3 +33,34 @@ import PickupSelection from "./pickup/PickupSelection.astro";
     gap: var(--space-s);
   }
 </style>
+
+<script>
+  if (typeof window !== "undefined") {
+    const link = document.getElementById("preorder-go-checkout");
+    link?.addEventListener("click", function (e) {
+      try {
+        const raw = window.localStorage.getItem("hart.checkoutSelection");
+        const sel = raw ? JSON.parse(raw) : null;
+        if (!sel || !sel.location || !sel.date || !sel.time) {
+          e.preventDefault();
+          // Dispatch the global event to show selection warning (Layout mounts the component)
+          const event = new CustomEvent("show-selection-warning", {
+            detail: {
+              onGo: () => (window.location.href = "/preorder"),
+              onClose: () => {
+                document.dispatchEvent(
+                  new CustomEvent("open-preorder-popover", {
+                    bubbles: true,
+                  }),
+                );
+              },
+            },
+          });
+          window.dispatchEvent(event);
+        }
+      } catch (err) {
+        // ignore
+      }
+    });
+  }
+</script>

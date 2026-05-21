@@ -2,12 +2,19 @@ import React, { useEffect, useState, useRef } from "react";
 import AmountButton from "../atoms/AmountButton.jsx";
 import "./CartItems.css";
 
-export default function CartItems() {
+/**
+ * @param {{ buttonColor?: string; buttonTone?: string }} props
+ */
+export default function CartItems({
+  buttonColor = "cream",
+  buttonTone = "charcoal",
+}) {
   const [cart, setCart] = useState([]);
   const storeRef = useRef(null);
 
   useEffect(() => {
     console.log("[CartItems] Hydration complete, loading cart store");
+    let unsubscribe = () => {};
 
     // Lazy load store only after hydration
     import("../../stores/cartStore.js").then(
@@ -19,13 +26,13 @@ export default function CartItems() {
         setCart(getCart());
 
         // Subscribe to cart changes
-        const unsubscribe = subscribe(() => {
+        unsubscribe = subscribe(() => {
           setCart(getCart());
         });
-
-        return unsubscribe;
       },
     );
+
+    return () => unsubscribe();
   }, []);
 
   if (!cart || cart.length === 0) {
@@ -45,6 +52,8 @@ export default function CartItems() {
           price={item.price}
           imgSrc={item.imgSrc}
           quantity={item.quantity}
+          buttonColor={buttonColor}
+          buttonTone={buttonTone}
           onRemove={() => storeRef.current?.removeFromCart(item.title)}
           onQuantityChange={(newQuantity) =>
             storeRef.current?.updateQuantity(item.title, newQuantity)
@@ -60,6 +69,8 @@ function CartItemRow({
   price,
   imgSrc,
   quantity,
+  buttonColor = "cream",
+  buttonTone = "charcoal",
   onRemove,
   onQuantityChange,
 }) {
@@ -89,6 +100,8 @@ function CartItemRow({
             onDecrease={() => onQuantityChange(Math.max(1, quantity - 1))}
             onIncrease={() => onQuantityChange(quantity + 1)}
             variant="cart"
+            color={buttonColor}
+            tone={buttonTone}
           />
           <button
             onClick={onRemove}

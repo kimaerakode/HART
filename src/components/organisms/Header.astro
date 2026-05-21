@@ -38,7 +38,11 @@ const logoSrc =
       >
       {
         isSecondary ? (
-          <a class="cart-icon-wrapper" href="">
+          <button
+            class="cart-icon-wrapper"
+            type="button"
+            aria-label="Open cart"
+          >
             <p class="cart-count text-xs" data-cart-count>
               0
             </p>
@@ -53,13 +57,17 @@ const logoSrc =
                 alt="Cart icon"
               />
             </picture>
-          </a>
+          </button>
         ) : (
           <div class="header-actions">
             <div class="header-menu-wrapper">
               <NavMenu direction={navMenuDirection} />
             </div>
-            <button class="cart-icon-wrapper">
+            <button
+              class="cart-icon-wrapper"
+              type="button"
+              aria-label="Open cart"
+            >
               <p class="cart-count text-xs" data-cart-count>
                 0
               </p>
@@ -87,6 +95,11 @@ const logoSrc =
 
 <script>
   // @ts-nocheck
+  import {
+    isMobileViewport,
+    openContactMenu,
+  } from "../../scripts/mobileMenu.js";
+
   const CART_STORAGE_KEY = "hart_cart";
   const CART_CHANGE_EVENT = "hart-cart-change";
 
@@ -133,16 +146,59 @@ const logoSrc =
   document.addEventListener("astro:page-load", initializeCartCount);
   document.addEventListener("astro:after-swap", initializeCartCount);
 
+  const initializeCartModal = (() => {
+    let clickHandler = null;
+
+    return () => {
+      const cartButtons = document.querySelectorAll(".cart-icon-wrapper");
+
+      if (clickHandler) {
+        cartButtons.forEach((button) => {
+          button.removeEventListener("click", clickHandler);
+        });
+      }
+
+      clickHandler = (event) => {
+        event.preventDefault();
+        const win = /** @type {any} */ (window);
+
+        if (typeof win.__hartOpenCartModal === "function") {
+          win.__hartOpenCartModal();
+          return;
+        }
+
+        win.__hartPendingCartModal = true;
+        window.dispatchEvent(new CustomEvent("open-cart"));
+      };
+
+      cartButtons.forEach((button) => {
+        button.addEventListener("click", clickHandler);
+      });
+    };
+  })();
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initializeCartModal, {
+      once: true,
+    });
+  } else {
+    initializeCartModal();
+  }
+
+  document.addEventListener("astro:page-load", initializeCartModal);
+  document.addEventListener("astro:after-swap", initializeCartModal);
+
   // Mobile menu toggle with handler cleanup and navigation-aware open
   const initializeMobileMenu = (() => {
     let clickHandler = null;
     let closeHandler = null;
-    let linkHandler = null;
+    let secondaryNavHandler = null;
 
     return () => {
       const mobileToggle = document.querySelector(".mobile-toggle");
       const mobileMenu = document.querySelector(".mobile-menu--overlay");
       const closeButton = mobileMenu?.querySelector(".close");
+      const secondaryNav = document.querySelector(".secondary-nav");
 
       // Remove old listeners to prevent accumulation
       if (mobileToggle && clickHandler) {
@@ -151,8 +207,8 @@ const logoSrc =
       if (closeButton && closeHandler) {
         closeButton.removeEventListener("click", closeHandler);
       }
-      if (mobileMenu && linkHandler) {
-        mobileMenu.removeEventListener("click", linkHandler);
+      if (secondaryNav && secondaryNavHandler) {
+        secondaryNav.removeEventListener("click", secondaryNavHandler);
       }
 
       // Create new handlers
@@ -163,27 +219,25 @@ const logoSrc =
         mobileMenu?.classList.remove("active");
       };
 
-      linkHandler = (e) => {
+      secondaryNavHandler = (e) => {
         const target =
           e.target instanceof Element ? e.target.closest("a") : null;
         if (!target) return;
+
         const href = target.getAttribute("href");
         const targetAttr = target.getAttribute("target");
-        // Only handle internal navigations
         if (!href || href.startsWith("http") || targetAttr === "_blank") return;
+
         try {
           const url = new URL(href, window.location.origin);
-          const inMainMenu = Boolean(
-            target.closest('[data-menu-panel="main"]'),
-          );
-          if (url.pathname === "/contact" && inMainMenu) {
+          const isMobile = isMobileViewport();
+
+          if (isMobile && url.pathname === "/contact") {
             e.preventDefault();
-            window.__hartSetMobileMenuView?.("contact");
-            return;
+            openContactMenu();
           }
-          mobileMenu?.classList.remove("active");
-        } catch (err) {
-          // ignore
+        } catch {
+          // ignore invalid URLs
         }
       };
 
@@ -194,8 +248,8 @@ const logoSrc =
       if (closeButton && mobileMenu) {
         closeButton.addEventListener("click", closeHandler);
       }
-      if (mobileMenu) {
-        mobileMenu.addEventListener("click", linkHandler);
+      if (secondaryNav) {
+        secondaryNav.addEventListener("click", secondaryNavHandler);
       }
       mobileMenu?.classList.remove("active");
     };
@@ -264,10 +318,13 @@ const logoSrc =
     place-content: start center;
     position: relative;
     background: var(--color-charcoal);
+    border: none;
+    appearance: none;
     width: 2.25rem;
     height: 2.25rem;
     border-radius: 100%;
     padding: var(--space-xs);
+    cursor: pointer;
     transition:
       width var(--easy),
       height var(--easy);

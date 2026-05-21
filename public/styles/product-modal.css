@@ -8,10 +8,6 @@
     max-height: 90vh;
   }
 
-  .pm-img {
-    aspect-ratio: 1 / 1;
-  }
-
   .pm-content .title-wrapper {
     padding-block-start: var(--space-s);
   }
@@ -56,6 +52,7 @@
   height: auto;
   border-radius: 10px;
   object-fit: cover;
+  aspect-ratio: 5 / 6;
 }
 
 .pm-content {
@@ -120,7 +117,6 @@
   place-items: center;
   width: 8px;
   height: 8px;
-  padding: 0;
   border: none;
   background: transparent;
   cursor: pointer;
@@ -135,15 +131,15 @@
 
 /* Amount Button Color Variants */
 .amount-color-cream {
-  background: var(--color-cream);
-  border-color: var(--color-charcoal);
-  color: var(--color-charcoal);
-}
-
-.amount-color-charcoal {
   background: var(--color-charcoal);
   border-color: var(--color-cream);
   color: var(--color-cream);
+}
+
+.amount-color-charcoal {
+  background: var(--color-cream) !important;
+  border-color: var(--color-charcoal);
+  color: var(--color-charcoal);
 }
 
 .pm-button {
@@ -175,14 +171,13 @@
   gap: var(--space-m);
   height: calc(8px + (var(--space-xs) * 2));
   height: fit-content;
-  padding-block: 0;
   padding-inline: var(--space-xs-s);
   border: var(--border-thin) var(--color-charcoal);
   border-radius: 5px;
   background: var(--color-cream);
 }
 
-.cart-amount-count {
+.pm-box .cart-amount-count {
   width: 2ch;
   flex: 0 0 auto;
   text-align: center;
@@ -191,7 +186,7 @@
   color: var(--color-charcoal);
 }
 
-.cart-amount-btn {
+.pm-box .cart-amount-btn {
   display: grid;
   place-items: center;
   width: 8px;

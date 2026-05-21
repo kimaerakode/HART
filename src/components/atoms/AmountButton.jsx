@@ -6,16 +6,18 @@ export default function AmountButton({
   onIncrease,
   variant = "modal",
   color = "cream",
+  tone = "charcoal",
 }) {
   const isCart = variant === "cart";
   const isCreamColor = color === "cream";
   const decreaseIcon = isCreamColor
-    ? "/assets/icons/arrow-decrease-charcoal.svg"
-    : "/assets/icons/arrow-decrease-cream.svg";
+    ? "/assets/icons/arrow-decrease-cream.svg"
+    : "/assets/icons/arrow-decrease-charcoal.svg";
   const increaseIcon = isCreamColor
-    ? "/assets/icons/arrow-increase-charcoal.svg"
-    : "/assets/icons/arrow-increase-cream.svg";
+    ? "/assets/icons/arrow-increase-cream.svg"
+    : "/assets/icons/arrow-increase-charcoal.svg";
   const containerClass = isCart ? "cart-amount" : "pm-amount";
+  const toneClass = isCart ? `cart-amount--${tone}` : "";
   const colorClass = isCreamColor
     ? "amount-color-cream"
     : "amount-color-charcoal";
@@ -24,7 +26,7 @@ export default function AmountButton({
 
   return (
     <div
-      className={`${containerClass} ${colorClass}`}
+      className={`${containerClass} ${toneClass} ${colorClass}`}
       aria-label="Quantity selector"
     >
       <button

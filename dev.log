@@ -1,0 +1,12 @@
+
+> hart@0.0.1 dev
+> astro dev
+
+[vite] connected.
+10:26:28 [types] Generated 0ms
+10:26:28 [WARN] [content] Content config not loaded
+10:26:28 [vite] Port 4321 is in use, trying another one...
+ astro  v6.1.9 ready in 476 ms
+┃ Local    http://localhost:4322/
+┃ Network  use --host to expose
+10:26:28 watching for file changes...

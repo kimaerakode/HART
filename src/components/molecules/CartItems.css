@@ -96,7 +96,7 @@
 }
 
 /* Cart Amount Button Styling */
-.cart-amount {
+.cart .cart-amount {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -106,7 +106,14 @@
   padding-inline: var(--space-xs-s);
   border: var(--border-thin) var(--color-charcoal);
   border-radius: 5px;
+}
+
+.cart-amount--charcoal {
   background: var(--color-charcoal);
+}
+
+.cart-amount--cream {
+  background: var(--color-cream);
 }
 
 .cart-amount-count {
@@ -118,11 +125,11 @@
   color: var(--color-cream);
 }
 
-.cart-amount-btn {
+.cart .cart-amount-btn {
   display: grid;
   place-items: center;
-  width: 7px;
-  height: 7px;
+  width: 6px;
+  height: 6px;
   padding: 0;
   border: none;
   background: transparent;
@@ -138,23 +145,23 @@
 
 /* Amount Button Color Variants */
 .amount-color-cream {
-  background: var(--color-cream);
-  border-color: var(--color-charcoal);
-  color: var(--color-charcoal);
-}
-
-.amount-color-cream .cart-amount-count {
-  color: var(--color-charcoal);
-}
-
-.amount-color-charcoal {
   background: var(--color-charcoal);
   border-color: var(--color-cream);
   color: var(--color-cream);
 }
 
-.amount-color-charcoal .cart-amount-count {
+.amount-color-cream .cart-amount-count {
   color: var(--color-cream);
+}
+
+.amount-color-charcoal {
+  background: var(--color-cream) !important;
+  border-color: var(--color-charcoal);
+  color: var(--color-charcoal);
+}
+
+.amount-color-charcoal .cart-amount-count {
+  color: var(--color-charcoal) !important;
 }
 
 @media screen and (min-width: 480px) {

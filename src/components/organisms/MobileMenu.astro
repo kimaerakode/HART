@@ -39,47 +39,74 @@ const { variant = "main", state } = Astro.props;
   </div>
   <div class="bottom">
     <InstagramHandle />
-    <img src="/assets/brand/scribble-logo-cream.svg" alt="Hart logo" />
+    <img
+      class="logo"
+      src="/assets/brand/hart-logo-handwritten-cream.png"
+      alt="Hart logo"
+    />
   </div>
 </div>
 
 <script>
   // @ts-nocheck
-  const setMenuView = (views, view) => {
-    if (!views) return;
-    views.dataset.menuView = view;
-  };
-
-  const setOverlayView = (menu, view) => {
-    if (!menu) return;
-    menu.dataset.mobileMenuView = view;
-  };
-
-  window.__hartSetMobileMenuView = (view) => {
-    const menu = document.querySelector(".mobile-menu--overlay");
-    const views = menu?.querySelector(".mobile-menu-views");
-    setMenuView(views, view);
-    setOverlayView(menu, view);
-  };
+  import {
+    isMobileViewport,
+    openContactMenu,
+    setMobileMenuView,
+  } from "../../scripts/mobileMenu.js";
+  /** @type {((event: MouseEvent) => void) | null} */
+  let linkHandler = null;
+  /** @type {((event: MouseEvent) => void) | null} */
+  let backButtonHandler = null;
 
   const initializeMobileMenuView = () => {
     const menu = document.querySelector(".mobile-menu--overlay");
     if (!menu) return;
-    const views = menu.querySelector(".mobile-menu-views");
 
     const backButton = menu.querySelector("[data-mobile-menu-back]");
 
-    if (backButton) {
-      backButton.addEventListener("click", () => {
-        setMenuView(views, "main");
-        setOverlayView(menu, "main");
-      });
+    if (linkHandler) {
+      menu.removeEventListener("click", linkHandler);
+    }
+    if (backButton && backButtonHandler) {
+      backButton.removeEventListener("click", backButtonHandler);
     }
 
-    const pending = window.__hartPendingMobileMenu;
+    linkHandler = (/** @type {MouseEvent} */ event) => {
+      const target =
+        event.target instanceof Element ? event.target.closest("a") : null;
+      if (!target) return;
+
+      const href = target.getAttribute("href");
+      const targetAttr = target.getAttribute("target");
+      if (!href || href.startsWith("http") || targetAttr === "_blank") return;
+
+      try {
+        const url = new URL(href, window.location.origin);
+        const inMainPanel = Boolean(target.closest('[data-menu-panel="main"]'));
+
+        if (isMobileViewport() && inMainPanel && url.pathname === "/contact") {
+          event.preventDefault();
+          openContactMenu();
+        }
+      } catch {
+        // ignore invalid URLs
+      }
+    };
+
+    menu.addEventListener("click", linkHandler);
+
+    if (backButton) {
+      backButtonHandler = () => {
+        setMobileMenuView(menu, "main");
+      };
+      backButton.addEventListener("click", backButtonHandler);
+    }
+
+    const win = /** @type {any} */ (window);
+    const pending = win.__hartPendingMobileMenu;
     if (pending?.open) {
-      setMenuView(views, "main");
-      setOverlayView(menu, "main");
+      setMobileMenuView(menu, "main");
     }
   };
 
@@ -104,7 +131,7 @@ const { variant = "main", state } = Astro.props;
     display: flex;
     flex-direction: column;
     min-height: 90svh;
-    max-width: 80svw;
+    max-width: 90svw;
     inset: 0;
     position: absolute;
     top: 0;
@@ -198,6 +225,10 @@ const { variant = "main", state } = Astro.props;
     align-items: end;
     width: 100%;
     font-size: var(--text-s);
+  }
+
+  .logo {
+    width: 10rem;
   }
 
   @media screen and (min-width: 1024px) {
