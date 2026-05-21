@@ -1,10 +1,13 @@
+@media screen and (max-width: 480px) {
+  .pm-box {
+    max-width: 90vw;
+  }
+}
+
 @media screen and (max-width: 1023px) {
   .pm-box {
     grid-template-columns: 1fr;
-
-    /* display: flex;
-    flex-direction: column; */
-    max-width: min(70vw, 18rem);
+    max-width: min(calc(100svw - (var(--space-s) * 2)), 22rem);
     max-height: 90vh;
   }
 
